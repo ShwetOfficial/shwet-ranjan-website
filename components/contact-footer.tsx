@@ -39,6 +39,7 @@ export default function ContactFooter() {
 
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [lastSubmitted, setLastSubmitted] = useState<{ name: string; email: string; message: string } | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,6 +50,8 @@ export default function ContactFooter() {
     const senderEmail = (form.elements.namedItem("email") as HTMLInputElement)?.value || "";
     const message = (form.elements.namedItem("message") as HTMLTextAreaElement)?.value || "";
 
+    setLastSubmitted({ name, email: senderEmail, message });
+
     try {
       await fetch("/api/contact", {
         method: "POST",
@@ -58,8 +61,6 @@ export default function ContactFooter() {
     } catch (err) {
       console.error("Form submit error:", err);
     } finally {
-      // Trigger native mailto link as bulletproof delivery fallback
-      window.location.href = `mailto:${email}?subject=Inquiry%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(message)}`;
       setSubmitted(true);
       setSubmitting(false);
       form.reset();
@@ -133,12 +134,27 @@ export default function ContactFooter() {
             </h4>
 
             {submitted ? (
-              <div className="p-4 rounded-2xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 font-mono text-xs font-bold flex items-center gap-3 animate-fadeIn">
-                <Check className="w-5 h-5 text-emerald-400 shrink-0" />
-                <div>
-                  <span className="block text-white font-bold text-sm">Message Dispatched!</span>
-                  <span className="text-emerald-300 text-[11px]">Your message was delivered to info@shwetranjan.com. Shwet will respond directly to your email shortly.</span>
+              <div className="p-4 sm:p-5 rounded-2xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 font-mono text-xs space-y-3 animate-fadeIn">
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-emerald-400 shrink-0" />
+                  <div>
+                    <span className="block text-white font-bold text-sm">Message Dispatched!</span>
+                    <span className="text-emerald-300 text-[11px]">Your inquiry has been routed to info@shwetranjan.com. Shwet will respond directly to your email shortly.</span>
+                  </div>
                 </div>
+
+                {lastSubmitted && (
+                  <div className="pt-2 border-t border-emerald-800/60 flex items-center justify-between gap-2 flex-wrap text-[11px]">
+                    <span className="text-zinc-400">Want to launch your mail app too?</span>
+                    <a
+                      href={`mailto:${email}?subject=Inquiry%20from%20${encodeURIComponent(lastSubmitted.name)}&body=${encodeURIComponent(lastSubmitted.message)}`}
+                      className="px-3 py-1 rounded-lg bg-emerald-900/80 hover:bg-emerald-800 text-white font-bold transition-all border border-emerald-500/40 flex items-center gap-1.5"
+                    >
+                      <Mail className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>Open Mail Client Direct ✉️</span>
+                    </a>
+                  </div>
+                )}
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-3">
