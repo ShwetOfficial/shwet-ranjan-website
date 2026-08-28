@@ -9,8 +9,55 @@ import { TrendingUp, AlertTriangle, ShieldCheck, DollarSign, ArrowUpRight, Zap, 
 export default function StockCaseStudies() {
   const [selectedId, setSelectedId] = useState<string>("itc-ltd");
   const [modalActive, setModalActive] = useState<boolean>(false);
+  const [liveQuote, setLiveQuote] = useState<{
+    price: number;
+    change: number;
+    changePercent: number;
+    currency: string;
+    isLive: boolean;
+  } | null>(null);
+  const [loadingQuote, setLoadingQuote] = useState<boolean>(false);
 
   const currentStudy = stockCaseStudiesData.find((s) => s.id === selectedId) || stockCaseStudiesData[0];
+
+  // Fetch live market quote whenever active stock study changes
+  React.useEffect(() => {
+    let isMounted = true;
+    const tickerKey = currentStudy.id === "itc-ltd" ? "ITC" : "HDFCBANK";
+    setLoadingQuote(true);
+
+    fetch(`/api/stock-quote?ticker=${tickerKey}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data && typeof data.price === "number") {
+          setLiveQuote({
+            price: data.price,
+            change: data.change || 0,
+            changePercent: data.changePercent || 0,
+            currency: data.currency || "INR",
+            isLive: data.isLive ?? true,
+          });
+        }
+      })
+      .catch((err) => console.error("Stock quote fetch error:", err))
+      .finally(() => {
+        if (isMounted) setLoadingQuote(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [selectedId, currentStudy]);
+
+  // Dynamic calculations based on live market quote
+  const rawCentralValue = parseFloat(currentStudy.centralIntrinsicValue.replace(/[^0-9.]/g, "")) || 368;
+  const activePrice = liveQuote?.price || parseFloat(currentStudy.currentPrice.replace(/[^0-9.]/g, "")) || 272;
+  const dynamicUpside = rawCentralValue > activePrice 
+    ? `+${(((rawCentralValue - activePrice) / activePrice) * 100).toFixed(1)}%`
+    : `${(((rawCentralValue - activePrice) / activePrice) * 100).toFixed(1)}%`;
+  const dynamicMargin = rawCentralValue > activePrice
+    ? `${(((rawCentralValue - activePrice) / activePrice) * 100).toFixed(0)}% Margin of Safety`
+    : "At Fair Value";
 
   return (
     <section id="stock-case-studies" className="py-24 px-4 sm:px-8 max-w-7xl mx-auto border-t border-white/10 relative text-white">
@@ -48,7 +95,7 @@ export default function StockCaseStudies() {
               <BarChart2 className={`w-4 h-4 ${isSelected ? "text-white" : "text-cobalt-400"}`} />
               <div className="text-left">
                 <span className="block text-white font-extrabold">{study.companyName}</span>
-                <span className="text-[10px] text-zinc-300/80 font-normal">{study.ticker} • {study.currentPrice}</span>
+                <span className="text-[10px] text-zinc-300/80 font-normal">{study.ticker}</span>
               </div>
             </button>
           );
@@ -102,11 +149,26 @@ export default function StockCaseStudies() {
         {/* 4 Metric Highlights Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
-            <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">
-              Current Market Price
+            <div className="flex items-center justify-between mb-1">
+              <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest block">
+                Live Market Price
+              </span>
+              <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono text-[9px] font-bold border border-emerald-500/30 animate-pulse">
+                🟢 LIVE
+              </span>
+            </div>
+            <div className="font-display text-xl sm:text-2xl font-black text-white">
+              {liveQuote ? `${liveQuote.currency === "INR" ? "₹" : "$"}${liveQuote.price.toLocaleString()}` : currentStudy.currentPrice}
+            </div>
+            <span className="text-[11px] font-mono mt-1 block">
+              {liveQuote ? (
+                <span className={liveQuote.change >= 0 ? "text-emerald-400 font-bold" : "text-red-400 font-bold"}>
+                  {liveQuote.change >= 0 ? "+" : ""}{liveQuote.change} ({liveQuote.changePercent >= 0 ? "+" : ""}{liveQuote.changePercent}%) 1D
+                </span>
+              ) : (
+                <span className="text-zinc-400">Live Trading Feed</span>
+              )}
             </span>
-            <div className="font-display text-xl sm:text-2xl font-black text-white">{currentStudy.currentPrice}</div>
-            <span className="text-[11px] font-mono text-zinc-400 mt-1 block">Live Trading Price</span>
           </div>
 
           <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
@@ -121,8 +183,8 @@ export default function StockCaseStudies() {
             <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">
               Margin of Safety / Upside
             </span>
-            <div className="font-display text-xl sm:text-2xl font-black text-cyan-400">{currentStudy.upsidePercentage}</div>
-            <span className="text-[11px] font-mono text-emerald-300 mt-1 block">{currentStudy.marginOfSafety}</span>
+            <div className="font-display text-xl sm:text-2xl font-black text-cyan-400">{dynamicUpside}</div>
+            <span className="text-[11px] font-mono text-emerald-300 mt-1 block">{dynamicMargin}</span>
           </div>
 
           <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800 overflow-hidden">
