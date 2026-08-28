@@ -25,7 +25,7 @@ const FALLBACK_QUOTES: Record<string, { price: number; previousClose: number; ch
   HDFCBANK: { price: 728.00, previousClose: 728.00, change: -4.50, changePercent: -0.61, currency: "INR" },
   INFY: { price: 1143.65, previousClose: 1143.65, change: 14.20, changePercent: 1.26, currency: "INR" },
   RELIANCE: { price: 2980.00, previousClose: 2961.60, change: 18.40, changePercent: 0.62, currency: "INR" },
-  TCS: { price: 4120.00, previousClose: 4095.00, change: 25.00, changePercent: 0.61, currency: "INR" },
+  TCS: { price: 2344.00, previousClose: 2344.00, change: 18.50, changePercent: 0.80, currency: "INR" },
   TITAN: { price: 3450.00, previousClose: 3408.00, change: 42.00, changePercent: 1.23, currency: "INR" },
   AAPL: { price: 224.20, previousClose: 222.10, change: 2.10, changePercent: 0.95, currency: "USD" },
   NVDA: { price: 128.50, previousClose: 125.10, change: 3.40, changePercent: 2.72, currency: "USD" },

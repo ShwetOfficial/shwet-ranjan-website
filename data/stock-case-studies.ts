@@ -249,5 +249,70 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
         { priceRange: "Below ₹1,100", verdict: "🟢🟢🟢 Exceptional Bargain Zone", color: "text-cyan-300" }
       ]
     }
+  },
+  {
+    id: "tcs-ltd",
+    ticker: "NSE: TCS",
+    companyName: "Tata Consultancy Services",
+    sector: "Global IT Services & Enterprise AI Transformation",
+    currentPrice: "₹2,344.00",
+    intrinsicValueRange: "₹1,700 – ₹3,300",
+    centralIntrinsicValue: "₹2,400",
+    upsidePercentage: "+2.4% Upside",
+    marginOfSafety: "2.3% Margin of Safety (At Fair Value)",
+    dividendYield: "2.7% Yield (₹62.00/share)",
+    buffettVerdict: "FAIRLY VALUED — 9.0/10 Buffett Scorecard (Superior Moat, At Fair Value)",
+    verdictBadge: "🟡 FAIR VALUE",
+    verdictColor: "text-amber-400 border-amber-500/30 bg-amber-500/10",
+
+    researchDate: "28 August 2026",
+    dataAsOf: "Includes FY26 Annual Report (₹145.99 EPS) & Q1 FY27 Results",
+
+    summaryHeader: "Unrivaled Scale (585k Engineers), 10-Yr EPS 2.2x Growth, $2.6B AI Revenue — Superior Franchise Currently Trading at Fair Value",
+
+    whyItFell: {
+      title: "Why Has TCS Fallen ~30% From Its ₹3,336.70 High?",
+      description: "TCS's decline reflects global IT spending caution, P/E multiple compression from 35.7x to 16.5x, and FY26's modest constant-currency revenue performance (-2.4% YoY).",
+      keyPoints: [
+        "Multiple Compression: Valuation P/E re-rated from 35.7x (FY22) down to 16.5x baseline.",
+        "Macro Enterprise Drag: US & European corporate clients pausing discretionary technology cloud spending.",
+        "AI Disruption Risk: Market anxiety surrounding legacy IT headcount reduction.",
+        "Constant-Currency Slowdown: FY26 revenue declined 2.4% CC, though operating margins expanded."
+      ]
+    },
+
+    normalizedEarnings: {
+      title: "10-Year Earnings Consistency & AI Productivity Gains",
+      description: "TCS has doubled net profit (₹26.2k Cr ➔ ₹52.8k Cr) over 10 years. In FY26, employee count dropped (608k ➔ 585k) while revenue grew (+9% revenue/employee).",
+      metrics: [
+        { label: "10-Yr EPS Growth", value: "₹66.71 ➔ ₹145.99 (2.2x)" },
+        { label: "Q1 FY27 AI Revenue", value: "$2.6 Billion (+13.6% QoQ)" },
+        { label: "Annual FCF Conversion", value: "106.7% of Net Income" },
+        { label: "FY26 Shareholder Payout", value: "₹39,571 Crore (Dividends + Buyback)" }
+      ]
+    },
+
+    intrinsicModel: {
+      method: "Buffett FCF & Normalized Earnings DCF Model",
+      description: "Using ₹145.99 FY26 EPS, ₹130-135 FCF/share, 10% Discount Rate, and 10-Year Horizon:",
+      scenarios: [
+        { name: "🔴 Bear Case", condition: "AI Disrupts Outsourcing (3% EPS Growth)", intrinsicValue: "₹1,700 – ₹1,950", status: "bear" },
+        { name: "🟡 Conservative", condition: "Modest Growth (~4-5% EPS Growth)", intrinsicValue: "₹2,100 – ₹2,300", status: "conservative" },
+        { name: "🟢 Base Case", condition: "AI Neutral / Outcome Billing (5-6% Growth)", intrinsicValue: "₹2,400 / share", status: "base" },
+        { name: "🔵 Bull Case", condition: "AI Growth Engine (7-8% EPS Growth)", intrinsicValue: "₹2,800 – ₹3,300", status: "bull" }
+      ]
+    },
+
+    buffettFramework: {
+      moatScore: "95/100 (Unrivaled Scale, 66 $100M+ Clients, Tata Brand)",
+      reinvestmentNote: "TCS is a superior business (9.0/10 vs Infosys 8.8/10), but at ₹2,344 it trades at fair value (~2% discount). Infosys at ₹1,144 offers a higher margin of safety (21%).",
+      buyThresholds: [
+        { priceRange: "₹2,800+", verdict: "🔴 Expensive", color: "text-red-400" },
+        { priceRange: "₹2,400 – ₹2,800", verdict: "🟡 Fair Value (Last Close: ₹2,344.00)", color: "text-amber-300" },
+        { priceRange: "₹2,100 – ₹2,400", verdict: "🟢 Reasonably Attractive", color: "text-emerald-300" },
+        { priceRange: "₹1,900 – ₹2,100", verdict: "🟢🟢 Attractive Zone (21% Discount)", color: "text-emerald-400" },
+        { priceRange: "Below ₹1,700", verdict: "🟢🟢🟢 Exceptional Safety Margin", color: "text-cyan-300" }
+      ]
+    }
   }
 ];
