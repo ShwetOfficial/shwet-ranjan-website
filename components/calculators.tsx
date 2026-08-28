@@ -24,11 +24,11 @@ export default function Calculators() {
   const [copied, setCopied] = useState(false);
   const [shareCopied, setShareCopied] = useState(false);
 
-  // Hydrate state ONLY IF incoming URL contains query parameters
+  // Hydrate state from incoming URL parameters and instantly clean the address bar
   React.useEffect(() => {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
-    if (!params.toString()) return; // Keep URL clean if no incoming params!
+    if (!params.toString()) return; // Already clean!
 
     const modeParam = params.get("mode");
     if (modeParam === "gst" || modeParam === "d2c") {
@@ -46,6 +46,12 @@ export default function Calculators() {
     if (params.has("rtoPct")) setRtoPct(Number(params.get("rtoPct")));
     if (params.has("cac")) setCac(Number(params.get("cac")));
     if (params.has("shippingCost")) setShippingCost(Number(params.get("shippingCost")));
+
+    // Clean address bar back to pristine shwetranjan.com or shwetranjan.com/#calculators
+    const cleanUrl = window.location.hash
+      ? `${window.location.pathname}${window.location.hash}`
+      : window.location.pathname;
+    window.history.replaceState(null, "", cleanUrl);
   }, []);
 
   // INR Formatting Helper
