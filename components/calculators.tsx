@@ -283,32 +283,31 @@ export default function Calculators() {
               <span className="font-mono text-xs text-cobalt-400 font-bold uppercase tracking-widest block mb-4">
                 SIMULATION RESULTS
               </span>
-
-              <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-800">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6">
+                <div className="p-3.5 sm:p-4 rounded-xl bg-zinc-900 border border-zinc-800">
                   <span className="font-mono text-[10px] text-zinc-400 block mb-1">Output Tax Collected</span>
-                  <span className="font-display text-xl font-bold text-white">₹{outputTax.toLocaleString()}</span>
+                  <span className="font-display text-lg sm:text-xl font-bold text-white tracking-tight break-all">₹{outputTax.toLocaleString()}</span>
                 </div>
-                <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-800">
+                <div className="p-3.5 sm:p-4 rounded-xl bg-zinc-900 border border-zinc-800">
                   <span className="font-mono text-[10px] text-zinc-400 block mb-1">Total Eligible ITC</span>
-                  <span className="font-display text-xl font-bold text-emerald-400">₹{eligibleITC.toLocaleString()}</span>
+                  <span className="font-display text-lg sm:text-xl font-bold text-emerald-400 tracking-tight break-all">₹{eligibleITC.toLocaleString()}</span>
                 </div>
               </div>
 
               {/* Locked Cash Alert Box */}
-              <div className="p-4 rounded-xl bg-red-950/60 border border-red-800/80 mb-4 flex items-start gap-3">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-red-950/60 border border-red-800/80 mb-4 flex items-start gap-2.5">
                 <ShieldAlert className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
-                <div>
-                  <span className="font-mono text-xs font-bold text-red-300 block">Blocked Working Capital Risk</span>
-                  <p className="font-sans text-xs text-red-200 mt-1">
-                    <strong className="text-white font-mono text-sm">₹{lockedITC.toLocaleString()}</strong> in input tax credit is locked because {delinquentVendorPct}% of your vendors failed to file GSTR-1 on time.
-                  </p>
+                <div className="text-xs font-sans text-red-200 leading-relaxed">
+                  <span className="font-mono font-bold text-red-400 block mb-0.5 uppercase tracking-wider text-[11px]">
+                    Blocked Working Capital Risk
+                  </span>
+                  <strong className="text-white font-mono font-bold">₹{lockedITC.toLocaleString()}</strong> in input tax credit is locked because {delinquentVendorPct}% of your vendors failed to file GSTR-1 on time.
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-between">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-between gap-2">
                 <span className="font-mono text-xs text-zinc-300">Monthly Tax Cash Outflow:</span>
-                <span className="font-display text-2xl font-black text-amber-400">₹{netTaxPayable.toLocaleString()}</span>
+                <span className="font-display text-lg sm:text-xl font-bold text-amber-400 tracking-tight break-all">₹{netTaxPayable.toLocaleString()}</span>
               </div>
             </div>
 

@@ -100,12 +100,12 @@ export default function StockCaseStudies() {
         </div>
 
         {/* 4 Metric Highlights Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
             <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">
               Current Market Price
             </span>
-            <div className="font-display text-2xl font-black text-white">{currentStudy.currentPrice}</div>
+            <div className="font-display text-xl sm:text-2xl font-black text-white">{currentStudy.currentPrice}</div>
             <span className="text-[11px] font-mono text-zinc-400 mt-1 block">Live Trading Price</span>
           </div>
 
@@ -113,7 +113,7 @@ export default function StockCaseStudies() {
             <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">
               Base Intrinsic Value
             </span>
-            <div className="font-display text-2xl font-black text-emerald-400">{currentStudy.centralIntrinsicValue}</div>
+            <div className="font-display text-xl sm:text-2xl font-black text-emerald-400">{currentStudy.centralIntrinsicValue}</div>
             <span className="text-[11px] font-mono text-zinc-400 mt-1 block">Range: {currentStudy.intrinsicValueRange}</span>
           </div>
 
@@ -121,16 +121,18 @@ export default function StockCaseStudies() {
             <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">
               Margin of Safety / Upside
             </span>
-            <div className="font-display text-2xl font-black text-cyan-400">{currentStudy.upsidePercentage}</div>
+            <div className="font-display text-xl sm:text-2xl font-black text-cyan-400">{currentStudy.upsidePercentage}</div>
             <span className="text-[11px] font-mono text-emerald-300 mt-1 block">{currentStudy.marginOfSafety}</span>
           </div>
 
-          <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
+          <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800 overflow-hidden">
             <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">
               Dividend Cushion
             </span>
-            <div className="font-display text-2xl font-black text-amber-400">{currentStudy.dividendYield}</div>
-            <span className="text-[11px] font-mono text-zinc-400 mt-1 block">Annual Cash Payout</span>
+            <div className="font-display text-xl sm:text-2xl font-black text-amber-400 tracking-tight">{currentStudy.dividendYield.split(' (')[0]}</div>
+            <span className="text-[11px] font-mono text-amber-300/90 mt-0.5 block font-semibold">
+              {currentStudy.dividendYield.includes('(') ? `(${currentStudy.dividendYield.split('(')[1]}` : "Annual Cash Payout"}
+            </span>
           </div>
         </div>
 
@@ -139,7 +141,7 @@ export default function StockCaseStudies() {
           {/* Column 1: Why It Fell & Normalized Cash Flow */}
           <div className="space-y-6">
             {/* Why It Fell Box */}
-            <div className="p-6 rounded-2xl bg-zinc-950/80 border border-zinc-800 space-y-3">
+            <div className="p-5 sm:p-6 rounded-2xl bg-zinc-950/80 border border-zinc-800 space-y-3">
               <div className="flex items-center gap-2 text-amber-400 font-mono text-xs font-bold uppercase tracking-wider">
                 <AlertTriangle className="w-4 h-4 shrink-0" />
                 <span>{currentStudy.whyItFell.title}</span>
@@ -158,7 +160,7 @@ export default function StockCaseStudies() {
             </div>
 
             {/* Normalized Earnings Box */}
-            <div className="p-6 rounded-2xl bg-zinc-950/80 border border-zinc-800 space-y-3">
+            <div className="p-5 sm:p-6 rounded-2xl bg-zinc-950/80 border border-zinc-800 space-y-3">
               <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider">
                 <DollarSign className="w-4 h-4 shrink-0" />
                 <span>{currentStudy.normalizedEarnings.title}</span>
@@ -166,7 +168,7 @@ export default function StockCaseStudies() {
               <p className="font-sans text-xs text-zinc-300 leading-relaxed">
                 {currentStudy.normalizedEarnings.description}
               </p>
-              <div className="grid grid-cols-2 gap-3 pt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 {currentStudy.normalizedEarnings.metrics.map((m) => (
                   <div key={m.label} className="p-3 rounded-xl bg-zinc-900 border border-zinc-800">
                     <span className="font-mono text-[10px] text-zinc-400 block">{m.label}</span>
@@ -180,8 +182,8 @@ export default function StockCaseStudies() {
           {/* Column 2: Intrinsic Valuation Matrix & Buffett Buy Framework */}
           <div className="space-y-6">
             {/* DCF / Residual Scenario Matrix */}
-            <div className="p-6 rounded-2xl bg-zinc-950/80 border border-zinc-800 space-y-3">
-              <div className="flex items-center justify-between">
+            <div className="p-5 sm:p-6 rounded-2xl bg-zinc-950/80 border border-zinc-800 space-y-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                 <div className="flex items-center gap-2 text-cobalt-400 font-mono text-xs font-bold uppercase tracking-wider">
                   <TrendingUp className="w-4 h-4 shrink-0" />
                   <span>Intrinsic Value Scenarios</span>
@@ -196,33 +198,33 @@ export default function StockCaseStudies() {
                 {currentStudy.intrinsicModel.scenarios.map((scenario) => (
                   <div
                     key={scenario.name}
-                    className={`p-3 rounded-xl border flex items-center justify-between text-xs font-mono ${
+                    className={`p-3 rounded-xl border flex items-center justify-between text-xs font-mono gap-2 ${
                       scenario.status === "base"
                         ? "bg-cobalt-500/10 border-cobalt-500/40 text-white font-bold"
                         : "bg-zinc-900/90 border-zinc-800 text-zinc-300"
                     }`}
                   >
-                    <div>
-                      <span className="font-bold block">{scenario.name}</span>
-                      <span className="text-[10px] text-zinc-400 font-sans">{scenario.condition}</span>
+                    <div className="min-w-0">
+                      <span className="font-bold block truncate">{scenario.name}</span>
+                      <span className="text-[10px] text-zinc-400 font-sans block truncate">{scenario.condition}</span>
                     </div>
-                    <span className="font-bold text-sm text-emerald-400">{scenario.intrinsicValue}</span>
+                    <span className="font-bold text-xs sm:text-sm text-emerald-400 shrink-0">{scenario.intrinsicValue}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Buffett Buy Framework */}
-            <div className="p-6 rounded-2xl bg-zinc-950/80 border border-zinc-800 space-y-3">
+            <div className="p-5 sm:p-6 rounded-2xl bg-zinc-950/80 border border-zinc-800 space-y-3">
               <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-bold uppercase tracking-wider">
                 <ShieldCheck className="w-4 h-4 shrink-0" />
                 <span>Buffett Valuation & Buying Framework</span>
               </div>
-              <div className="space-y-1.5 pt-1">
+              <div className="space-y-2 pt-1">
                 {currentStudy.buffettFramework.buyThresholds.map((t) => (
-                  <div key={t.priceRange} className="flex items-center justify-between text-xs font-mono py-1 px-2.5 rounded bg-zinc-900/60 border border-zinc-800">
-                    <span className="text-zinc-300 font-bold">{t.priceRange}</span>
-                    <span className={`font-bold ${t.color}`}>{t.verdict}</span>
+                  <div key={t.priceRange} className="flex items-center justify-between text-[11px] sm:text-xs font-mono py-1.5 px-3 rounded bg-zinc-900/60 border border-zinc-800 gap-2">
+                    <span className="text-zinc-300 font-bold shrink-0">{t.priceRange}</span>
+                    <span className={`font-bold text-right ${t.color}`}>{t.verdict}</span>
                   </div>
                 ))}
               </div>

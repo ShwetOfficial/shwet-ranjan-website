@@ -694,24 +694,24 @@ export function GstExtensionSimulator() {
       </div>
 
       {/* Top Banner on GST Portal */}
-      <div className="p-2.5 rounded-lg bg-cobalt-600 text-white font-mono text-xs font-bold flex items-center justify-between shadow-md">
-        <span className="flex items-center gap-2">
-          <Zap className="w-4 h-4 text-yellow-300 animate-pulse" />
-          Taxamicus Extension: Checking GST Notices silently in background...
+      <div className="p-2.5 sm:p-3 rounded-lg bg-cobalt-600 text-white font-mono text-xs font-bold flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 shadow-md">
+        <span className="flex items-center gap-2 leading-tight">
+          <Zap className="w-4 h-4 text-yellow-300 shrink-0 animate-pulse" />
+          <span>Taxamicus Extension: Checking GST Notices silently...</span>
         </span>
-        <span className="px-2 py-0.5 rounded bg-black/30 text-cobalt-200 text-[10px]">
+        <span className="px-2 py-0.5 rounded bg-black/30 text-cobalt-200 text-[10px] shrink-0 font-mono">
           GSTIN: 19AUEPG0367J1ZK
         </span>
       </div>
 
       {/* Extension Dropdown Menu Simulator */}
-      <div className="flex flex-wrap items-center justify-between gap-2 p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-mono">
-        <div className="flex items-center gap-2">
-          <span className="text-zinc-400 font-bold">Reconciliation Matrix:</span>
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-mono">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <span className="text-zinc-400 font-bold shrink-0">Reconciliation Matrix:</span>
           <select
             value={activeMatrix}
             onChange={(e) => setActiveMatrix(e.target.value)}
-            className="bg-black border border-cobalt-500/50 rounded px-2.5 py-1 text-cobalt-300 font-bold focus:outline-none"
+            className="bg-black border border-cobalt-500/50 rounded px-2.5 py-1 text-cobalt-300 font-bold focus:outline-none max-w-full text-xs truncate"
           >
             <option>GSTR-1 vs GSTR-3B</option>
             <option>GSTR-1 vs GSTR-3B (State-wise)</option>
@@ -725,18 +725,18 @@ export function GstExtensionSimulator() {
           <button
             onClick={() => handleDownload("csv")}
             disabled={downloadingState !== null}
-            className="px-2.5 py-1 rounded bg-zinc-800 hover:bg-cobalt-600 text-zinc-200 hover:text-white text-[11px] font-bold transition-all flex items-center gap-1"
+            className="flex-1 sm:flex-initial px-2.5 py-1.5 rounded bg-zinc-800 hover:bg-cobalt-600 text-zinc-200 hover:text-white text-[11px] font-bold transition-all flex items-center justify-center gap-1"
           >
-            <Download className="w-3 h-3 text-cobalt-400" />
+            <Download className="w-3 h-3 text-cobalt-400 shrink-0" />
             <span>GSTR-1 FY CSV</span>
           </button>
 
           <button
             onClick={() => handleDownload("json")}
             disabled={downloadingState !== null}
-            className="px-2.5 py-1 rounded bg-zinc-800 hover:bg-emerald-600 text-zinc-200 hover:text-white text-[11px] font-bold transition-all flex items-center gap-1"
+            className="flex-1 sm:flex-initial px-2.5 py-1.5 rounded bg-zinc-800 hover:bg-emerald-600 text-zinc-200 hover:text-white text-[11px] font-bold transition-all flex items-center justify-center gap-1"
           >
-            <Download className="w-3 h-3 text-emerald-400" />
+            <Download className="w-3 h-3 text-emerald-400 shrink-0" />
             <span>Raw JSON Archive (.zip)</span>
           </button>
         </div>
@@ -746,17 +746,17 @@ export function GstExtensionSimulator() {
       {downloadMsg && (
         <div className="p-2.5 rounded-lg bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 font-mono text-xs font-bold flex items-center justify-between animate-fadeIn">
           <span>{downloadMsg}</span>
-          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
         </div>
       )}
 
       {/* Simulated Live Table */}
-      <div className="overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-950">
-        <table className="w-full text-left font-mono text-[11px]">
+      <div className="overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-950 w-full touch-pan-x">
+        <table className="w-full text-left font-mono text-[11px] min-w-[540px]">
           <thead className="bg-zinc-900 text-zinc-400 border-b border-zinc-800">
             <tr>
               {currentDataset.headers.map((h, i) => (
-                <th key={h} className={`p-2 ${i === currentDataset.headers.length - 1 ? "text-right" : ""}`}>
+                <th key={h} className={`p-2.5 ${i === currentDataset.headers.length - 1 ? "text-right" : ""}`}>
                   {h}
                 </th>
               ))}
@@ -765,9 +765,9 @@ export function GstExtensionSimulator() {
           <tbody className="divide-y divide-zinc-900 text-zinc-300">
             {currentDataset.rows.map((row, idx) => (
               <tr key={idx} className="hover:bg-zinc-900/50 transition-colors">
-                <td className="p-2 font-bold text-cobalt-400">{row.col1}</td>
-                <td className="p-2">{row.col2}</td>
-                <td className="p-2">{row.col3}</td>
+                <td className="p-2.5 font-bold text-cobalt-400">{row.col1}</td>
+                <td className="p-2.5">{row.col2}</td>
+                <td className="p-2.5">{row.col3}</td>
                 <td className="p-2">{row.col4}</td>
                 <td className="p-2">{row.col5}</td>
                 <td className={`p-2 text-right font-bold ${!row.isDiff ? "text-emerald-400" : "text-red-400 bg-red-950/40"}`}>
@@ -1084,21 +1084,21 @@ export function StockMarketInvestingSimulator() {
         </div>
 
         {/* Visual Intrinsic Value Projection Chart & Monte Carlo Controls */}
-        <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-800 space-y-3">
-          <div className="flex items-center justify-between font-mono text-xs">
-            <span className="text-zinc-300 font-bold flex items-center gap-1.5">
-              <BarChart3 className="w-3.5 h-3.5 text-cobalt-400" />
-              10-Year Intrinsic Valuation Curve (${selectedTicker}):
+        <div className="p-3.5 sm:p-4 rounded-xl bg-zinc-900 border border-zinc-800 space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between font-mono text-xs gap-2">
+            <span className="text-zinc-300 font-bold flex items-center gap-1.5 truncate">
+              <BarChart3 className="w-3.5 h-3.5 text-cobalt-400 shrink-0" />
+              <span className="truncate">10-Year Intrinsic Curve (${activeTicker}):</span>
             </span>
 
             {/* Monte Carlo Scenario Selector */}
-            <div className="flex items-center gap-1 font-mono text-[10px]">
-              <span className="text-zinc-400 mr-1">Scenario:</span>
+            <div className="flex items-center gap-1 font-mono text-[10px] shrink-0">
+              <span className="text-zinc-400 mr-0.5">Scenario:</span>
               {(["bear", "base", "bull"] as const).map((sc) => (
                 <button
                   key={sc}
                   onClick={() => setScenario(sc)}
-                  className={`px-2.5 py-1 rounded font-bold uppercase transition-all ${
+                  className={`px-2 py-0.5 rounded font-bold uppercase transition-all ${
                     scenario === sc
                       ? "bg-cobalt-600 text-white shadow-md shadow-cobalt-600/30 scale-105"
                       : "bg-zinc-800 text-zinc-400 hover:text-white"
@@ -1138,10 +1138,10 @@ export function StockMarketInvestingSimulator() {
               {/* Target Marker Dot */}
               <circle cx="500" cy={scenario === "bull" ? 2 : scenario === "bear" ? 60 : 10} r="5" fill="#3B82F6" className="animate-pulse" />
             </svg>
-            <div className="flex items-center justify-between text-[9px] font-mono text-zinc-400 mt-1">
-              <span>Historical Base</span>
-              <span className="text-emerald-400">Current Mkt (₹{current.price})</span>
-              <span className="text-cobalt-400 font-bold">Target ({scenario.toUpperCase()}: ₹{targetPrice})</span>
+            <div className="flex items-center justify-between text-[8px] sm:text-[9px] font-mono text-zinc-400 mt-1 gap-1">
+              <span className="truncate">Hist Base</span>
+              <span className="text-emerald-400 truncate">Mkt (₹{current.price})</span>
+              <span className="text-cobalt-400 font-bold truncate">Target ({scenario.toUpperCase()}: ₹{targetPrice})</span>
             </div>
           </div>
         </div>
