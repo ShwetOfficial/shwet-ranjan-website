@@ -24,10 +24,11 @@ export default function Calculators() {
   const [copied, setCopied] = useState(false);
   const [shareCopied, setShareCopied] = useState(false);
 
-  // 1. Hydrate state from URL query parameters on mount
+  // Hydrate state ONLY IF incoming URL contains query parameters
   React.useEffect(() => {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
+    if (!params.toString()) return; // Keep URL clean if no incoming params!
 
     const modeParam = params.get("mode");
     if (modeParam === "gst" || modeParam === "d2c") {
@@ -46,30 +47,6 @@ export default function Calculators() {
     if (params.has("cac")) setCac(Number(params.get("cac")));
     if (params.has("shippingCost")) setShippingCost(Number(params.get("shippingCost")));
   }, []);
-
-  // 2. Sync state back to URL query parameters on change
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-    const params = new URLSearchParams();
-    params.set("mode", activeTab);
-
-    if (activeTab === "gst") {
-      params.set("grossSales", grossSales.toString());
-      params.set("taxRate", taxRate.toString());
-      params.set("purchases", purchases.toString());
-      params.set("delinquentVendorPct", delinquentVendorPct.toString());
-    } else {
-      params.set("sellingPrice", sellingPrice.toString());
-      params.set("cogs", cogs.toString());
-      params.set("prepaidPct", prepaidPct.toString());
-      params.set("rtoPct", rtoPct.toString());
-      params.set("cac", cac.toString());
-      params.set("shippingCost", shippingCost.toString());
-    }
-
-    const newUrl = `${window.location.pathname}?${params.toString()}#calculators`;
-    window.history.replaceState(null, "", newUrl);
-  }, [activeTab, grossSales, taxRate, purchases, delinquentVendorPct, sellingPrice, cogs, prepaidPct, rtoPct, cac, shippingCost]);
 
   // INR Formatting Helper
   const formatINR = (val: number) => {
@@ -105,8 +82,27 @@ export default function Calculators() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  // Generate serialized share link on click without cluttering default homepage URL
   const handleShareLink = () => {
-    navigator.clipboard.writeText(window.location.href);
+    const params = new URLSearchParams();
+    params.set("mode", activeTab);
+
+    if (activeTab === "gst") {
+      params.set("grossSales", grossSales.toString());
+      params.set("taxRate", taxRate.toString());
+      params.set("purchases", purchases.toString());
+      params.set("delinquentVendorPct", delinquentVendorPct.toString());
+    } else {
+      params.set("sellingPrice", sellingPrice.toString());
+      params.set("cogs", cogs.toString());
+      params.set("prepaidPct", prepaidPct.toString());
+      params.set("rtoPct", rtoPct.toString());
+      params.set("cac", cac.toString());
+      params.set("shippingCost", shippingCost.toString());
+    }
+
+    const shareableUrl = `${window.location.origin}${window.location.pathname}?${params.toString()}#calculators`;
+    navigator.clipboard.writeText(shareableUrl);
     setShareCopied(true);
     setTimeout(() => setShareCopied(false), 2000);
   };
