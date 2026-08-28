@@ -20,14 +20,14 @@ const INDIAN_TICKERS: Record<string, string> = {
 };
 
 // Fallback mock prices if upstream API is unreachable
-const FALLBACK_QUOTES: Record<string, { price: number; change: number; changePercent: number; currency: string }> = {
-  ITC: { price: 272.50, change: 3.20, changePercent: 1.19, currency: "INR" },
-  HDFCBANK: { price: 728.00, change: -4.50, changePercent: -0.61, currency: "INR" },
-  RELIANCE: { price: 2980.00, change: 18.40, changePercent: 0.62, currency: "INR" },
-  TCS: { price: 4120.00, change: 25.00, changePercent: 0.61, currency: "INR" },
-  TITAN: { price: 3450.00, change: 42.00, changePercent: 1.23, currency: "INR" },
-  AAPL: { price: 224.20, change: 2.10, changePercent: 0.95, currency: "USD" },
-  NVDA: { price: 128.50, change: 3.40, changePercent: 2.72, currency: "USD" },
+const FALLBACK_QUOTES: Record<string, { price: number; previousClose: number; change: number; changePercent: number; currency: string }> = {
+  ITC: { price: 272.50, previousClose: 272.00, change: 3.20, changePercent: 1.19, currency: "INR" },
+  HDFCBANK: { price: 728.00, previousClose: 728.00, change: -4.50, changePercent: -0.61, currency: "INR" },
+  RELIANCE: { price: 2980.00, previousClose: 2961.60, change: 18.40, changePercent: 0.62, currency: "INR" },
+  TCS: { price: 4120.00, previousClose: 4095.00, change: 25.00, changePercent: 0.61, currency: "INR" },
+  TITAN: { price: 3450.00, previousClose: 3408.00, change: 42.00, changePercent: 1.23, currency: "INR" },
+  AAPL: { price: 224.20, previousClose: 222.10, change: 2.10, changePercent: 0.95, currency: "USD" },
+  NVDA: { price: 128.50, previousClose: 125.10, change: 3.40, changePercent: 2.72, currency: "USD" },
 };
 
 export async function GET(request: Request) {
@@ -54,15 +54,16 @@ export async function GET(request: Request) {
 
       if (meta && typeof meta.regularMarketPrice === "number") {
         const price = meta.regularMarketPrice;
-        const prevClose = meta.chartPreviousClose || meta.previousClose || price;
-        const change = Number((price - prevClose).toFixed(2));
-        const changePercent = Number(((change / prevClose) * 100).toFixed(2));
+        const previousClose = meta.chartPreviousClose || meta.previousClose || meta.regularMarketPreviousClose || price;
+        const change = Number((price - previousClose).toFixed(2));
+        const changePercent = Number(((change / previousClose) * 100).toFixed(2));
         const currency = meta.currency || (symbol.endsWith(".NS") || symbol.endsWith(".BO") ? "INR" : "USD");
 
         return NextResponse.json({
           symbol: rawQuery,
           yahooSymbol: symbol,
           price,
+          previousClose,
           change,
           changePercent,
           currency,
@@ -79,6 +80,7 @@ export async function GET(request: Request) {
   // Return fallback quote if API fails or rate-limited
   const fallback = FALLBACK_QUOTES[rawQuery] || {
     price: 1500.00,
+    previousClose: 1500.00,
     change: 12.00,
     changePercent: 0.81,
     currency: rawQuery.endsWith(".NS") || INDIAN_TICKERS[rawQuery] ? "INR" : "USD",
@@ -88,6 +90,7 @@ export async function GET(request: Request) {
     symbol: rawQuery,
     yahooSymbol: symbol,
     price: fallback.price,
+    previousClose: fallback.previousClose,
     change: fallback.change,
     changePercent: fallback.changePercent,
     currency: fallback.currency,

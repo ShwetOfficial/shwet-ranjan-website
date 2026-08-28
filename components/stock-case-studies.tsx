@@ -11,6 +11,7 @@ export default function StockCaseStudies() {
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [liveQuote, setLiveQuote] = useState<{
     price: number;
+    previousClose: number;
     change: number;
     changePercent: number;
     currency: string;
@@ -20,7 +21,7 @@ export default function StockCaseStudies() {
 
   const currentStudy = stockCaseStudiesData.find((s) => s.id === selectedId) || stockCaseStudiesData[0];
 
-  // Fetch live market quote whenever active stock study changes
+  // Fetch live market quote & last day close price whenever active stock study changes
   React.useEffect(() => {
     let isMounted = true;
     const tickerKey = currentStudy.id === "itc-ltd" ? "ITC" : "HDFCBANK";
@@ -32,6 +33,7 @@ export default function StockCaseStudies() {
         if (isMounted && data && typeof data.price === "number") {
           setLiveQuote({
             price: data.price,
+            previousClose: data.previousClose || data.price,
             change: data.change || 0,
             changePercent: data.changePercent || 0,
             currency: data.currency || "INR",
@@ -49,14 +51,17 @@ export default function StockCaseStudies() {
     };
   }, [selectedId, currentStudy]);
 
-  // Dynamic calculations based on live market quote
+  // Use Last Trading Day Closing Price as anchor for calculations (Buffett Model Standard)
   const rawCentralValue = parseFloat(currentStudy.centralIntrinsicValue.replace(/[^0-9.]/g, "")) || 368;
-  const activePrice = liveQuote?.price || parseFloat(currentStudy.currentPrice.replace(/[^0-9.]/g, "")) || 272;
-  const dynamicUpside = rawCentralValue > activePrice 
-    ? `+${(((rawCentralValue - activePrice) / activePrice) * 100).toFixed(1)}%`
-    : `${(((rawCentralValue - activePrice) / activePrice) * 100).toFixed(1)}%`;
-  const dynamicMargin = rawCentralValue > activePrice
-    ? `${(((rawCentralValue - activePrice) / activePrice) * 100).toFixed(0)}% Margin of Safety`
+  const fallbackStaticPrice = parseFloat(currentStudy.currentPrice.replace(/[^0-9.]/g, "")) || 272;
+  const lastClosePrice = liveQuote?.previousClose || liveQuote?.price || fallbackStaticPrice;
+  const currentLivePrice = liveQuote?.price || fallbackStaticPrice;
+
+  const dynamicUpside = rawCentralValue > lastClosePrice 
+    ? `+${(((rawCentralValue - lastClosePrice) / lastClosePrice) * 100).toFixed(1)}%`
+    : `${(((rawCentralValue - lastClosePrice) / lastClosePrice) * 100).toFixed(1)}%`;
+  const dynamicMargin = rawCentralValue > lastClosePrice
+    ? `${(((rawCentralValue - lastClosePrice) / lastClosePrice) * 100).toFixed(0)}% Margin of Safety`
     : "At Fair Value";
 
   return (
@@ -124,6 +129,9 @@ export default function StockCaseStudies() {
                 <Calendar className="w-3.5 h-3.5 text-cyan-400" />
                 <span>RESEARCH DATE: {currentStudy.researchDate}</span>
               </span>
+              <span className="px-3 py-1 rounded-full text-[11px] font-mono font-bold border border-amber-500/30 bg-amber-500/10 text-amber-300 flex items-center gap-1.5">
+                <span>📊 BASELINE: Last Day Close ({liveQuote?.currency === "USD" ? "$" : "₹"}{lastClosePrice.toLocaleString()})</span>
+              </span>
             </div>
             <h3 className="font-display text-2xl sm:text-4xl font-black text-white tracking-tight">
               {currentStudy.companyName} ({currentStudy.ticker})
@@ -151,23 +159,17 @@ export default function StockCaseStudies() {
           <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
             <div className="flex items-center justify-between mb-1">
               <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest block">
-                Live Market Price
+                Last Trading Day Close
               </span>
-              <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono text-[9px] font-bold border border-emerald-500/30 animate-pulse">
-                🟢 LIVE
+              <span className="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono text-[9px] font-bold border border-amber-500/30">
+                LAST CLOSE
               </span>
             </div>
             <div className="font-display text-xl sm:text-2xl font-black text-white">
-              {liveQuote ? `${liveQuote.currency === "INR" ? "₹" : "$"}${liveQuote.price.toLocaleString()}` : currentStudy.currentPrice}
+              {liveQuote ? `${liveQuote.currency === "INR" ? "₹" : "$"}${lastClosePrice.toLocaleString()}` : currentStudy.currentPrice}
             </div>
-            <span className="text-[11px] font-mono mt-1 block">
-              {liveQuote ? (
-                <span className={liveQuote.change >= 0 ? "text-emerald-400 font-bold" : "text-red-400 font-bold"}>
-                  {liveQuote.change >= 0 ? "+" : ""}{liveQuote.change} ({liveQuote.changePercent >= 0 ? "+" : ""}{liveQuote.changePercent}%) 1D
-                </span>
-              ) : (
-                <span className="text-zinc-400">Live Trading Feed</span>
-              )}
+            <span className="text-[10px] font-mono text-zinc-400 mt-1 block">
+              Used as Baseline for DCF & Safety Margin
             </span>
           </div>
 

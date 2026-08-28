@@ -115,7 +115,7 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
         { priceRange: "₹400+", verdict: "🔴 Expensive", color: "text-red-400" },
         { priceRange: "₹350 – ₹400", verdict: "🟡 Fairly Valued", color: "text-amber-400" },
         { priceRange: "₹300 – ₹350", verdict: "🟢 Reasonably Attractive", color: "text-emerald-300" },
-        { priceRange: "₹270 – ₹300", verdict: "🟢🟢 Attractive (Current: ₹272)", color: "text-emerald-400" },
+        { priceRange: "₹270 – ₹300", verdict: "🟢🟢 Attractive (Last Close: ₹272.50)", color: "text-emerald-400" },
         { priceRange: "Below ₹240", verdict: "🟢🟢🟢 Exceptional Value", color: "text-cyan-300" }
       ]
     }
@@ -179,7 +179,7 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
       buyThresholds: [
         { priceRange: "₹900+", verdict: "🔴 Expensive", color: "text-red-400" },
         { priceRange: "₹800 – ₹900", verdict: "⚠️ Requires ROE Evidence", color: "text-amber-400" },
-        { priceRange: "₹730 – ₹800", verdict: "🟡 Fair Value (Current: ₹728)", color: "text-amber-300" },
+        { priceRange: "₹730 – ₹800", verdict: "🟡 Fair Value (Last Close: ₹728.00)", color: "text-amber-300" },
         { priceRange: "₹650 – ₹730", verdict: "🟢 Accumulation Zone", color: "text-emerald-400" },
         { priceRange: "Below ₹600", verdict: "🟢🟢 High Safety Margin", color: "text-cyan-300" }
       ]
