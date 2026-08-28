@@ -286,11 +286,11 @@ export default function Calculators() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6">
                 <div className="p-3.5 sm:p-4 rounded-xl bg-zinc-900 border border-zinc-800">
                   <span className="font-mono text-[10px] text-zinc-400 block mb-1">Output Tax Collected</span>
-                  <span className="font-display text-lg sm:text-xl font-bold text-white tracking-tight break-all">₹{outputTax.toLocaleString()}</span>
+                  <span className="font-display text-lg sm:text-xl font-bold text-white tracking-tight whitespace-nowrap block">₹{outputTax.toLocaleString()}</span>
                 </div>
                 <div className="p-3.5 sm:p-4 rounded-xl bg-zinc-900 border border-zinc-800">
                   <span className="font-mono text-[10px] text-zinc-400 block mb-1">Total Eligible ITC</span>
-                  <span className="font-display text-lg sm:text-xl font-bold text-emerald-400 tracking-tight break-all">₹{eligibleITC.toLocaleString()}</span>
+                  <span className="font-display text-lg sm:text-xl font-bold text-emerald-400 tracking-tight whitespace-nowrap block">₹{eligibleITC.toLocaleString()}</span>
                 </div>
               </div>
 
@@ -305,9 +305,9 @@ export default function Calculators() {
                 </div>
               </div>
 
-              <div className="p-3.5 sm:p-4 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-between gap-2">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-zinc-900 border border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-2">
                 <span className="font-mono text-xs text-zinc-300">Monthly Tax Cash Outflow:</span>
-                <span className="font-display text-lg sm:text-xl font-bold text-amber-400 tracking-tight break-all">₹{netTaxPayable.toLocaleString()}</span>
+                <span className="font-display text-xl sm:text-2xl font-black text-amber-400 tracking-tight whitespace-nowrap">₹{netTaxPayable.toLocaleString()}</span>
               </div>
             </div>
 

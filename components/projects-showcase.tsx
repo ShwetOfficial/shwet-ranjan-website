@@ -233,13 +233,13 @@ export default function ProjectsShowcase() {
               </div>
 
               {/* Impact Metrics Badges */}
-              <div className="grid grid-cols-3 gap-3 p-4 rounded-2xl bg-zinc-950/80 border border-zinc-800 mb-6">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 rounded-2xl bg-zinc-950/80 border border-zinc-800 mb-6">
                 {project.impactMetrics.map((m) => (
-                  <div key={m.label} className="text-center">
-                    <span className="font-display font-black text-xl sm:text-2xl text-cobalt-400 block">
+                  <div key={m.label} className="text-center p-2 rounded-xl bg-zinc-900/50 sm:bg-transparent border sm:border-0 border-zinc-800/60">
+                    <span className="font-display font-black text-lg sm:text-2xl text-cobalt-400 block leading-tight">
                       {m.value}
                     </span>
-                    <span className="font-mono text-[10px] sm:text-xs text-zinc-400 uppercase tracking-wider block mt-0.5">
+                    <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest block mt-1">
                       {m.label}
                     </span>
                   </div>
