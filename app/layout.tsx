@@ -45,6 +45,11 @@ export const metadata: Metadata = {
     locale: "en_US",
     siteName: "Shwet Ranjan",
   },
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
