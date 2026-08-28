@@ -24,7 +24,7 @@ export default function StockCaseStudies() {
   // Fetch live market quote & last day close price whenever active stock study changes
   React.useEffect(() => {
     let isMounted = true;
-    const tickerKey = currentStudy.id === "itc-ltd" ? "ITC" : currentStudy.id === "hdfc-bank" ? "HDFCBANK" : currentStudy.id === "infosys-ltd" ? "INFY" : "TCS";
+    const tickerKey = currentStudy.id === "itc-ltd" ? "ITC" : currentStudy.id === "hdfc-bank" ? "HDFCBANK" : currentStudy.id === "infosys-ltd" ? "INFY" : currentStudy.id === "tcs-ltd" ? "TCS" : "WIPRO";
     setLoadingQuote(true);
 
     fetch(`/api/stock-quote?ticker=${tickerKey}`)

@@ -314,5 +314,70 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
         { priceRange: "Below ₹1,700", verdict: "🟢🟢🟢 Exceptional Safety Margin", color: "text-cyan-300" }
       ]
     }
+  },
+  {
+    id: "wipro-ltd",
+    ticker: "NSE: WIPRO",
+    companyName: "Wipro Limited",
+    sector: "IT Services & Cloud Consulting",
+    currentPrice: "₹180.40",
+    intrinsicValueRange: "₹140 – ₹280",
+    centralIntrinsicValue: "₹205",
+    upsidePercentage: "+13.6% Upside",
+    marginOfSafety: "12.2% Margin of Safety (Discount)",
+    dividendYield: "6.1% Yield (₹11.00/share)",
+    buffettVerdict: "ATTRACTIVE VALUE PLAY — 7.5/10 Buffett Scorecard (14.3x P/E, 6.1% Yield)",
+    verdictBadge: "🟢 ATTRACTIVE VALUE",
+    verdictColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+
+    researchDate: "28 August 2026",
+    dataAsOf: "Includes FY26 Annual Results & ₹150B Buyback Baseline",
+
+    summaryHeader: "High OCF Conversion (112.6%), 14.3x P/E, 6.1% Yield — Weaker Growth Than Peers Creates 12.2% Margin of Safety",
+
+    whyItFell: {
+      title: "Why Has Wipro Fallen ~34% From Its ₹273.15 High?",
+      description: "Wipro's decline reflects flat FY26 earnings (+0.5% net profit), IT services constant-currency growth contraction (-1.6%), and historical valuation discount vs TCS & Infosys.",
+      keyPoints: [
+        "Flat Earnings Growth: FY26 net income increased just 0.5% YoY (EPS +0.3% to ₹12.60).",
+        "Contracting IT Growth: IT Services constant-currency revenue declined 1.6% YoY in FY26.",
+        "Operating Margin Gap: Operating margin of 17.2% lags peers (TCS ~25%, Infosys ~20%+).",
+        "Multiple Discount: Market assigns lower 14.3x P/E multiple due to historical execution drag."
+      ]
+    },
+
+    normalizedEarnings: {
+      title: "Cash Flow Strength & Large Deal Momentum",
+      description: "Wipro generated ₹14,930 Cr operating cash flow (112.6% PAT conversion) and expanded large-deal TCV to $7.8B (+45.4% YoY).",
+      metrics: [
+        { label: "FY26 Operating Cash", value: "₹14,930 Cr (112.6% Conversion)" },
+        { label: "Large Deal TCV", value: "$7.8 Billion (+45.4% YoY)" },
+        { label: "Valuation & Yield", value: "14.3x P/E | 6.1% Yield" },
+        { label: "Capital Payout", value: "₹15,000 Cr Buyback + ₹11 Dividend" }
+      ]
+    },
+
+    intrinsicModel: {
+      method: "Buffett FCF & Normalized Earnings DCF Model",
+      description: "Using ₹12.60 FY26 EPS, ₹14,930 Cr OCF, 10% Discount Rate, and 10-Year Horizon:",
+      scenarios: [
+        { name: "🔴 Bear Case", condition: "Weak Spending / Cannibalization (2-3% Growth)", intrinsicValue: "₹140 – ₹155", status: "bear" },
+        { name: "🟡 Conservative", condition: "Modest Growth (~4% EPS Growth)", intrinsicValue: "₹170 – ₹190", status: "conservative" },
+        { name: "🟢 Base Case", condition: "AI Neutral / Margin Improvement (5-6% Growth)", intrinsicValue: "₹205 / share", status: "base" },
+        { name: "🔵 Bull Case", condition: "AI Productivity Surge (8% EPS Growth)", intrinsicValue: "₹240 – ₹280", status: "bull" }
+      ]
+    },
+
+    buffettFramework: {
+      moatScore: "70/100 (Scale, High Switching Costs, 242k Engineers)",
+      reinvestmentNote: "In the IT Triad ranking: Infosys is #1 (Best Value, 21% Discount), Wipro is #2 (Value Play, 12% Discount, 6.1% Yield), TCS is #3 (Best Business, At Fair Value).",
+      buyThresholds: [
+        { priceRange: "₹250+", verdict: "🔴 Expensive", color: "text-red-400" },
+        { priceRange: "₹220 – ₹250", verdict: "🟡 Fair / Expensive", color: "text-amber-400" },
+        { priceRange: "₹200 – ₹220", verdict: "🟡 Around Fair Value", color: "text-amber-300" },
+        { priceRange: "₹175 – ₹200", verdict: "🟢 Attractive (Last Close: ₹180.40)", color: "text-emerald-400" },
+        { priceRange: "Below ₹150", verdict: "🟢🟢🟢 Potential Bargain Zone", color: "text-cyan-300" }
+      ]
+    }
   }
 ];
