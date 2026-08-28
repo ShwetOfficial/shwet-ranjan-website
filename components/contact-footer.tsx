@@ -157,7 +157,18 @@ export default function ContactFooter() {
                 )}
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-3">
+              <form
+                action="https://formsubmit.co/info@shwetranjan.com"
+                method="POST"
+                onSubmit={() => setSubmitted(true)}
+                className="space-y-3"
+              >
+                {/* FormSubmit Configuration Hidden Fields */}
+                <input type="hidden" name="_subject" value="⚡ New Direct Website Inquiry on shwetranjan.com" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_next" value="https://shwetranjan.com/#contact" />
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <input
                     type="text"
@@ -181,14 +192,23 @@ export default function ContactFooter() {
                   placeholder="Brief project details, GST advice request, or collaboration inquiry..."
                   className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-zinc-800 focus:border-cobalt-500 focus:outline-none text-xs font-mono text-white placeholder-zinc-500 resize-none"
                 />
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="px-6 py-3 rounded-xl bg-cobalt-600 hover:bg-cobalt-500 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-md shadow-cobalt-600/30 flex items-center gap-2"
-                >
-                  <span>{submitting ? "Dispatching to Inbox..." : "Dispatch Message"}</span>
-                  <Zap className="w-3.5 h-3.5" />
-                </button>
+                <div className="flex items-center gap-3 flex-wrap">
+                  <button
+                    type="submit"
+                    className="px-6 py-3 rounded-xl bg-cobalt-600 hover:bg-cobalt-500 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-md shadow-cobalt-600/30 flex items-center gap-2"
+                  >
+                    <span>Dispatch Message</span>
+                    <Zap className="w-3.5 h-3.5" />
+                  </button>
+
+                  <a
+                    href="mailto:info@shwetranjan.com?subject=Direct%20Inquiry%20from%20Website"
+                    className="px-4 py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white font-mono text-xs font-bold transition-all border border-zinc-700 flex items-center gap-1.5"
+                  >
+                    <Mail className="w-3.5 h-3.5 text-cobalt-400" />
+                    <span>Send via Email Client</span>
+                  </a>
+                </div>
               </form>
             )}
           </div>
