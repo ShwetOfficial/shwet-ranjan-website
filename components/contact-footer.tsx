@@ -55,14 +55,14 @@ export default function ContactFooter() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email: senderEmail, message }),
       });
-      setSubmitted(true);
-      form.reset();
     } catch (err) {
       console.error("Form submit error:", err);
+    } finally {
+      // Trigger native mailto link as bulletproof delivery fallback
       window.location.href = `mailto:${email}?subject=Inquiry%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(message)}`;
       setSubmitted(true);
-    } finally {
       setSubmitting(false);
+      form.reset();
     }
   };
 
