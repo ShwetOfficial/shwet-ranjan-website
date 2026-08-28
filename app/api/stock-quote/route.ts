@@ -23,6 +23,7 @@ const INDIAN_TICKERS: Record<string, string> = {
 const FALLBACK_QUOTES: Record<string, { price: number; previousClose: number; change: number; changePercent: number; currency: string }> = {
   ITC: { price: 272.50, previousClose: 272.00, change: 3.20, changePercent: 1.19, currency: "INR" },
   HDFCBANK: { price: 728.00, previousClose: 728.00, change: -4.50, changePercent: -0.61, currency: "INR" },
+  INFY: { price: 1143.65, previousClose: 1143.65, change: 14.20, changePercent: 1.26, currency: "INR" },
   RELIANCE: { price: 2980.00, previousClose: 2961.60, change: 18.40, changePercent: 0.62, currency: "INR" },
   TCS: { price: 4120.00, previousClose: 4095.00, change: 25.00, changePercent: 0.61, currency: "INR" },
   TITAN: { price: 3450.00, previousClose: 3408.00, change: 42.00, changePercent: 1.23, currency: "INR" },

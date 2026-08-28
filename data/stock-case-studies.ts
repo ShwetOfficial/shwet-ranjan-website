@@ -184,5 +184,70 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
         { priceRange: "Below ₹600", verdict: "🟢🟢 High Safety Margin", color: "text-cyan-300" }
       ]
     }
+  },
+  {
+    id: "infosys-ltd",
+    ticker: "NSE: INFY",
+    companyName: "Infosys Limited",
+    sector: "IT Services & Enterprise AI Infrastructure",
+    currentPrice: "₹1,143.65",
+    intrinsicValueRange: "₹1,000 – ₹1,600",
+    centralIntrinsicValue: "₹1,450",
+    upsidePercentage: "+26.8% Upside",
+    marginOfSafety: "21.1% Margin of Safety (Discount)",
+    dividendYield: "4.2% Yield (₹48.00/share)",
+    buffettVerdict: "VERY ATTRACTIVE — 8.8/10 Buffett Scorecard (21% Discount)",
+    verdictBadge: "🟢 VERY ATTRACTIVE",
+    verdictColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+
+    researchDate: "28 August 2026",
+    dataAsOf: "Includes FY26 Full-Year Numbers & FY27 Guidance Baseline",
+
+    summaryHeader: "High ROE (31.6%), Zero Debt, Exceptional FCF (112.3% Conversion) — AI Uncertainty Creates 21% Margin of Safety",
+
+    whyItFell: {
+      title: "Why Has Infosys Fallen ~33.8% From Its ₹1,727.85 High?",
+      description: "Infosys's decline is driven by market uncertainty over AI's impact on traditional billable-hour IT services economics, client contract renegotiations, and modest FY27 revenue guidance.",
+      keyPoints: [
+        "AI Disruption Anxiety: Investors fear AI will reduce billable engineer hours, compressing legacy contract sizes.",
+        "Slower Short-Term Growth: FY27 management revenue guidance moderated to 1.5–3.5% constant currency growth.",
+        "Outcome-Based Billing Shift: Enterprise clients pushing for performance-linked contracts over pure time-and-material.",
+        "Macro Tech Spending Drag: Temporary slowdown in US banking and retail client discretionary cloud spend."
+      ]
+    },
+
+    normalizedEarnings: {
+      title: "Owner Earnings & Balance Sheet Fortification Baseline",
+      description: "Infosys exhibits textbook Buffett financial quality: ~31.6% ROE achieved with ZERO debt and ₹43,075 Cr net cash liquidity.",
+      metrics: [
+        { label: "FY26 Free Cash Flow", value: "₹33,097 Cr (112.3% PAT Conversion)" },
+        { label: "Return on Equity (ROE)", value: "31.6% (Unleveraged)" },
+        { label: "Net Cash & Investments", value: "₹43,075 Cr (Zero Debt)" },
+        { label: "Capital Return Policy", value: "85% 5-Yr FCF Payout (113.9% in FY26)" }
+      ]
+    },
+
+    intrinsicModel: {
+      method: "Buffett Owner Earnings & AI Scenario DCF Model",
+      description: "Using ₹71.58 FY26 EPS, ₹33,097 Cr FCF (₹80.5/share FCF), 10% Discount Rate, and 10-Year Horizon:",
+      scenarios: [
+        { name: "🔴 Bear Case", condition: "AI Hurts Growth (2-3% EPS Growth)", intrinsicValue: "₹1,000 – ₹1,100", status: "bear" },
+        { name: "🟡 Conservative", condition: "Modest Growth (~4% EPS Growth)", intrinsicValue: "₹1,200 – ₹1,300", status: "conservative" },
+        { name: "🟢 Base Case", condition: "AI Neutral / Implementation (~5-6% Growth)", intrinsicValue: "₹1,450 / share", status: "base" },
+        { name: "🔵 Bull Case", condition: "AI Growth Engine (8-10% EPS Growth)", intrinsicValue: "₹1,650 – ₹1,850", status: "bull" }
+      ]
+    },
+
+    buffettFramework: {
+      moatScore: "88/100 (Scale, High Switching Costs, 328k Engineers)",
+      reinvestmentNote: "At ₹1,143.65 (16x P/E, 7.0% FCF yield), Infosys trades at a 21.1% discount to its ₹1,450 central intrinsic value. 85% FCF return policy provides high capital protection.",
+      buyThresholds: [
+        { priceRange: "₹1,600+", verdict: "🔴 Expensive", color: "text-red-400" },
+        { priceRange: "₹1,450 – ₹1,600", verdict: "🟡 Fair Value", color: "text-amber-400" },
+        { priceRange: "₹1,250 – ₹1,450", verdict: "🟢 Attractive", color: "text-emerald-300" },
+        { priceRange: "₹1,100 – ₹1,250", verdict: "🟢🟢 Very Attractive (Last Close: ₹1,143.65)", color: "text-emerald-400" },
+        { priceRange: "Below ₹1,100", verdict: "🟢🟢🟢 Exceptional Bargain Zone", color: "text-cyan-300" }
+      ]
+    }
   }
 ];
