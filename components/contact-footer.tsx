@@ -37,6 +37,35 @@ export default function ContactFooter() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitting(true);
+
+    const form = e.currentTarget;
+    const name = (form.elements.namedItem("name") as HTMLInputElement)?.value || "";
+    const senderEmail = (form.elements.namedItem("email") as HTMLInputElement)?.value || "";
+    const message = (form.elements.namedItem("message") as HTMLTextAreaElement)?.value || "";
+
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email: senderEmail, message }),
+      });
+      setSubmitted(true);
+      form.reset();
+    } catch (err) {
+      console.error("Form submit error:", err);
+      window.location.href = `mailto:${email}?subject=Inquiry%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(message)}`;
+      setSubmitted(true);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <footer id="contact" className="pt-24 pb-12 px-4 sm:px-8 max-w-7xl mx-auto border-t border-white/10 relative text-white">
       {/* Contact Section Box */}
@@ -102,47 +131,50 @@ export default function ContactFooter() {
             <h4 className="font-display text-lg font-bold text-white mb-3">
               Or Send a Direct Inquiry Message:
             </h4>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                const form = e.currentTarget;
-                const name = (form.elements.namedItem("name") as HTMLInputElement)?.value;
-                const msg = (form.elements.namedItem("message") as HTMLTextAreaElement)?.value;
-                window.location.href = `mailto:info@shwetranjan.com?subject=Inquiry%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(msg)}`;
-              }}
-              className="space-y-3"
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  placeholder="Your Name / Company"
-                  className="px-4 py-3 rounded-xl bg-zinc-900 border border-zinc-800 focus:border-cobalt-500 focus:outline-none text-xs font-mono text-white placeholder-zinc-500"
-                />
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  placeholder="Your Email Address"
-                  className="px-4 py-3 rounded-xl bg-zinc-900 border border-zinc-800 focus:border-cobalt-500 focus:outline-none text-xs font-mono text-white placeholder-zinc-500"
-                />
+
+            {submitted ? (
+              <div className="p-4 rounded-2xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 font-mono text-xs font-bold flex items-center gap-3 animate-fadeIn">
+                <Check className="w-5 h-5 text-emerald-400 shrink-0" />
+                <div>
+                  <span className="block text-white font-bold text-sm">Message Dispatched!</span>
+                  <span className="text-emerald-300 text-[11px]">Your message was delivered to info@shwetranjan.com. Shwet will respond directly to your email shortly.</span>
+                </div>
               </div>
-              <textarea
-                name="message"
-                required
-                rows={3}
-                placeholder="Brief project details, GST advice request, or collaboration inquiry..."
-                className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-zinc-800 focus:border-cobalt-500 focus:outline-none text-xs font-mono text-white placeholder-zinc-500 resize-none"
-              />
-              <button
-                type="submit"
-                className="px-6 py-3 rounded-xl bg-cobalt-600 hover:bg-cobalt-500 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-md shadow-cobalt-600/30 flex items-center gap-2"
-              >
-                <span>Dispatch Message</span>
-                <Zap className="w-3.5 h-3.5" />
-              </button>
-            </form>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    placeholder="Your Name / Company"
+                    className="px-4 py-3 rounded-xl bg-zinc-900 border border-zinc-800 focus:border-cobalt-500 focus:outline-none text-xs font-mono text-white placeholder-zinc-500"
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="Your Email Address"
+                    className="px-4 py-3 rounded-xl bg-zinc-900 border border-zinc-800 focus:border-cobalt-500 focus:outline-none text-xs font-mono text-white placeholder-zinc-500"
+                  />
+                </div>
+                <textarea
+                  name="message"
+                  required
+                  rows={3}
+                  placeholder="Brief project details, GST advice request, or collaboration inquiry..."
+                  className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-zinc-800 focus:border-cobalt-500 focus:outline-none text-xs font-mono text-white placeholder-zinc-500 resize-none"
+                />
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="px-6 py-3 rounded-xl bg-cobalt-600 hover:bg-cobalt-500 text-white font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-md shadow-cobalt-600/30 flex items-center gap-2"
+                >
+                  <span>{submitting ? "Dispatching to Inbox..." : "Dispatch Message"}</span>
+                  <Zap className="w-3.5 h-3.5" />
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>
