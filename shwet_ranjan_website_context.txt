@@ -1,0 +1,70 @@
+SHWET RANJAN — Flagship Web Application & Knowledge Base
+Domain: shwetranjan.com
+Repository: Shwet Ranjan Website
+Tech Stack: Next.js 14 (App Router), TypeScript, Tailwind CSS, Framer Motion, HTML5 Canvas 3D.
+
+================================================================================
+1. EXECUTIVE SUMMARY & PERSONA
+================================================================================
+Shwet Ranjan is a multi-disciplinary business operator, tax compliance architect, AI/software engineer, and long-term intrinsic value investor.
+- Primary Persona: Engineering scalable business operations, untangling complex Indian tax compliance frameworks (GST), building production-grade software platforms, and managing equity capital.
+- Primary Contact Email: info@shwetranjan.com
+- Location: New Delhi / Patna / Kolkata, India (IST timezone).
+
+================================================================================
+2. PLATFORM ARCHITECTURE & LIVE PAGES
+================================================================================
+A. Main Portfolio Hub (app/page.tsx — /)
+1. Top Navbar: Sticky glassmorphic bar with active section spring tab indicators, live status pill (5 Live Apps Online), and Cmd + K search launcher.
+2. 3D Hero Section: 3D Perspective Cyber Grid Floor Canvas (components/hero-3d-background.tsx) reacting dynamically to mouse movement and page scroll.
+3. Interactive Product Showcase (#projects): 5 built platforms with 3D tilt cards, category filters, and architecture spec modals.
+4. Financial & Tax Calculators (#calculators): GST Cash Lock / ITC Delinquency Audit & D2C Net Realization / CM3 Contribution Margin.
+5. Core Pillars (#pillars): 4 strategic domain pillars.
+6. Journey & Philosophy (#journey): Timeline from Stock Market Investing (2010) to E-Commerce GST Automation (2025–2026).
+7. Skills Matrix (#skills): Categorized technical proficiency matrix.
+8. Editorial Insights (#insights): Essays on GST, D2C unit economics, and AI leverage.
+9. Direct Channel Dock (#contact): Inquiry message dispatcher, IST digital clock, info@shwetranjan.com copy tool.
+
+B. Intrinsic Value Equity Modeler (app/investing-modeler/page.tsx — /investing-modeler)
+Bloomberg/Koyfin-style equity valuation terminal hosted at shwetranjan.com/investing-modeler:
+- Live Stock Tickers: AAPL, MSFT, GOOGL, NVDA, TSLA.
+- Valuation Engine: DCF Fair Value, Margin of Safety (%), Buffett Economic Moat Score, Peter Lynch Fast-Grower Peg Ratio.
+- Interactive SVG Curves: 5-year revenue vs intrinsic value trajectory.
+
+================================================================================
+3. BUILT PRODUCTION SYSTEMS
+================================================================================
+1. E-Commerce Tax Engine (experts.taxamicus.in): Auto-ingests Flipkart, Amazon, Meesho, Myntra, Ajio, 1mg reports, normalizes multi-state buyer tax liabilities, outputs GSTR-1 and GSTR-3B audit templates.
+2. Enterprise Tax Operations CRM (experts.taxamicus.in): Multi-tenant task manager handling 324+ active client jobs and filing deadlines.
+3. Financial Invoicing Platform (invoice.taxamicus.in): Cloud invoicing portal generating B2B/B2C invoices and GSTR-1 JSON dumps.
+4. VerifyReels.com (verifyreels.com): AI video fact-checker & WhatsApp verification bot.
+5. GST Portal Chrome Extension: Silent notice checker & GSTR-1 vs 3B rate comparison extension inside gst.gov.in.
+
+================================================================================
+4. KEY FINANCIAL & BUSINESS FORMULAS
+================================================================================
+- GST Cash Lock: Output Tax = (Gross Sales * Tax Rate) / 100
+  Raw ITC = (Purchases * Tax Rate) / 100
+  Locked ITC = Raw ITC * (Delinquent Vendor % / 100)
+  Eligible ITC = Raw ITC - Locked ITC
+  Net Cash Tax Payable = max(0, Output Tax - Eligible ITC)
+
+- D2C CM3 Margin: COD % = 100 - Prepaid %
+  RTO Freight Cost = Forward Freight * 1.6
+  Weighted Freight = (Forward Freight * (1 - RTO %)) + (RTO Freight * RTO %)
+  Gateway Fee = Selling Price * 2%
+  CM3 Margin = Selling Price - COGS - Weighted Freight - Gateway Fee - CAC
+  CM3 Margin % = (CM3 Margin / Selling Price) * 100
+
+================================================================================
+5. CODEBASE MAP
+================================================================================
+app/page.tsx                    -> Main portfolio hub
+app/investing-modeler/page.tsx  -> Equity Valuation Terminal (/investing-modeler)
+components/hero-3d-background.tsx -> HTML5 Canvas 3D Cyber Grid background
+components/calculators.tsx       -> GST & D2C calculators with INR formatting
+components/projects-showcase.tsx -> 3D tilt cards & category filters
+components/navbar.tsx            -> Navigation bar with active spring pill & Cmd+K
+components/contact-footer.tsx   -> Message dispatcher, IST clock, info@shwetranjan.com
+data/projects.ts                 -> Projects dataset
+data/insights.ts                 -> Essays dataset
