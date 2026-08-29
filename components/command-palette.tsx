@@ -91,7 +91,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
             />
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
+              className="p-1.5 rounded-lg text-zinc-300 hover:text-white hover:bg-zinc-800 transition-colors"
             >
               <X className="w-4 h-4" />
             </button>

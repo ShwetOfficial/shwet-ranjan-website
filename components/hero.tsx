@@ -75,7 +75,7 @@ export default function Hero() {
 
         {/* Direct Quick Launcher Bar for 5 Built Apps */}
         <motion.div variants={itemVariants} className="space-y-3 pt-2">
-          <span className="font-mono text-xs text-zinc-400 uppercase tracking-wider font-bold block flex items-center gap-2">
+          <span className="font-mono text-xs text-zinc-300 uppercase tracking-wider font-bold block flex items-center gap-2">
             <Zap className="w-3.5 h-3.5 text-cobalt-400" />
             <span>Launch Built Applications & Engines Directly:</span>
           </span>
@@ -124,10 +124,10 @@ export default function Hero() {
           <div className="p-6 rounded-2xl bg-[#121218] border border-white/10 hover:border-cobalt-500/40 transition-all hover:scale-[1.02] shadow-xl">
             <div className="flex items-center gap-2 text-cobalt-400 mb-3">
               <FileSpreadsheet className="w-4 h-4" />
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-400">01. Tax Engine</span>
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-300">01. Tax Engine</span>
             </div>
             <p className="font-display font-bold text-xl text-white">E-Com Tax Automation</p>
-            <p className="text-xs text-zinc-400 font-mono mt-1.5 leading-relaxed">
+            <p className="text-xs text-zinc-300 font-mono mt-1.5 leading-relaxed">
               Flipkart, Amazon, Meesho, Myntra & B2B/B2C GST calculation
             </p>
           </div>
@@ -135,10 +135,10 @@ export default function Hero() {
           <div className="p-6 rounded-2xl bg-[#121218] border border-white/10 hover:border-emerald-500/40 transition-all hover:scale-[1.02] shadow-xl">
             <div className="flex items-center gap-2 text-emerald-400 mb-3">
               <Layers className="w-4 h-4" />
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-400">02. CRM Engine</span>
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-300">02. CRM Engine</span>
             </div>
             <p className="font-display font-bold text-xl text-white">Enterprise CRM</p>
-            <p className="text-xs text-zinc-400 font-mono mt-1.5 leading-relaxed">
+            <p className="text-xs text-zinc-300 font-mono mt-1.5 leading-relaxed">
               324+ active jobs & real-time task inbox dispatching
             </p>
           </div>
@@ -146,10 +146,10 @@ export default function Hero() {
           <div className="p-6 rounded-2xl bg-[#121218] border border-white/10 hover:border-cyan-400 mb-3 transition-all hover:scale-[1.02] shadow-xl">
             <div className="flex items-center gap-2 text-cyan-400 mb-3">
               <Bot className="w-4 h-4" />
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-400">03. AI Platform</span>
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-300">03. AI Platform</span>
             </div>
             <p className="font-display font-bold text-xl text-white">VerifyReels.com</p>
-            <p className="text-xs text-zinc-400 font-mono mt-1.5 leading-relaxed">
+            <p className="text-xs text-zinc-300 font-mono mt-1.5 leading-relaxed">
               AI viral video fact-checking & WhatsApp verification bot
             </p>
           </div>
@@ -157,10 +157,10 @@ export default function Hero() {
           <div className="p-6 rounded-2xl bg-[#121218] border border-white/10 hover:border-violet-400 transition-all hover:scale-[1.02] shadow-xl">
             <div className="flex items-center gap-2 text-violet-400 mb-3">
               <ShieldCheck className="w-4 h-4" />
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-400">04. Chrome Ext</span>
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-300">04. Chrome Ext</span>
             </div>
             <p className="font-display font-bold text-xl text-white">GST Portal Automation</p>
-            <p className="text-xs text-zinc-400 font-mono mt-1.5 leading-relaxed">
+            <p className="text-xs text-zinc-300 font-mono mt-1.5 leading-relaxed">
               Silent notice checking & GSTR-1 vs 3B rate comparison
             </p>
           </div>
@@ -169,7 +169,7 @@ export default function Hero() {
         {/* Scroll Indicator */}
         <motion.div
           variants={itemVariants}
-          className="pt-8 flex items-center justify-between border-t border-white/10 text-xs font-mono text-zinc-400"
+          className="pt-8 flex items-center justify-between border-t border-white/10 text-xs font-mono text-zinc-300"
         >
           <a
             href="#projects"

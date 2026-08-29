@@ -135,7 +135,7 @@ export default function Calculators() {
               className={`px-5 py-2.5 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all ${
                 activeTab === "gst"
                   ? "bg-cobalt-600 text-white shadow-lg shadow-cobalt-600/30"
-                  : "text-zinc-400 hover:text-white"
+                  : "text-zinc-300 hover:text-white"
               }`}
               data-cursor="CALCULATOR"
             >
@@ -146,7 +146,7 @@ export default function Calculators() {
               className={`px-5 py-2.5 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all ${
                 activeTab === "d2c"
                   ? "bg-cobalt-600 text-white shadow-lg shadow-cobalt-600/30"
-                  : "text-zinc-400 hover:text-white"
+                  : "text-zinc-300 hover:text-white"
               }`}
               data-cursor="CALCULATOR"
             >
@@ -200,7 +200,7 @@ export default function Calculators() {
               <Calculator className="w-5 h-5 text-cobalt-400" />
               <span>GST Input Tax Credit (ITC) Cash Lock Engine</span>
             </h3>
-            <p className="font-sans text-xs text-zinc-400 leading-relaxed">
+            <p className="font-sans text-xs text-zinc-300 leading-relaxed">
               Simulate how supplier filing delays in GSTR-2B directly freeze working capital and increase monthly tax cash outflows.
             </p>
 
@@ -234,7 +234,7 @@ export default function Calculators() {
                       className={`flex-1 py-1.5 rounded-lg text-xs font-mono font-bold transition-all ${
                         taxRate === r
                           ? "bg-cobalt-600 text-white"
-                          : "bg-zinc-900 text-zinc-400 hover:bg-zinc-800"
+                          : "bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
                       }`}
                     >
                       {r}%
@@ -285,11 +285,11 @@ export default function Calculators() {
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6">
                 <div className="p-3.5 sm:p-4 rounded-xl bg-zinc-900 border border-zinc-800">
-                  <span className="font-mono text-[10px] text-zinc-400 block mb-1">Output Tax Collected</span>
+                  <span className="font-mono text-[10px] text-zinc-300 block mb-1">Output Tax Collected</span>
                   <span className="font-display text-lg sm:text-xl font-bold text-white tracking-tight whitespace-nowrap block">₹{outputTax.toLocaleString()}</span>
                 </div>
                 <div className="p-3.5 sm:p-4 rounded-xl bg-zinc-900 border border-zinc-800">
-                  <span className="font-mono text-[10px] text-zinc-400 block mb-1">Total Eligible ITC</span>
+                  <span className="font-mono text-[10px] text-zinc-300 block mb-1">Total Eligible ITC</span>
                   <span className="font-display text-lg sm:text-xl font-bold text-emerald-400 tracking-tight whitespace-nowrap block">₹{eligibleITC.toLocaleString()}</span>
                 </div>
               </div>
@@ -311,7 +311,7 @@ export default function Calculators() {
               </div>
             </div>
 
-            <div className="pt-4 border-t border-zinc-800 flex items-center justify-between text-xs font-mono text-zinc-400">
+            <div className="pt-4 border-t border-zinc-800 flex items-center justify-between text-xs font-mono text-zinc-300">
               <span>Shwet Ranjan GST Audit Engine</span>
               <a href="#contact" className="text-cobalt-400 hover:underline flex items-center gap-1 font-bold">
                 <span>Request GST Audit</span>
@@ -331,7 +331,7 @@ export default function Calculators() {
               <TrendingUp className="w-5 h-5 text-emerald-400" />
               <span>D2C E-Commerce Net Realization & CM3 Engine</span>
             </h3>
-            <p className="font-sans text-xs text-zinc-400 leading-relaxed">
+            <p className="font-sans text-xs text-zinc-300 leading-relaxed">
               Calculate unit-level contribution margin (CM3) after accounting for COD Return-To-Origin (RTO) friction, shipping, and payment fees.
             </p>
 
@@ -421,19 +421,19 @@ export default function Calculators() {
 
               <div className="space-y-3 mb-6 font-mono text-xs">
                 <div className="flex justify-between pb-2 border-b border-zinc-800">
-                  <span className="text-zinc-400">Gross Selling Price:</span>
+                  <span className="text-zinc-300">Gross Selling Price:</span>
                   <span className="font-bold text-white">₹{sellingPrice}</span>
                 </div>
                 <div className="flex justify-between pb-2 border-b border-zinc-800">
-                  <span className="text-zinc-400">Less Product COGS:</span>
+                  <span className="text-zinc-300">Less Product COGS:</span>
                   <span className="text-red-400">-₹{cogs}</span>
                 </div>
                 <div className="flex justify-between pb-2 border-b border-zinc-800">
-                  <span className="text-zinc-400">Freight & RTO Drag:</span>
+                  <span className="text-zinc-300">Freight & RTO Drag:</span>
                   <span className="text-red-400">-₹{weightedFreightPerOrder.toFixed(0)}</span>
                 </div>
                 <div className="flex justify-between pb-2 border-b border-zinc-800">
-                  <span className="text-zinc-400">Customer Acquisition (CAC):</span>
+                  <span className="text-zinc-300">Customer Acquisition (CAC):</span>
                   <span className="text-red-400">-₹{cac}</span>
                 </div>
               </div>
@@ -452,7 +452,7 @@ export default function Calculators() {
               </div>
             </div>
 
-            <div className="pt-4 border-t border-zinc-800 flex items-center justify-between text-xs font-mono text-zinc-400">
+            <div className="pt-4 border-t border-zinc-800 flex items-center justify-between text-xs font-mono text-zinc-300">
               <span>Shwet Ranjan D2C OS</span>
               <a href="#contact" className="text-emerald-400 hover:underline flex items-center gap-1 font-bold">
                 <span>Inquire D2C Strategy</span>

@@ -144,7 +144,7 @@ export default function ProjectsShowcase() {
           <h2 className="font-display text-4xl sm:text-5xl font-black text-white tracking-tight">
             Interactive Product Showcase
           </h2>
-          <p className="font-sans text-sm text-zinc-400 mt-2 max-w-2xl">
+          <p className="font-sans text-sm text-zinc-300 mt-2 max-w-2xl">
             Explore live interactive previews of my 5 built software platforms, tax automation engines, enterprise CRM, and AI fact-checking tools.
           </p>
         </div>
@@ -160,7 +160,7 @@ export default function ProjectsShowcase() {
                 className={`relative px-4 py-2 rounded-full text-xs font-mono font-bold transition-colors ${
                   isActive
                     ? "text-white"
-                    : "bg-zinc-900/90 text-zinc-400 border border-zinc-800 hover:border-zinc-600 hover:text-white"
+                    : "bg-zinc-900/90 text-zinc-300 border border-zinc-800 hover:border-zinc-600 hover:text-white"
                 }`}
                 data-cursor="FILTER"
               >
@@ -207,7 +207,7 @@ export default function ProjectsShowcase() {
                   <span className="px-3.5 py-1 rounded-full bg-cobalt-500/20 text-cobalt-400 font-mono text-xs font-bold uppercase tracking-wider border border-cobalt-500/30">
                     {project.category}
                   </span>
-                  <span className="font-mono text-xs text-zinc-400">{project.year}</span>
+                  <span className="font-mono text-xs text-zinc-300">{project.year}</span>
                   {project.id === "ecom-tax-filing-engine" || project.id === "enterprise-tax-crm" || project.id === "gst-notice-extension" ? (
                     <span className="px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-[10px] font-bold flex items-center gap-1">
                       🔒 Only for Internal Company Team & Enterprise Client Use
@@ -261,7 +261,7 @@ export default function ProjectsShowcase() {
                     <span className="font-display font-black text-lg sm:text-2xl text-cobalt-400 block leading-tight">
                       {m.value}
                     </span>
-                    <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest block mt-1">
+                    <span className="font-mono text-[10px] text-zinc-300 uppercase tracking-widest block mt-1">
                       {m.label}
                     </span>
                   </div>
@@ -277,7 +277,7 @@ export default function ProjectsShowcase() {
                 {simulatorContent ? (
                   simulatorContent
                 ) : (
-                  <div className="py-12 text-center text-zinc-400 font-mono text-xs">
+                  <div className="py-12 text-center text-zinc-300 font-mono text-xs">
                     Interactive architecture preview active for {project.title}
                   </div>
                 )}
@@ -315,14 +315,14 @@ export default function ProjectsShowcase() {
               key={exp.title}
               className="p-5 rounded-2xl bg-zinc-950/80 border border-zinc-800 hover:border-cobalt-500/40 transition-all hover:scale-[1.02]"
             >
-              <div className="flex items-center justify-between text-xs font-mono text-zinc-400 mb-2">
+              <div className="flex items-center justify-between text-xs font-mono text-zinc-300 mb-2">
                 <span className="text-cobalt-400 font-bold">{exp.tag}</span>
                 <span className="px-2 py-0.5 rounded bg-zinc-800 text-emerald-400 text-[10px] font-bold">
                   {exp.status}
                 </span>
               </div>
               <h4 className="font-display font-bold text-lg text-white mb-2">{exp.title}</h4>
-              <p className="font-sans text-xs text-zinc-400 leading-relaxed">{exp.desc}</p>
+              <p className="font-sans text-xs text-zinc-300 leading-relaxed">{exp.desc}</p>
             </div>
           ))}
         </div>
@@ -366,7 +366,7 @@ export default function ProjectsShowcase() {
                       <h5 className="font-display font-bold text-sm text-white mb-1">
                         {node.label}
                       </h5>
-                      <p className="font-sans text-[11px] text-zinc-400 leading-normal">
+                      <p className="font-sans text-[11px] text-zinc-300 leading-normal">
                         {node.detail}
                       </p>
                     </div>

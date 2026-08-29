@@ -156,7 +156,7 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   className={`relative px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap ${
-                    isActive ? "text-white font-extrabold" : "hover:text-white text-zinc-400"
+                    isActive ? "text-white font-extrabold" : "hover:text-white text-zinc-300"
                   }`}
                 >
                   {isActive && (
@@ -226,7 +226,7 @@ export default function Navbar() {
                             </span>
                             <span className="text-[10px] text-emerald-400 font-mono">{app.status}</span>
                           </div>
-                          <p className="text-[11px] text-zinc-400 font-sans leading-tight mb-1">
+                          <p className="text-[11px] text-zinc-300 font-sans leading-tight mb-1">
                             {app.desc}
                           </p>
                           <span className="text-[9px] font-mono text-amber-300/80 block">
@@ -246,7 +246,7 @@ export default function Navbar() {
               className="px-3 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 transition-colors flex items-center gap-1.5 text-xs font-mono font-semibold whitespace-nowrap"
               aria-label="Search Command Palette"
             >
-              <Search className="w-3.5 h-3.5 text-zinc-400" />
+              <Search className="w-3.5 h-3.5 text-zinc-300" />
               <span className="hidden sm:inline-block">Cmd + K</span>
             </button>
 
@@ -300,7 +300,7 @@ export default function Navbar() {
                 }}
                 className="w-full py-3 rounded-xl bg-zinc-900 text-zinc-300 font-mono text-xs font-bold flex items-center justify-center gap-2 border border-zinc-800"
               >
-                <Search className="w-4 h-4 text-zinc-400" />
+                <Search className="w-4 h-4 text-zinc-300" />
                 <span>Search Command Palette (Cmd + K)</span>
               </button>
               <a

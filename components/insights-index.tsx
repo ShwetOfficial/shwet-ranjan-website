@@ -22,7 +22,7 @@ export default function InsightsIndex() {
             Editorial Writing Index
           </h2>
         </div>
-        <p className="max-w-md font-sans text-zinc-400 text-sm sm:text-base leading-relaxed">
+        <p className="max-w-md font-sans text-zinc-300 text-sm sm:text-base leading-relaxed">
           Analytical writings on Indian statutory tax architecture, e-commerce unit economics, intrinsic value DCF modeling, and software automation.
         </p>
       </div>
@@ -43,7 +43,7 @@ export default function InsightsIndex() {
             data-cursor="READ"
           >
             <div className="max-w-3xl space-y-2">
-              <div className="flex items-center gap-3 text-xs font-mono text-zinc-400">
+              <div className="flex items-center gap-3 text-xs font-mono text-zinc-300">
                 <span className="px-2.5 py-0.5 rounded bg-cobalt-500/20 text-cobalt-300 font-bold uppercase border border-cobalt-500/30">
                   {article.category}
                 </span>
@@ -61,7 +61,7 @@ export default function InsightsIndex() {
                 {article.title}
               </h3>
 
-              <p className="font-sans text-zinc-400 text-sm leading-relaxed line-clamp-2">
+              <p className="font-sans text-zinc-300 text-sm leading-relaxed line-clamp-2">
                 {article.excerpt}
               </p>
             </div>

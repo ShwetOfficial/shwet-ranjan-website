@@ -62,7 +62,7 @@ export default function Modal({ isOpen, onClose, title, category, children }: Mo
               </div>
               <button
                 onClick={onClose}
-                className="p-2 rounded-full text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
+                className="p-2 rounded-full text-zinc-300 hover:text-white hover:bg-zinc-800 transition-colors"
                 aria-label="Close modal"
               >
                 <X className="w-6 h-6" />
@@ -75,7 +75,7 @@ export default function Modal({ isOpen, onClose, title, category, children }: Mo
             </div>
 
             {/* Modal Footer */}
-            <div className="sticky bottom-0 z-20 px-6 py-4 bg-[#181822] border-t border-zinc-800 flex items-center justify-between text-xs font-mono text-zinc-400">
+            <div className="sticky bottom-0 z-20 px-6 py-4 bg-[#181822] border-t border-zinc-800 flex items-center justify-between text-xs font-mono text-zinc-300">
               <span>SHWET RANJAN — SYSTEM SPECIFICATION</span>
               <button
                 onClick={onClose}

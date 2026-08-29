@@ -145,7 +145,7 @@ export default function ContactFooter() {
 
                 {lastSubmitted && (
                   <div className="pt-2 border-t border-emerald-800/60 flex items-center justify-between gap-2 flex-wrap text-[11px]">
-                    <span className="text-zinc-400">Want to launch your mail app too?</span>
+                    <span className="text-zinc-300">Want to launch your mail app too?</span>
                     <a
                       href={`mailto:${email}?subject=Inquiry%20from%20${encodeURIComponent(lastSubmitted.name)}&body=${encodeURIComponent(lastSubmitted.message)}`}
                       className="px-3 py-1 rounded-lg bg-emerald-900/80 hover:bg-emerald-800 text-white font-bold transition-all border border-emerald-500/40 flex items-center gap-1.5"
@@ -206,11 +206,11 @@ export default function ContactFooter() {
       </div>
 
       {/* Footer Bottom Bar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-400 pt-6 border-t border-zinc-800">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-300 pt-6 border-t border-zinc-800">
         <div className="flex items-center gap-4">
           <span className="font-bold text-white">SHWET RANJAN © 2026</span>
           <span className="hidden sm:inline">•</span>
-          <span className="hidden sm:inline text-zinc-400">Interactive Tech Showcase</span>
+          <span className="hidden sm:inline text-zinc-300">Interactive Tech Showcase</span>
         </div>
 
         {/* Live Kolkata Time Indicator */}

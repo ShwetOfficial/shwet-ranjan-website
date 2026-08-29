@@ -19,7 +19,7 @@ export default function SkillsMatrix() {
             Skills & Competency Framework
           </h2>
         </div>
-        <p className="max-w-md font-sans text-zinc-400 text-sm sm:text-base leading-relaxed">
+        <p className="max-w-md font-sans text-zinc-300 text-sm sm:text-base leading-relaxed">
           Quantitative breakdown of multi-domain technical capabilities across business leadership, GST statutory compliance, full-stack web software, and fundamental valuation.
         </p>
       </div>
@@ -67,7 +67,7 @@ export default function SkillsMatrix() {
                         className="h-full bg-gradient-to-r from-cobalt-500 to-emerald-400 rounded-full"
                       />
                     </div>
-                    <p className="font-mono text-[10px] text-zinc-400">{skill.note}</p>
+                    <p className="font-mono text-[10px] text-zinc-300">{skill.note}</p>
                   </div>
                 ))}
               </div>
@@ -75,7 +75,7 @@ export default function SkillsMatrix() {
 
             {/* Frameworks & Tooling Chips */}
             <div className="pt-4 border-t border-zinc-800">
-              <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-2">
+              <span className="font-mono text-[10px] font-bold text-zinc-300 uppercase tracking-widest block mb-2">
                 Frameworks & Models:
               </span>
               <div className="flex flex-wrap gap-1">

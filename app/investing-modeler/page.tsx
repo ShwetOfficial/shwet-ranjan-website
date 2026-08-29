@@ -136,7 +136,7 @@ export default function InvestingModelerPage() {
         <h3 className="font-display text-2xl font-bold text-white">
           Interested in Quantitative Equity Valuation & Capital Allocation?
         </h3>
-        <p className="font-sans text-xs sm:text-sm text-zinc-400 max-w-2xl mx-auto">
+        <p className="font-sans text-xs sm:text-sm text-zinc-300 max-w-2xl mx-auto">
           Connect with Shwet Ranjan to discuss equity research, capital allocation frameworks, or automated financial engineering pipelines.
         </p>
         <div className="pt-2">

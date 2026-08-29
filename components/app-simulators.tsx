@@ -81,7 +81,7 @@ export function FilingAutomationSimulator() {
         {/* Left Inputs */}
         <div className="space-y-3">
           <div>
-            <label className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block mb-1">
+            <label className="text-[11px] font-mono text-zinc-300 uppercase tracking-wider block mb-1">
               Select Client *
             </label>
             <select
@@ -98,7 +98,7 @@ export function FilingAutomationSimulator() {
           {/* Period Selection (Monthly vs Quarterly) */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <label className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider">
+              <label className="text-[11px] font-mono text-zinc-300 uppercase tracking-wider">
                 Select Filing Period Type
               </label>
               <div className="inline-flex p-0.5 rounded-md bg-zinc-900 border border-zinc-800 font-mono text-[10px]">
@@ -106,7 +106,7 @@ export function FilingAutomationSimulator() {
                   type="button"
                   onClick={() => setPeriodType("monthly")}
                   className={`px-2.5 py-0.5 rounded font-bold transition-all ${
-                    periodType === "monthly" ? "bg-cobalt-600 text-white" : "text-zinc-400 hover:text-white"
+                    periodType === "monthly" ? "bg-cobalt-600 text-white" : "text-zinc-300 hover:text-white"
                   }`}
                 >
                   Monthly
@@ -115,7 +115,7 @@ export function FilingAutomationSimulator() {
                   type="button"
                   onClick={() => setPeriodType("quarterly")}
                   className={`px-2.5 py-0.5 rounded font-bold transition-all ${
-                    periodType === "quarterly" ? "bg-cobalt-600 text-white" : "text-zinc-400 hover:text-white"
+                    periodType === "quarterly" ? "bg-cobalt-600 text-white" : "text-zinc-300 hover:text-white"
                   }`}
                 >
                   Quarterly
@@ -160,7 +160,7 @@ export function FilingAutomationSimulator() {
           </div>
 
           <div>
-            <label className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block mb-1">
+            <label className="text-[11px] font-mono text-zinc-300 uppercase tracking-wider block mb-1">
               Platform Format Engine
             </label>
             <div className="flex flex-wrap gap-1.5">
@@ -171,7 +171,7 @@ export function FilingAutomationSimulator() {
                   className={`px-2.5 py-1 rounded-md text-[11px] font-mono transition-all ${
                     selectedPlatform === p
                       ? "bg-cobalt-600 text-white font-bold shadow-sm"
-                      : "bg-zinc-800 text-zinc-400 hover:text-white hover:bg-zinc-700"
+                      : "bg-zinc-800 text-zinc-300 hover:text-white hover:bg-zinc-700"
                   }`}
                 >
                   {p}
@@ -188,7 +188,7 @@ export function FilingAutomationSimulator() {
             <h5 className="font-display text-xs font-bold text-white mb-1">
               Upload Sales Reports
             </h5>
-            <p className="font-sans text-[11px] text-zinc-400 mb-3">
+            <p className="font-sans text-[11px] text-zinc-300 mb-3">
               Drag & drop CSV/Excel from Flipkart, Amazon, Meesho or click below
             </p>
           </div>
@@ -286,7 +286,7 @@ export function EnterpriseCrmSimulator() {
       {/* CRM Task Operations Table */}
       <div className="overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-950">
         <table className="w-full text-left font-mono text-xs">
-          <thead className="bg-zinc-900 text-zinc-400 border-b border-zinc-800">
+          <thead className="bg-zinc-900 text-zinc-300 border-b border-zinc-800">
             <tr>
               <th className="p-3">Job ID</th>
               <th className="p-3">Compliance Task Title</th>
@@ -300,7 +300,7 @@ export function EnterpriseCrmSimulator() {
               <tr key={task.id} className="hover:bg-zinc-900/50 transition-colors">
                 <td className="p-3 font-bold text-cobalt-400">{task.id}</td>
                 <td className="p-3 font-bold text-white">{task.title}</td>
-                <td className="p-3 text-zinc-400">{task.client}</td>
+                <td className="p-3 text-zinc-300">{task.client}</td>
                 <td className="p-3 text-amber-400 font-bold">{task.daysLeft} Days Left</td>
                 <td className="p-3 text-right">
                   <button
@@ -377,7 +377,7 @@ export function InvoicingAppSimulator() {
       {/* Financial Summary Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 relative overflow-hidden">
-          <div className="flex items-center justify-between text-xs font-mono text-zinc-400 mb-1">
+          <div className="flex items-center justify-between text-xs font-mono text-zinc-300 mb-1">
             <span>EST. OUTPUT GST</span>
             <span className="w-2 h-2 rounded-full bg-cobalt-400 animate-pulse" />
           </div>
@@ -386,7 +386,7 @@ export function InvoicingAppSimulator() {
         </div>
 
         <div className="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 relative overflow-hidden">
-          <div className="flex items-center justify-between text-xs font-mono text-zinc-400 mb-1">
+          <div className="flex items-center justify-between text-xs font-mono text-zinc-300 mb-1">
             <span>TOTAL SALES</span>
             <span className="w-2 h-2 rounded-full bg-emerald-400" />
           </div>
@@ -395,7 +395,7 @@ export function InvoicingAppSimulator() {
         </div>
 
         <div className="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 relative overflow-hidden">
-          <div className="flex items-center justify-between text-xs font-mono text-zinc-400 mb-1">
+          <div className="flex items-center justify-between text-xs font-mono text-zinc-300 mb-1">
             <span>PENDING PAYMENTS</span>
             <span className="w-2 h-2 rounded-full bg-amber-400" />
           </div>
@@ -422,7 +422,7 @@ export function InvoicingAppSimulator() {
                 className={`px-2.5 py-1 rounded text-[10px] font-mono font-bold transition-all ${
                   timeRange === tab.id
                     ? "bg-cobalt-600 text-white shadow-md shadow-cobalt-600/30 scale-105"
-                    : "bg-zinc-800 text-zinc-400 hover:text-white"
+                    : "bg-zinc-800 text-zinc-300 hover:text-white"
                 }`}
               >
                 {tab.label}
@@ -445,7 +445,7 @@ export function InvoicingAppSimulator() {
               strokeWidth="3"
             />
           </svg>
-          <div className="relative z-10 w-full flex items-end justify-between font-mono text-[10px] text-zinc-400 pt-20">
+          <div className="relative z-10 w-full flex items-end justify-between font-mono text-[10px] text-zinc-300 pt-20">
             {current.labels.map((lbl, idx) => (
               <span key={idx} className={idx === current.labels.length - 1 ? "text-cobalt-400 font-bold" : ""}>
                 {lbl}
@@ -543,7 +543,7 @@ export function VerifyReelsSimulator() {
             className={`p-2.5 rounded-lg text-left text-xs font-mono transition-all ${
               creditMode === "standard"
                 ? "bg-emerald-500/20 border border-emerald-500 text-emerald-300 font-bold"
-                : "bg-zinc-800/80 border border-zinc-700 text-zinc-400"
+                : "bg-zinc-800/80 border border-zinc-700 text-zinc-300"
             }`}
           >
             <div className="font-bold block">1. Standard (1 credit)</div>
@@ -555,7 +555,7 @@ export function VerifyReelsSimulator() {
             className={`p-2.5 rounded-lg text-left text-xs font-mono transition-all ${
               creditMode === "deep"
                 ? "bg-cobalt-500/20 border border-cobalt-500 text-cobalt-300 font-bold"
-                : "bg-zinc-800/80 border border-zinc-700 text-zinc-400"
+                : "bg-zinc-800/80 border border-zinc-700 text-zinc-300"
             }`}
           >
             <div className="font-bold block">2. Deep Search (2 credits)</div>
@@ -564,7 +564,7 @@ export function VerifyReelsSimulator() {
         </div>
 
         {/* Quick Test Chips */}
-        <div className="flex flex-wrap items-center gap-1.5 text-[11px] font-mono text-zinc-400">
+        <div className="flex flex-wrap items-center gap-1.5 text-[11px] font-mono text-zinc-300">
           <span>Test Instantly:</span>
           {sampleTopics.map((topic) => (
             <button
@@ -602,7 +602,7 @@ export function VerifyReelsSimulator() {
             ))}
           </div>
 
-          <div className="flex items-center justify-between pt-2 border-t border-zinc-800 text-[10px] text-zinc-400">
+          <div className="flex items-center justify-between pt-2 border-t border-zinc-800 text-[10px] text-zinc-300">
             <span>Verified via Live Web Engine</span>
             <span className="text-emerald-400 flex items-center gap-1 font-bold">
               <MessageSquare className="w-3 h-3" /> WhatsApp Bot Integrated
@@ -707,7 +707,7 @@ export function GstExtensionSimulator() {
       {/* Extension Dropdown Menu Simulator */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-mono">
         <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-          <span className="text-zinc-400 font-bold shrink-0">Reconciliation Matrix:</span>
+          <span className="text-zinc-300 font-bold shrink-0">Reconciliation Matrix:</span>
           <select
             value={activeMatrix}
             onChange={(e) => setActiveMatrix(e.target.value)}
@@ -753,7 +753,7 @@ export function GstExtensionSimulator() {
       {/* Simulated Live Table */}
       <div className="overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-950 w-full touch-pan-x">
         <table className="w-full text-left font-mono text-[11px] min-w-[540px]">
-          <thead className="bg-zinc-900 text-zinc-400 border-b border-zinc-800">
+          <thead className="bg-zinc-900 text-zinc-300 border-b border-zinc-800">
             <tr>
               {currentDataset.headers.map((h, i) => (
                 <th key={h} className={`p-2.5 ${i === currentDataset.headers.length - 1 ? "text-right" : ""}`}>
@@ -951,7 +951,7 @@ export function StockMarketInvestingSimulator() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 p-3.5 rounded-2xl bg-zinc-950 border border-zinc-800">
         {/* Ticker Selector Pills & Dynamic Search Input */}
         <div className="flex items-center gap-2 flex-wrap flex-1">
-          <span className="font-mono text-xs font-bold text-zinc-400 uppercase tracking-wider shrink-0 flex items-center gap-1">
+          <span className="font-mono text-xs font-bold text-zinc-300 uppercase tracking-wider shrink-0 flex items-center gap-1">
             <TrendingUp className="w-3.5 h-3.5 text-cobalt-400" />
             <span>Equity Query:</span>
           </span>
@@ -967,7 +967,7 @@ export function StockMarketInvestingSimulator() {
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-2 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white text-xs font-bold"
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-zinc-300 hover:text-white text-xs font-bold"
               >
                 ✕
               </button>
@@ -985,7 +985,7 @@ export function StockMarketInvestingSimulator() {
                 className={`px-2.5 py-1 rounded-lg font-mono text-xs font-extrabold transition-all shrink-0 ${
                   !searchQuery && selectedTicker === ticker
                     ? "bg-cobalt-600 text-white shadow-md shadow-cobalt-600/30 scale-105"
-                    : "bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800"
+                    : "bg-zinc-900 text-zinc-300 hover:text-white border border-zinc-800"
                 }`}
               >
                 ${ticker}
@@ -1001,7 +1001,7 @@ export function StockMarketInvestingSimulator() {
             className={`px-3 py-1 rounded-lg font-mono text-[11px] font-bold transition-all ${
               strategy === "buffett"
                 ? "bg-cobalt-600 text-white shadow"
-                : "text-zinc-400 hover:text-white"
+                : "text-zinc-300 hover:text-white"
             }`}
           >
             Buffett Moats (Long-Term)
@@ -1011,7 +1011,7 @@ export function StockMarketInvestingSimulator() {
             className={`px-3 py-1 rounded-lg font-mono text-[11px] font-bold transition-all ${
               strategy === "lynch"
                 ? "bg-emerald-600 text-white shadow"
-                : "text-zinc-400 hover:text-white"
+                : "text-zinc-300 hover:text-white"
             }`}
           >
             Lynch Growth (Mid-Term)
@@ -1028,11 +1028,11 @@ export function StockMarketInvestingSimulator() {
               <h4 className="font-display font-black text-xl text-white tracking-tight">
                 {current.name} (${selectedTicker})
               </h4>
-              <span className="px-2 py-0.5 rounded bg-zinc-900 font-mono text-xs text-zinc-400 border border-zinc-800">
+              <span className="px-2 py-0.5 rounded bg-zinc-900 font-mono text-xs text-zinc-300 border border-zinc-800">
                 NSE / BSE
               </span>
             </div>
-            <span className="font-mono text-xs text-zinc-400 mt-0.5 block">
+            <span className="font-mono text-xs text-zinc-300 mt-0.5 block">
               Active stock market valuation model since 2010
             </span>
           </div>
@@ -1047,13 +1047,13 @@ export function StockMarketInvestingSimulator() {
         {/* 4 Financial Key Metrics Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono">
           <div className="p-3 rounded-xl bg-zinc-900 border border-zinc-800">
-            <span className="text-zinc-400 text-[10px] uppercase block mb-1">Market Price</span>
+            <span className="text-zinc-300 text-[10px] uppercase block mb-1">Market Price</span>
             <span className="font-bold text-white text-base">₹{current.price.toLocaleString()}</span>
-            <span className="text-[9px] text-zinc-400 block mt-0.5">Current Trading Price</span>
+            <span className="text-[9px] text-zinc-300 block mt-0.5">Current Trading Price</span>
           </div>
 
           <div className="p-3 rounded-xl bg-zinc-900 border border-zinc-800">
-            <span className="text-zinc-400 text-[10px] uppercase block mb-1">
+            <span className="text-zinc-300 text-[10px] uppercase block mb-1">
               {strategy === "buffett" ? "30% Safety Target" : "Lynch Fair Target"}
             </span>
             <span className="font-bold text-emerald-400 text-base">₹{targetPrice.toLocaleString()}</span>
@@ -1061,25 +1061,25 @@ export function StockMarketInvestingSimulator() {
           </div>
 
           <div className="p-3 rounded-xl bg-zinc-900 border border-zinc-800">
-            <span className="text-zinc-400 text-[10px] uppercase block mb-1">
+            <span className="text-zinc-300 text-[10px] uppercase block mb-1">
               {strategy === "buffett" ? "5-Yr Avg ROIC" : "PEG Growth Ratio"}
             </span>
             <span className="font-bold text-cobalt-400 text-base">
               {strategy === "buffett" ? `${current.roic}%` : current.peg}
             </span>
-            <span className="text-[9px] text-zinc-400 block mt-0.5">
+            <span className="text-[9px] text-zinc-300 block mt-0.5">
               {strategy === "buffett" ? "High Reinvestment Moat" : "PEG < 1.0 Undervalued"}
             </span>
           </div>
 
           <div className="p-3 rounded-xl bg-zinc-900 border border-zinc-800">
-            <span className="text-zinc-400 text-[10px] uppercase block mb-1">
+            <span className="text-zinc-300 text-[10px] uppercase block mb-1">
               {strategy === "buffett" ? "Owner Cash Flow" : "Economic Moat Score"}
             </span>
             <span className="font-bold text-amber-400 text-base">
               {strategy === "buffett" ? current.ownerEarnings : `${current.moatScore}/100`}
             </span>
-            <span className="text-[9px] text-zinc-400 block mt-0.5">Normalized CapEx</span>
+            <span className="text-[9px] text-zinc-300 block mt-0.5">Normalized CapEx</span>
           </div>
         </div>
 
@@ -1093,7 +1093,7 @@ export function StockMarketInvestingSimulator() {
 
             {/* Monte Carlo Scenario Selector */}
             <div className="flex items-center gap-1 font-mono text-[10px] shrink-0">
-              <span className="text-zinc-400 mr-0.5">Scenario:</span>
+              <span className="text-zinc-300 mr-0.5">Scenario:</span>
               {(["bear", "base", "bull"] as const).map((sc) => (
                 <button
                   key={sc}
@@ -1101,7 +1101,7 @@ export function StockMarketInvestingSimulator() {
                   className={`px-2 py-0.5 rounded font-bold uppercase transition-all ${
                     scenario === sc
                       ? "bg-cobalt-600 text-white shadow-md shadow-cobalt-600/30 scale-105"
-                      : "bg-zinc-800 text-zinc-400 hover:text-white"
+                      : "bg-zinc-800 text-zinc-300 hover:text-white"
                   }`}
                 >
                   {sc}
@@ -1138,7 +1138,7 @@ export function StockMarketInvestingSimulator() {
               {/* Target Marker Dot */}
               <circle cx="500" cy={scenario === "bull" ? 2 : scenario === "bear" ? 60 : 10} r="5" fill="#3B82F6" className="animate-pulse" />
             </svg>
-            <div className="flex items-center justify-between text-[8px] sm:text-[9px] font-mono text-zinc-400 mt-1 gap-1">
+            <div className="flex items-center justify-between text-[8px] sm:text-[9px] font-mono text-zinc-300 mt-1 gap-1">
               <span className="truncate">Hist Base</span>
               <span className="text-emerald-400 truncate">Mkt (₹{current.price})</span>
               <span className="text-cobalt-400 font-bold truncate">Target ({scenario.toUpperCase()}: ₹{targetPrice})</span>
@@ -1192,7 +1192,7 @@ export function TaxamicusWordPressSimulator() {
             <h4 className="font-display font-black text-white text-base tracking-tight">
               Taxamicus.in – Official Corporate Portal
             </h4>
-            <span className="font-mono text-[10px] text-zinc-400">
+            <span className="font-mono text-[10px] text-zinc-300">
               Built from Scratch on WordPress.com • Custom Content Engine
             </span>
           </div>
@@ -1216,12 +1216,12 @@ export function TaxamicusWordPressSimulator() {
             className={`p-3 rounded-xl border text-left font-mono transition-all ${
               activeTab === s.title
                 ? "bg-cobalt-600/20 border-cobalt-500 text-white"
-                : "bg-zinc-950 border-zinc-800 text-zinc-400 hover:text-white"
+                : "bg-zinc-950 border-zinc-800 text-zinc-300 hover:text-white"
             }`}
           >
             <span className="text-[10px] font-bold text-cobalt-400 block">{s.badge}</span>
             <span className="font-bold text-xs block text-white mt-0.5 truncate">{s.title}</span>
-            <span className="text-[9px] text-zinc-400 block">{s.metric}</span>
+            <span className="text-[9px] text-zinc-300 block">{s.metric}</span>
           </button>
         ))}
       </div>
@@ -1232,7 +1232,7 @@ export function TaxamicusWordPressSimulator() {
           <span className="font-mono text-xs font-bold text-zinc-300 block">
             WordPress Lead Capture Funnel:
           </span>
-          <span className="font-sans text-xs text-zinc-400">
+          <span className="font-sans text-xs text-zinc-300">
             {leadCaptured ? "Client inquiry ingested & dispatched to Taxamicus CRM!" : "Simulate client booking tax advisory lead from taxamicus.in"}
           </span>
         </div>

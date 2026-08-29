@@ -77,7 +77,7 @@ export default function StockCaseStudies() {
             Fundamental Stock Research
           </h2>
         </div>
-        <p className="max-w-md font-sans text-zinc-400 text-sm sm:text-base leading-relaxed">
+        <p className="max-w-md font-sans text-zinc-300 text-sm sm:text-base leading-relaxed">
           Warren Buffett-style fundamental intrinsic value case studies. Evaluating owner earnings, moat durability, temporary market panics, and safety margins.
         </p>
       </div>
@@ -93,7 +93,7 @@ export default function StockCaseStudies() {
               className={`px-5 py-3 rounded-2xl font-mono text-xs font-bold transition-all duration-300 flex items-center gap-3 border ${
                 isSelected
                   ? "bg-cobalt-600 text-white border-cobalt-500 shadow-lg shadow-cobalt-600/30"
-                  : "bg-[#121218] text-zinc-400 border-zinc-800 hover:text-white hover:border-zinc-700"
+                  : "bg-[#121218] text-zinc-300 border-zinc-800 hover:text-white hover:border-zinc-700"
               }`}
               data-cursor="CASE STUDY"
             >
@@ -158,7 +158,7 @@ export default function StockCaseStudies() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
             <div className="flex items-center justify-between mb-1">
-              <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest block">
+              <span className="font-mono text-[10px] font-bold text-zinc-300 uppercase tracking-widest block">
                 Last Trading Day Close
               </span>
               <span className="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono text-[9px] font-bold border border-amber-500/30">
@@ -168,21 +168,21 @@ export default function StockCaseStudies() {
             <div className="font-display text-xl sm:text-2xl font-black text-white">
               {liveQuote ? `${liveQuote.currency === "INR" ? "₹" : "$"}${lastClosePrice.toLocaleString()}` : currentStudy.currentPrice}
             </div>
-            <span className="text-[10px] font-mono text-zinc-400 mt-1 block">
+            <span className="text-[10px] font-mono text-zinc-300 mt-1 block">
               Used as Baseline for DCF & Safety Margin
             </span>
           </div>
 
           <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
-            <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">
+            <span className="font-mono text-[10px] font-bold text-zinc-300 uppercase tracking-widest block mb-1">
               Base Intrinsic Value
             </span>
             <div className="font-display text-xl sm:text-2xl font-black text-emerald-400">{currentStudy.centralIntrinsicValue}</div>
-            <span className="text-[11px] font-mono text-zinc-400 mt-1 block">Range: {currentStudy.intrinsicValueRange}</span>
+            <span className="text-[11px] font-mono text-zinc-300 mt-1 block">Range: {currentStudy.intrinsicValueRange}</span>
           </div>
 
           <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
-            <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">
+            <span className="font-mono text-[10px] font-bold text-zinc-300 uppercase tracking-widest block mb-1">
               Margin of Safety / Upside
             </span>
             <div className="font-display text-xl sm:text-2xl font-black text-cyan-400">{dynamicUpside}</div>
@@ -190,7 +190,7 @@ export default function StockCaseStudies() {
           </div>
 
           <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800 overflow-hidden">
-            <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-1">
+            <span className="font-mono text-[10px] font-bold text-zinc-300 uppercase tracking-widest block mb-1">
               Dividend Cushion
             </span>
             <div className="font-display text-xl sm:text-2xl font-black text-amber-400 tracking-tight">{currentStudy.dividendYield.split(' (')[0]}</div>
@@ -235,7 +235,7 @@ export default function StockCaseStudies() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 {currentStudy.normalizedEarnings.metrics.map((m) => (
                   <div key={m.label} className="p-3 rounded-xl bg-zinc-900 border border-zinc-800">
-                    <span className="font-mono text-[10px] text-zinc-400 block">{m.label}</span>
+                    <span className="font-mono text-[10px] text-zinc-300 block">{m.label}</span>
                     <span className="font-mono text-xs font-bold text-white mt-0.5 block">{m.value}</span>
                   </div>
                 ))}
@@ -252,9 +252,9 @@ export default function StockCaseStudies() {
                   <TrendingUp className="w-4 h-4 shrink-0" />
                   <span>Intrinsic Value Scenarios</span>
                 </div>
-                <span className="font-mono text-[10px] text-zinc-400">{currentStudy.intrinsicModel.method}</span>
+                <span className="font-mono text-[10px] text-zinc-300">{currentStudy.intrinsicModel.method}</span>
               </div>
-              <p className="font-sans text-xs text-zinc-400">
+              <p className="font-sans text-xs text-zinc-300">
                 {currentStudy.intrinsicModel.description}
               </p>
 
@@ -270,7 +270,7 @@ export default function StockCaseStudies() {
                   >
                     <div className="min-w-0">
                       <span className="font-bold block truncate">{scenario.name}</span>
-                      <span className="text-[10px] text-zinc-400 font-sans block truncate">{scenario.condition}</span>
+                      <span className="text-[10px] text-zinc-300 font-sans block truncate">{scenario.condition}</span>
                     </div>
                     <span className="font-bold text-xs sm:text-sm text-emerald-400 shrink-0">{scenario.intrinsicValue}</span>
                   </div>

@@ -29,7 +29,7 @@ export default function LabExploring() {
               </h3>
             </div>
           </div>
-          <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
+          <div className="flex items-center gap-2 text-xs font-mono text-zinc-300">
             <Clock className="w-3.5 h-3.5 text-cobalt-400" />
             <span>Updated: August 2026</span>
           </div>
@@ -49,7 +49,7 @@ export default function LabExploring() {
                   <span className="text-[10px] font-mono text-emerald-400 font-bold">{item.status}</span>
                 </div>
                 <h4 className="font-display font-bold text-sm text-white mb-2">{item.title}</h4>
-                <p className="font-sans text-xs text-zinc-400 leading-relaxed">{item.detail}</p>
+                <p className="font-sans text-xs text-zinc-300 leading-relaxed">{item.detail}</p>
               </div>
               <div className="pt-3 mt-3 border-t border-zinc-900 text-[10px] font-mono text-zinc-500">
                 {item.date}

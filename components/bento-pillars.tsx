@@ -70,7 +70,7 @@ export default function BentoPillars() {
             Four Core Pillars
           </h2>
         </div>
-        <p className="max-w-md font-sans text-zinc-400 text-sm sm:text-base leading-relaxed">
+        <p className="max-w-md font-sans text-zinc-300 text-sm sm:text-base leading-relaxed">
           Operational mastery requires combining business judgment, statutory tax precision, multi-channel commerce execution, and AI software leverage.
         </p>
       </div>
@@ -105,7 +105,7 @@ export default function BentoPillars() {
                     <div className="p-3 rounded-2xl bg-zinc-900 border border-zinc-800 group-hover:border-cobalt-500/40 transition-colors">
                       {getPillarIcon(pillar.id)}
                     </div>
-                    <span className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-400">
+                    <span className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-300">
                       {pillar.badge}
                     </span>
                   </div>
@@ -129,7 +129,7 @@ export default function BentoPillars() {
 
                 {/* Key Capabilities List */}
                 <div className="space-y-2 mb-6">
-                  <span className="font-mono text-[11px] font-bold text-zinc-400 uppercase tracking-widest block mb-2">
+                  <span className="font-mono text-[11px] font-bold text-zinc-300 uppercase tracking-widest block mb-2">
                     Core Capabilities:
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">

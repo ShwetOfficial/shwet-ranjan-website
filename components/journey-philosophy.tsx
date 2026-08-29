@@ -30,7 +30,7 @@ export default function JourneyPhilosophy() {
             className={`px-4 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all ${
               activeTab === "journey"
                 ? "bg-cobalt-600 text-white shadow-md"
-                : "text-zinc-400 hover:text-white"
+                : "text-zinc-300 hover:text-white"
             }`}
             data-cursor="TIMELINE"
           >
@@ -41,7 +41,7 @@ export default function JourneyPhilosophy() {
             className={`px-4 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all ${
               activeTab === "philosophy"
                 ? "bg-cobalt-600 text-white shadow-md"
-                : "text-zinc-400 hover:text-white"
+                : "text-zinc-300 hover:text-white"
             }`}
             data-cursor="MODELS"
           >
@@ -52,7 +52,7 @@ export default function JourneyPhilosophy() {
             className={`px-4 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all ${
               activeTab === "code"
                 ? "bg-cobalt-600 text-white shadow-md"
-                : "text-zinc-400 hover:text-white"
+                : "text-zinc-300 hover:text-white"
             }`}
             data-cursor="ETHICS"
           >
@@ -82,7 +82,7 @@ export default function JourneyPhilosophy() {
                   <span className="font-mono text-xs font-bold text-cobalt-400 uppercase tracking-widest">
                     {item.phase}
                   </span>
-                  <div className="flex items-center gap-3 text-xs font-mono text-zinc-400">
+                  <div className="flex items-center gap-3 text-xs font-mono text-zinc-300">
                     <span className="px-2.5 py-0.5 rounded bg-zinc-900 text-zinc-300 font-bold border border-zinc-800">{item.year}</span>
                     <span className="flex items-center gap-1">
                       <MapPin className="w-3 h-3 text-cobalt-400" />
@@ -152,7 +152,7 @@ export default function JourneyPhilosophy() {
                   <span className="font-display text-4xl font-black text-cobalt-500/40">
                     {model.number}
                   </span>
-                  <span className="font-mono text-xs font-bold text-zinc-400 uppercase tracking-widest">
+                  <span className="font-mono text-xs font-bold text-zinc-300 uppercase tracking-widest">
                     {model.subtitle}
                   </span>
                 </div>
@@ -213,7 +213,7 @@ export default function JourneyPhilosophy() {
                   <h3 className="font-display text-xl font-bold text-white tracking-tight mb-1">
                     {rule.title}
                   </h3>
-                  <span className="font-mono text-xs text-zinc-400 font-semibold uppercase tracking-wider block mb-4">
+                  <span className="font-mono text-xs text-zinc-300 font-semibold uppercase tracking-wider block mb-4">
                     {rule.subtitle}
                   </span>
 
@@ -221,7 +221,7 @@ export default function JourneyPhilosophy() {
                     "{rule.quote}"
                   </blockquote>
 
-                  <p className="font-sans text-zinc-400 text-xs leading-relaxed">
+                  <p className="font-sans text-zinc-300 text-xs leading-relaxed">
                     {rule.rule}
                   </p>
                 </div>
