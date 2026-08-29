@@ -7,7 +7,7 @@ import Modal from "./modal";
 import { TrendingUp, AlertTriangle, ShieldCheck, DollarSign, ArrowUpRight, Zap, BarChart2, BookOpen, Calendar } from "lucide-react";
 
 export default function StockCaseStudies() {
-  const [selectedId, setSelectedId] = useState<string>("itc-ltd");
+  const [selectedId, setSelectedId] = useState<string>(stockCaseStudiesData[0]?.id || "hcltech-ltd");
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [liveQuote, setLiveQuote] = useState<{
     price: number;
