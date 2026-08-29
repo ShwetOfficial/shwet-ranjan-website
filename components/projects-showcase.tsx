@@ -5,15 +5,37 @@ import { motion } from "framer-motion";
 import { projectsData, futureLabExperiments, Project } from "@/data/projects";
 import Modal from "./modal";
 import BrowserFrame from "./browser-frame";
-import {
-  FilingAutomationSimulator,
-  EnterpriseCrmSimulator,
-  InvoicingAppSimulator,
-  VerifyReelsSimulator,
-  GstExtensionSimulator,
-  StockMarketInvestingSimulator,
-  TaxamicusWordPressSimulator
-} from "./app-simulators";
+import dynamic from "next/dynamic";
+
+const FilingAutomationSimulator = dynamic(
+  () => import("./app-simulators").then((mod) => mod.FilingAutomationSimulator),
+  { ssr: false }
+);
+const EnterpriseCrmSimulator = dynamic(
+  () => import("./app-simulators").then((mod) => mod.EnterpriseCrmSimulator),
+  { ssr: false }
+);
+const InvoicingAppSimulator = dynamic(
+  () => import("./app-simulators").then((mod) => mod.InvoicingAppSimulator),
+  { ssr: false }
+);
+const VerifyReelsSimulator = dynamic(
+  () => import("./app-simulators").then((mod) => mod.VerifyReelsSimulator),
+  { ssr: false }
+);
+const GstExtensionSimulator = dynamic(
+  () => import("./app-simulators").then((mod) => mod.GstExtensionSimulator),
+  { ssr: false }
+);
+const StockMarketInvestingSimulator = dynamic(
+  () => import("./app-simulators").then((mod) => mod.StockMarketInvestingSimulator),
+  { ssr: false }
+);
+const TaxamicusWordPressSimulator = dynamic(
+  () => import("./app-simulators").then((mod) => mod.TaxamicusWordPressSimulator),
+  { ssr: false }
+);
+
 import {
   ExternalLink,
   Sparkles,

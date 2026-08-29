@@ -59,6 +59,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${syne.variable} ${jakarta.variable} ${jetbrains.variable} dark scroll-smooth`}>
+      <head>
+        <link rel="preload" href="/hero_background_sky.jpg" as="image" />
+      </head>
       <body className="bg-[#09090b] text-[#FAFAF9] antialiased selection:bg-cobalt-700 selection:text-white">
         <SmoothScroll>
           {children}
@@ -67,3 +70,4 @@ export default function RootLayout({
     </html>
   );
 }
+

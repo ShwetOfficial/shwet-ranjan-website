@@ -1,17 +1,49 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/navbar";
 import Hero from "@/components/hero";
-import BentoPillars from "@/components/bento-pillars";
-import ProjectsShowcase from "@/components/projects-showcase";
-import Calculators from "@/components/calculators";
-import JourneyPhilosophy from "@/components/journey-philosophy";
-import SkillsMatrix from "@/components/skills-matrix";
-import LabExploring from "@/components/lab-exploring";
-import StockCaseStudies from "@/components/stock-case-studies";
-import InsightsIndex from "@/components/insights-index";
-import ContactFooter from "@/components/contact-footer";
 import CustomCursor from "@/components/custom-cursor";
-import ScrollVelocityMarquee from "@/components/scroll-velocity-marquee";
+
+// Below-the-fold sections dynamically imported to reduce initial JS payload
+const ScrollVelocityMarquee = dynamic(() => import("@/components/scroll-velocity-marquee"), {
+  ssr: true,
+});
+
+const BentoPillars = dynamic(() => import("@/components/bento-pillars"), {
+  ssr: true,
+});
+
+const ProjectsShowcase = dynamic(() => import("@/components/projects-showcase"), {
+  ssr: true,
+});
+
+const Calculators = dynamic(() => import("@/components/calculators"), {
+  ssr: true,
+});
+
+const JourneyPhilosophy = dynamic(() => import("@/components/journey-philosophy"), {
+  ssr: true,
+});
+
+const SkillsMatrix = dynamic(() => import("@/components/skills-matrix"), {
+  ssr: true,
+});
+
+const LabExploring = dynamic(() => import("@/components/lab-exploring"), {
+  ssr: true,
+});
+
+const StockCaseStudies = dynamic(() => import("@/components/stock-case-studies"), {
+  ssr: true,
+});
+
+const InsightsIndex = dynamic(() => import("@/components/insights-index"), {
+  ssr: true,
+});
+
+const ContactFooter = dynamic(() => import("@/components/contact-footer"), {
+  ssr: true,
+});
 
 export default function Home() {
   return (
@@ -82,3 +114,4 @@ export default function Home() {
     </main>
   );
 }
+

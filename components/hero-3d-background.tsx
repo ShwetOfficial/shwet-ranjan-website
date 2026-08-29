@@ -17,11 +17,12 @@ export default function Hero3dBackground() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationFrameId: number;
+    let animationFrameId = 0;
     let isVisible = true;
 
     // Accessibility check: prefers-reduced-motion
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let isReducedMotion = mediaQuery.matches;
 
     // Dynamic Pixel Ratio Scaler (Cap at 2.0 to prevent GPU overheat on 4K/Retina)
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -34,6 +35,10 @@ export default function Hero3dBackground() {
       canvas.style.width = `${w}px`;
       canvas.style.height = `${h}px`;
       ctx.scale(dpr, dpr);
+
+      if (isReducedMotion) {
+        renderFrame(true);
+      }
     };
 
     updateSize();
@@ -60,31 +65,17 @@ export default function Hero3dBackground() {
     const handleMouseMove = (e: MouseEvent) => {
       lastClientX = e.clientX;
       lastClientY = e.clientY;
-      updateMousePos();
+      if (!isReducedMotion) {
+        updateMousePos();
+      }
     };
 
     const handleScroll = () => {
-      if (isVisible) updateMousePos();
+      if (isVisible && !isReducedMotion) updateMousePos();
     };
 
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("scroll", handleScroll, { passive: true });
-
-    // IntersectionObserver: Pause animation loop when Hero is out of viewport
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        isVisible = entry.isIntersecting;
-        if (isVisible && !prefersReducedMotion && !animationFrameId) {
-          animationFrameId = requestAnimationFrame(render);
-        } else if (!isVisible && animationFrameId) {
-          cancelAnimationFrame(animationFrameId);
-          animationFrameId = 0;
-        }
-      },
-      { threshold: 0.05 }
-    );
-    observer.observe(canvas);
 
     // 3D Perspective Grid Parameters
     const gridCols = 38;
@@ -114,14 +105,15 @@ export default function Hero3dBackground() {
       });
     };
 
-    const render = () => {
-      if (!isVisible) return;
+    const renderFrame = (isStatic = false) => {
+      if (!isVisible && !isStatic) return;
 
-      time += 0.015;
-
-      updateMousePos();
-      mouse.x += (mouse.targetX - mouse.x) * 0.08;
-      mouse.y += (mouse.targetY - mouse.y) * 0.08;
+      if (!isStatic) {
+        time += 0.015;
+        updateMousePos();
+        mouse.x += (mouse.targetX - mouse.x) * 0.08;
+        mouse.y += (mouse.targetY - mouse.y) * 0.08;
+      }
 
       const w = window.innerWidth;
       const h = canvas.parentElement?.offsetHeight || 800;
@@ -180,14 +172,14 @@ export default function Hero3dBackground() {
           const spread = 1 + depth * 2.8;
           const screenX = vanishingPointX + colNorm * (w * 0.6) * spread;
 
-          // Mouse magnetic wave elevation
+          // Mouse magnetic wave elevation (only if dynamic)
           const dx = mouse.x - screenX;
           const dy = mouse.y - screenY;
           const dist = Math.hypot(dx, dy);
 
           let elevateZ = 0;
-          if (dist < mouse.radius && dist > 0.001) {
-            const force = (1 - dist / mouse.radius);
+          if (!isStatic && dist < mouse.radius && dist > 0.001) {
+            const force = 1 - dist / mouse.radius;
             elevateZ = Math.sin(force * Math.PI) * -35;
           }
 
@@ -230,93 +222,133 @@ export default function Hero3dBackground() {
         ctx.stroke();
       }
 
-      // 3. Render Mouse Target Light Aura on Grid Floor
-      const mouseGrad = ctx.createRadialGradient(
-        mouse.x,
-        mouse.y,
-        0,
-        mouse.x,
-        mouse.y,
-        mouse.radius
-      );
-      mouseGrad.addColorStop(0, "rgba(34, 211, 238, 0.35)");
-      mouseGrad.addColorStop(0.5, "rgba(59, 130, 246, 0.15)");
-      mouseGrad.addColorStop(1, "rgba(9, 9, 11, 0)");
+      // 3. Render Dynamic Motion Elements (Mouse Light Aura & Laser Pulses) only when motion is enabled
+      if (!isStatic) {
+        const mouseGrad = ctx.createRadialGradient(
+          mouse.x,
+          mouse.y,
+          0,
+          mouse.x,
+          mouse.y,
+          mouse.radius
+        );
+        mouseGrad.addColorStop(0, "rgba(34, 211, 238, 0.35)");
+        mouseGrad.addColorStop(0.5, "rgba(59, 130, 246, 0.15)");
+        mouseGrad.addColorStop(1, "rgba(9, 9, 11, 0)");
 
-      ctx.fillStyle = mouseGrad;
-      ctx.beginPath();
-      ctx.arc(mouse.x, mouse.y, mouse.radius, 0, Math.PI * 2);
-      ctx.fill();
+        ctx.fillStyle = mouseGrad;
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, mouse.radius, 0, Math.PI * 2);
+        ctx.fill();
 
-      // Concentric Target Reticle Rings
-      ctx.strokeStyle = "rgba(34, 211, 238, 0.55)";
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.arc(mouse.x, mouse.y, 22, 0, Math.PI * 2);
-      ctx.stroke();
+        // Concentric Target Reticle Rings
+        ctx.strokeStyle = "rgba(34, 211, 238, 0.55)";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, 22, 0, Math.PI * 2);
+        ctx.stroke();
 
-      ctx.strokeStyle = "rgba(59, 130, 246, 0.3)";
-      ctx.setLineDash([4, 6]);
-      ctx.beginPath();
-      ctx.arc(mouse.x, mouse.y, 45, time * 0.8, time * 0.8 + Math.PI * 2);
-      ctx.stroke();
-      ctx.setLineDash([]);
+        ctx.strokeStyle = "rgba(59, 130, 246, 0.3)";
+        ctx.setLineDash([4, 6]);
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, 45, time * 0.8, time * 0.8 + Math.PI * 2);
+        ctx.stroke();
+        ctx.setLineDash([]);
 
-      // 4. Render Laser Pulses along Grid Lines
-      if (Math.random() < 0.06) spawnGridPulse();
+        // 4. Render Laser Pulses along Grid Lines
+        if (Math.random() < 0.06) spawnGridPulse();
 
-      for (let i = gridPulses.length - 1; i >= 0; i--) {
-        const pulse = gridPulses[i];
-        pulse.progress += pulse.speed;
+        for (let i = gridPulses.length - 1; i >= 0; i--) {
+          const pulse = gridPulses[i];
+          pulse.progress += pulse.speed;
 
-        if (pulse.progress >= 1) {
-          gridPulses.splice(i, 1);
-          continue;
-        }
-
-        if (pulse.isRow) {
-          const r = pulse.row;
-          const cIndex = Math.floor(pulse.progress * gridCols);
-          if (projectedGrid[r] && projectedGrid[r][cIndex]) {
-            const pt = projectedGrid[r][cIndex];
-            const pulseAlpha = Math.sin(pulse.progress * Math.PI) * 0.85;
-
-            ctx.fillStyle = `${pulse.color}${pulseAlpha})`;
-            ctx.shadowColor = "#22d3ee";
-            ctx.shadowBlur = 10;
-            ctx.beginPath();
-            ctx.arc(pt.x, pt.y, 3.5, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.shadowBlur = 0;
+          if (pulse.progress >= 1) {
+            gridPulses.splice(i, 1);
+            continue;
           }
-        } else {
-          const c = pulse.col;
-          const rIndex = Math.floor(pulse.progress * gridRows);
-          if (projectedGrid[rIndex] && projectedGrid[rIndex][c]) {
-            const pt = projectedGrid[rIndex][c];
-            const pulseAlpha = Math.sin(pulse.progress * Math.PI) * 0.85;
 
-            ctx.fillStyle = `${pulse.color}${pulseAlpha})`;
-            ctx.shadowColor = "#3b82f6";
-            ctx.shadowBlur = 10;
-            ctx.beginPath();
-            ctx.arc(pt.x, pt.y, 3.5, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.shadowBlur = 0;
+          if (pulse.isRow) {
+            const r = pulse.row;
+            const cIndex = Math.floor(pulse.progress * gridCols);
+            if (projectedGrid[r] && projectedGrid[r][cIndex]) {
+              const pt = projectedGrid[r][cIndex];
+              const pulseAlpha = Math.sin(pulse.progress * Math.PI) * 0.85;
+
+              ctx.fillStyle = `${pulse.color}${pulseAlpha})`;
+              ctx.shadowColor = "#22d3ee";
+              ctx.shadowBlur = 10;
+              ctx.beginPath();
+              ctx.arc(pt.x, pt.y, 3.5, 0, Math.PI * 2);
+              ctx.fill();
+              ctx.shadowBlur = 0;
+            }
+          } else {
+            const c = pulse.col;
+            const rIndex = Math.floor(pulse.progress * gridRows);
+            if (projectedGrid[rIndex] && projectedGrid[rIndex][c]) {
+              const pt = projectedGrid[rIndex][c];
+              const pulseAlpha = Math.sin(pulse.progress * Math.PI) * 0.85;
+
+              ctx.fillStyle = `${pulse.color}${pulseAlpha})`;
+              ctx.shadowColor = "#3b82f6";
+              ctx.shadowBlur = 10;
+              ctx.beginPath();
+              ctx.arc(pt.x, pt.y, 3.5, 0, Math.PI * 2);
+              ctx.fill();
+              ctx.shadowBlur = 0;
+            }
           }
         }
       }
 
-      if (!prefersReducedMotion) {
-        animationFrameId = requestAnimationFrame(render);
+      if (!isReducedMotion) {
+        animationFrameId = requestAnimationFrame(() => renderFrame(false));
       }
     };
 
-    if (!prefersReducedMotion) {
-      render();
+    // Motion preference change listener
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      isReducedMotion = e.matches;
+      if (isReducedMotion) {
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = 0;
+        }
+        renderFrame(true);
+      } else {
+        if (isVisible && !animationFrameId) {
+          animationFrameId = requestAnimationFrame(() => renderFrame(false));
+        }
+      }
+    };
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", handleMotionChange);
     } else {
-      // Render static frame once for accessibility
-      render();
+      mediaQuery.addListener(handleMotionChange);
+    }
+
+    // IntersectionObserver: Pause animation loop when Hero is out of viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        isVisible = entry.isIntersecting;
+        if (isVisible && !isReducedMotion && !animationFrameId) {
+          animationFrameId = requestAnimationFrame(() => renderFrame(false));
+        } else if (!isVisible && animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = 0;
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(canvas);
+
+    // Initial frame render based on user motion preference
+    if (isReducedMotion) {
+      renderFrame(true);
+    } else {
+      renderFrame(false);
     }
 
     return () => {
@@ -325,6 +357,11 @@ export default function Hero3dBackground() {
       window.removeEventListener("resize", updateSize);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("scroll", handleScroll);
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener("change", handleMotionChange);
+      } else {
+        mediaQuery.removeListener(handleMotionChange);
+      }
     };
   }, [mounted]);
 

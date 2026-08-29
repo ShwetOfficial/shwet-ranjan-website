@@ -1,7 +1,7 @@
 SHWET RANJAN — Flagship Web Application & Knowledge Base
 Domain: shwetranjan.com
 Repository: Shwet Ranjan Website
-Tech Stack: Next.js 14 (App Router), TypeScript, Tailwind CSS, Framer Motion, HTML5 Canvas 3D.
+Tech Stack: Next.js 14 (App Router), TypeScript, Tailwind CSS, Framer Motion, HTML5 Canvas 3D, Sharp Image Optimization.
 
 ================================================================================
 1. EXECUTIVE SUMMARY & PERSONA
@@ -17,13 +17,14 @@ Shwet Ranjan is a multi-disciplinary business operator, tax compliance architect
 A. Main Portfolio Hub (app/page.tsx — /)
 1. Top Navbar: Sticky glassmorphic bar with active section spring tab indicators, live status pill (5 Live Apps Online), and Cmd + K search launcher.
 2. 3D Hero Section: 3D Perspective Cyber Grid Floor Canvas (components/hero-3d-background.tsx) reacting dynamically to mouse movement and page scroll.
-3. Interactive Product Showcase (#projects): 5 built platforms with 3D tilt cards, category filters, and architecture spec modals.
+3. Interactive Product Showcase (#projects): 5 built platforms with 3D tilt cards, category filters, architecture spec modals, and lazy-loaded simulators.
 4. Financial & Tax Calculators (#calculators): GST Cash Lock / ITC Delinquency Audit & D2C Net Realization / CM3 Contribution Margin.
 5. Core Pillars (#pillars): 4 strategic domain pillars.
 6. Journey & Philosophy (#journey): Timeline from Stock Market Investing (2010) to E-Commerce GST Automation (2025–2026).
 7. Skills Matrix (#skills): Categorized technical proficiency matrix.
-8. Editorial Insights (#insights): Essays on GST, D2C unit economics, and AI leverage.
-9. Direct Channel Dock (#contact): Inquiry message dispatcher, IST digital clock, info@shwetranjan.com copy tool.
+8. Stock Research & Case Studies (#stock-case-studies): Intrinsic value equity case studies with live Yahoo Finance quote integration (/api/stock-quote).
+9. Editorial Insights (#insights): Essays on GST, D2C unit economics, and AI leverage.
+10. Direct Channel Dock (#contact): Inquiry message dispatcher (/api/contact), IST digital clock, info@shwetranjan.com copy tool.
 
 B. Intrinsic Value Equity Modeler (app/investing-modeler/page.tsx — /investing-modeler)
 Bloomberg/Koyfin-style equity valuation terminal hosted at shwetranjan.com/investing-modeler:
@@ -32,7 +33,14 @@ Bloomberg/Koyfin-style equity valuation terminal hosted at shwetranjan.com/inves
 - Interactive SVG Curves: 5-year revenue vs intrinsic value trajectory.
 
 ================================================================================
-3. BUILT PRODUCTION SYSTEMS
+3. PERFORMANCE & LOW-NETWORK OPTIMIZATIONS
+================================================================================
+1. Next.js Image Optimization & HTTP Caching: Re-enabled image optimization in next.config.mjs with AVIF/WebP output formats, static asset Gzip/Brotli compression, and 1-year immutable Cache-Control headers for static assets.
+2. Code Splitting & Dynamic Imports: Below-the-fold page sections in app/page.tsx and heavy app simulators in components/projects-showcase.tsx are dynamically imported via next/dynamic to ensure instant First Contentful Paint (FCP) on low networks (3G/2G).
+3. Image Asset Compression: Optimized /public/hero_background_sky.jpg from 879 KB to 263 KB (70% size reduction) with 100% visual fidelity, removed 1.55 MB of unused assets, and preloaded hero background in layout.tsx.
+
+================================================================================
+4. BUILT PRODUCTION SYSTEMS
 ================================================================================
 1. E-Commerce Tax Engine (experts.taxamicus.in): Auto-ingests Flipkart, Amazon, Meesho, Myntra, Ajio, 1mg reports, normalizes multi-state buyer tax liabilities, outputs GSTR-1 and GSTR-3B audit templates.
 2. Enterprise Tax Operations CRM (experts.taxamicus.in): Multi-tenant task manager handling 324+ active client jobs and filing deadlines.
@@ -41,7 +49,7 @@ Bloomberg/Koyfin-style equity valuation terminal hosted at shwetranjan.com/inves
 5. GST Portal Chrome Extension: Silent notice checker & GSTR-1 vs 3B rate comparison extension inside gst.gov.in.
 
 ================================================================================
-4. KEY FINANCIAL & BUSINESS FORMULAS
+5. KEY FINANCIAL & BUSINESS FORMULAS
 ================================================================================
 - GST Cash Lock: Output Tax = (Gross Sales * Tax Rate) / 100
   Raw ITC = (Purchases * Tax Rate) / 100
@@ -57,14 +65,20 @@ Bloomberg/Koyfin-style equity valuation terminal hosted at shwetranjan.com/inves
   CM3 Margin % = (CM3 Margin / Selling Price) * 100
 
 ================================================================================
-5. CODEBASE MAP
+6. CODEBASE MAP
 ================================================================================
-app/page.tsx                    -> Main portfolio hub
+app/page.tsx                    -> Main portfolio hub (with next/dynamic code splitting)
+app/layout.tsx                  -> Root layout, Google Fonts, SEO metadata & hero image preload
 app/investing-modeler/page.tsx  -> Equity Valuation Terminal (/investing-modeler)
+app/api/stock-quote/route.ts    -> Live stock quote API endpoint (Yahoo Finance proxy + SWR cache)
+app/api/contact/route.ts        -> Contact form dispatcher endpoint
 components/hero-3d-background.tsx -> HTML5 Canvas 3D Cyber Grid background
 components/calculators.tsx       -> GST & D2C calculators with INR formatting
-components/projects-showcase.tsx -> 3D tilt cards & category filters
+components/projects-showcase.tsx -> 3D tilt cards, category filters & dynamic app simulators
+components/stock-case-studies.tsx -> Fundamental intrinsic value case studies & live price ticker
 components/navbar.tsx            -> Navigation bar with active spring pill & Cmd+K
 components/contact-footer.tsx   -> Message dispatcher, IST clock, info@shwetranjan.com
 data/projects.ts                 -> Projects dataset
 data/insights.ts                 -> Essays dataset
+data/stock-case-studies.ts       -> Stock research dataset
+next.config.mjs                  -> Next.js configuration (Image optimization, compression, cache headers)
