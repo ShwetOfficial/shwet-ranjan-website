@@ -22,7 +22,7 @@
 ### A. Main Portfolio Hub (`app/page.tsx` — `/`)
 The primary single-page experience containing 10 high-impact interactive sections:
 1. **Top Navbar & Scroll Progress**: Sticky glassmorphic navbar with active section spring tab indicators, live operational status pill (`5 Live Apps Online`), and `Cmd + K` search launcher.
-2. **3D Hero Section**: Features an edge-to-edge (`100vw`) 3D Perspective Cyber Grid & Horizon Floor Canvas (`components/hero-3d-background.tsx`) reacting dynamically to mouse movement and scroll.
+2. **3D Hero Section**: Features an edge-to-edge (`100vw`) 3D Perspective Cyber Grid & Horizon Floor Canvas (`components/hero-3d-background.tsx`) reacting dynamically to mouse movement and scroll. Includes full accessibility integration for `prefers-reduced-motion` with dynamic event listeners and frozen static frame rendering.
 3. **Interactive Product Showcase (`#projects`)**: Live interactive simulators for built platforms with 3D tilt cards, category filters, architecture spec modals, and lazy-loaded simulators.
 4. **Financial & Tax Calculators (`#calculators`)**: Dual-mode interactive calculators for **GST Cash Lock / ITC Delinquency Audit** and **D2C Net Realization / CM3 Contribution Margin**. Features `Intl.NumberFormat('en-IN')` formatting and one-click clipboard summary copying.
 5. **Core Pillars (`#pillars`)**: 4 strategic domain pillars (Business Operations, Tax Compliance Architecture, Full-Stack Engineering, Intrinsic Value Investing).
@@ -43,18 +43,41 @@ A dedicated Bloomberg/Koyfin-style equity valuation terminal hosted at `shwetran
 
 ---
 
-## 3. Performance & Low-Network Optimizations
+## 3. Performance, Accessibility & Security Hardening
 
-1. **Next.js Image Optimization & HTTP Caching**:
-   - Re-enabled image optimization in `next.config.mjs` with AVIF/WebP formats (`formats: ["image/avif", "image/webp"]`).
+1. **Industry-Standard Security Headers (`next.config.mjs`)**:
+   - Configured asynchronous `headers()` method exporting global protection headers for `/:path*`:
+     - `X-Frame-Options: DENY` (clickjacking mitigation)
+     - `X-Content-Type-Options: nosniff` (MIME-sniffing prevention)
+     - `X-XSS-Protection: 1; mode=block` (cross-site scripting filter)
+     - `Referrer-Policy: strict-origin-when-cross-origin` (referrer control)
+     - `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload` (HTTPS enforcement)
+     - `Permissions-Policy: camera=(), microphone=(), geolocation=()` (device feature restrictions)
+
+2. **WCAG AA Contrast & Accessibility Compliance**:
+   - Upgraded global text color tokens from `text-zinc-400` (`#a1a1aa`) to `text-zinc-300` (`#d4d4d8`) across all 15 core component files and defined `--muted-foreground: #d4d4d8;` in `app/globals.css`.
+   - Guarantees minimum 4.5:1 WCAG AA contrast ratio against dark background tones (`#09090b` / `#121218`) for high-ambient lighting readability.
+
+3. **3D Motion Accessibility Controls (`components/hero-3d-background.tsx`)**:
+   - Integrated `window.matchMedia('(prefers-reduced-motion: reduce)')` with dynamic `change` event listeners to respond instantly to system accessibility toggles.
+   - Completely pauses/bypasses `requestAnimationFrame` loops when motion reduction is preferred and renders a clean frozen static frame to eliminate vestibular discomfort triggers.
+
+4. **API Robustness & Resilience (`app/api/stock-quote/route.ts`)**:
+   - Implemented 4000ms `AbortController` timeout to prevent hanging serverless instances during upstream API latency.
+   - Robust error & rate-limit handling for HTTP 429 and 5xx responses from Yahoo Finance with static fallback dictionaries (`FALLBACK_QUOTES`).
+   - Diagnostic headers: `X-Data-Source: live` vs `X-Data-Source: fallback` with `X-Fallback-Reason`.
+   - Enforced HTTP cache control: `Cache-Control: public, s-maxage=60, stale-while-revalidate=120`.
+
+5. **Next.js Image Optimization & HTTP Caching**:
+   - Image optimization enabled in `next.config.mjs` with AVIF/WebP formats (`formats: ["image/avif", "image/webp"]`).
    - Enabled response compression (`compress: true`).
    - Configured 1-year immutable caching headers (`Cache-Control: public, max-age=31536000, immutable`) for static assets.
 
-2. **Code Splitting & Dynamic Imports**:
+6. **Code Splitting & Dynamic Imports**:
    - Below-the-fold components in `app/page.tsx` (`BentoPillars`, `ProjectsShowcase`, `Calculators`, `JourneyPhilosophy`, `SkillsMatrix`, `LabExploring`, `StockCaseStudies`, `InsightsIndex`, `ContactFooter`, `ScrollVelocityMarquee`) are loaded asynchronously via `next/dynamic`.
    - Heavy modal simulators (`app-simulators.tsx`) inside `components/projects-showcase.tsx` are dynamically imported with `{ ssr: false }`.
 
-3. **Asset Byte Size Compression**:
+7. **Asset Byte Size Compression**:
    - `/public/hero_background_sky.jpg` compressed from **879 KB to 263 KB** (70% size reduction) with 100% visual fidelity.
    - Cleaned up 1.55 MB of unused mountain JPEG files from `/public/`.
    - Added image preloading tag (`<link rel="preload" href="/hero_background_sky.jpg" as="image" />`) in `app/layout.tsx`.
@@ -118,8 +141,8 @@ Shwet Ranjan Website/
 ├── app/
 │   ├── api/
 │   │   ├── contact/route.ts       # Contact message dispatcher endpoint
-│   │   └── stock-quote/route.ts   # Live market quote proxy endpoint (Yahoo Finance + 60s cache)
-│   ├── globals.css                # Global CSS variables, Plus Jakarta Sans font, custom scrollbar
+│   │   └── stock-quote/route.ts   # Hardened live market quote proxy endpoint (Yahoo Finance + 4s timeout + fallbacks + SWR cache)
+│   ├── globals.css                # Global CSS variables (--muted-foreground: #d4d4d8), Plus Jakarta Sans font, custom scrollbar
 │   ├── layout.tsx                 # Root layout, Google Font imports, metadata SEO & image preload
 │   ├── page.tsx                   # Main 10-section portfolio hub (with dynamic code splitting)
 │   └── investing-modeler/
@@ -132,7 +155,7 @@ Shwet Ranjan Website/
 │   ├── command-palette.tsx        # Cmd + K search modal overlay
 │   ├── contact-footer.tsx         # Direct message dispatcher, IST clock, info@shwetranjan.com copy tool
 │   ├── custom-cursor.tsx          # Follower cursor with contextual text pills
-│   ├── hero-3d-background.tsx     # HTML5 Canvas 3D Cyber Grid & Sci-Fi Horizon background engine
+│   ├── hero-3d-background.tsx     # HTML5 Canvas 3D Cyber Grid & Sci-Fi Horizon background engine (prefers-reduced-motion enabled)
 │   ├── hero.tsx                   # Main Hero typography, quick launchers, scroll indicator
 │   ├── insights-index.tsx         # Editorial essays list
 │   ├── journey-philosophy.tsx     # Career milestone timeline
@@ -150,7 +173,7 @@ Shwet Ranjan Website/
 │   ├── projects.ts                # 5 flagship projects dataset
 │   └── stock-case-studies.ts       # Stock research dataset
 ├── public/                        # Static assets (optimized images, icons, wallpapers)
-├── next.config.mjs                # Next.js configuration (Image optimization, compression, cache headers)
+├── next.config.mjs                # Next.js configuration (Security headers, image optimization, Brotli compression, cache headers)
 ├── tailwind.config.ts             # Tailwind CSS theme, colors, font mappings
 ├── tsconfig.json                  # TypeScript strict compiler config
 └── package.json                   # Dependencies: Next 14, Framer Motion, Lucide React, Sharp
@@ -163,6 +186,6 @@ Shwet Ranjan Website/
 You can upload or copy-paste this document into Gemini to ask questions such as:
 - *"How does the GST Cash Lock calculation work in Shwet Ranjan's website?"*
 - *"Where is the stock valuation terminal located, and what metrics does it calculate?"*
-- *"How are low-network performance optimizations implemented in this Next.js app?"*
-- *"What technologies are used for the 3D Hero canvas background?"*
+- *"How are security headers and WCAG AA contrast compliance configured in this Next.js app?"*
+- *"What motion reduction features are implemented in the 3D Hero background canvas?"*
 - *"Draft a new blog essay on GST Section 16(4) compliance formatted for the Insights section."*

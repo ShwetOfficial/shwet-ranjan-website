@@ -16,7 +16,7 @@ Shwet Ranjan is a multi-disciplinary business operator, tax compliance architect
 ================================================================================
 A. Main Portfolio Hub (app/page.tsx — /)
 1. Top Navbar: Sticky glassmorphic bar with active section spring tab indicators, live status pill (5 Live Apps Online), and Cmd + K search launcher.
-2. 3D Hero Section: 3D Perspective Cyber Grid Floor Canvas (components/hero-3d-background.tsx) reacting dynamically to mouse movement and page scroll.
+2. 3D Hero Section: 3D Perspective Cyber Grid Floor Canvas (components/hero-3d-background.tsx) with prefers-reduced-motion media query listener, dynamic toggle handling, and static fallback freezing.
 3. Interactive Product Showcase (#projects): 5 built platforms with 3D tilt cards, category filters, architecture spec modals, and lazy-loaded simulators.
 4. Financial & Tax Calculators (#calculators): GST Cash Lock / ITC Delinquency Audit & D2C Net Realization / CM3 Contribution Margin.
 5. Core Pillars (#pillars): 4 strategic domain pillars.
@@ -33,11 +33,15 @@ Bloomberg/Koyfin-style equity valuation terminal hosted at shwetranjan.com/inves
 - Interactive SVG Curves: 5-year revenue vs intrinsic value trajectory.
 
 ================================================================================
-3. PERFORMANCE & LOW-NETWORK OPTIMIZATIONS
+3. PERFORMANCE, ACCESSIBILITY & SECURITY HARDENING
 ================================================================================
 1. Next.js Image Optimization & HTTP Caching: Re-enabled image optimization in next.config.mjs with AVIF/WebP output formats, static asset Gzip/Brotli compression, and 1-year immutable Cache-Control headers for static assets.
-2. Code Splitting & Dynamic Imports: Below-the-fold page sections in app/page.tsx and heavy app simulators in components/projects-showcase.tsx are dynamically imported via next/dynamic to ensure instant First Contentful Paint (FCP) on low networks (3G/2G).
-3. Image Asset Compression: Optimized /public/hero_background_sky.jpg from 879 KB to 263 KB (70% size reduction) with 100% visual fidelity, removed 1.55 MB of unused assets, and preloaded hero background in layout.tsx.
+2. Industry-Standard Security Headers (next.config.mjs): Configured global security headers on /:path* including X-Frame-Options (DENY), X-Content-Type-Options (nosniff), X-XSS-Protection (1; mode=block), Referrer-Policy (strict-origin-when-cross-origin), Strict-Transport-Security (HSTS), and Permissions-Policy.
+3. WCAG AA Contrast Compliance: Defined --muted-foreground (#d4d4d8) in globals.css and migrated secondary text tokens from text-zinc-400 to high-contrast text-zinc-300 across all 15 core component files for high-ambient lighting readability.
+4. 3D Canvas Accessibility (hero-3d-background.tsx): Integrated window.matchMedia('(prefers-reduced-motion: reduce)') with dynamic change listener, completely bypassing requestAnimationFrame animation loops and rendering a static frozen grid plane when reduced motion is preferred.
+5. Upstream API Timeout & Fallback Resilience (app/api/stock-quote/route.ts): Hardened Yahoo Finance proxy endpoint with a 4000ms AbortController timeout, HTTP 429 rate-limit interceptors, static fallback quote dictionary, diagnostic X-Data-Source headers, and SWR caching (s-maxage=60, stale-while-revalidate=120).
+6. Code Splitting & Dynamic Imports: Below-the-fold page sections in app/page.tsx and heavy app simulators in components/projects-showcase.tsx are dynamically imported via next/dynamic to ensure instant First Contentful Paint (FCP) on low networks (3G/2G).
+7. Image Asset Compression: Optimized /public/hero_background_sky.jpg from 879 KB to 263 KB (70% size reduction) with 100% visual fidelity, removed 1.55 MB of unused assets, and preloaded hero background in layout.tsx.
 
 ================================================================================
 4. BUILT PRODUCTION SYSTEMS
@@ -70,9 +74,9 @@ Bloomberg/Koyfin-style equity valuation terminal hosted at shwetranjan.com/inves
 app/page.tsx                    -> Main portfolio hub (with next/dynamic code splitting)
 app/layout.tsx                  -> Root layout, Google Fonts, SEO metadata & hero image preload
 app/investing-modeler/page.tsx  -> Equity Valuation Terminal (/investing-modeler)
-app/api/stock-quote/route.ts    -> Live stock quote API endpoint (Yahoo Finance proxy + SWR cache)
+app/api/stock-quote/route.ts    -> Hardened live stock quote API endpoint (Yahoo Finance proxy + 4000ms timeout + fallback dictionary + SWR cache)
 app/api/contact/route.ts        -> Contact form dispatcher endpoint
-components/hero-3d-background.tsx -> HTML5 Canvas 3D Cyber Grid background
+components/hero-3d-background.tsx -> HTML5 Canvas 3D Cyber Grid background (with prefers-reduced-motion accessibility controls)
 components/calculators.tsx       -> GST & D2C calculators with INR formatting
 components/projects-showcase.tsx -> 3D tilt cards, category filters & dynamic app simulators
 components/stock-case-studies.tsx -> Fundamental intrinsic value case studies & live price ticker
@@ -81,4 +85,4 @@ components/contact-footer.tsx   -> Message dispatcher, IST clock, info@shwetranj
 data/projects.ts                 -> Projects dataset
 data/insights.ts                 -> Essays dataset
 data/stock-case-studies.ts       -> Stock research dataset
-next.config.mjs                  -> Next.js configuration (Image optimization, compression, cache headers)
+next.config.mjs                  -> Next.js configuration (Security headers, image optimization, Brotli compression, cache headers)
