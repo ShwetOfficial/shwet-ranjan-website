@@ -32,6 +32,7 @@ export default function StockCaseStudies() {
       "wipro-ltd": "WIPRO",
       "sbi-ltd": "SBIN",
       "hcltech-ltd": "HCLTECH",
+      "icicibank-ltd": "ICICIBANK",
     };
     const tickerKey = tickerMap[currentStudy.id] || currentStudy.ticker.replace("NSE: ", "").trim();
     setLoadingQuote(true);

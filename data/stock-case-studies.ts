@@ -56,6 +56,71 @@ export interface StockCaseStudy {
 
 export const stockCaseStudiesData: StockCaseStudy[] = [
   {
+    id: "icicibank-ltd",
+    ticker: "NSE: ICICIBANK",
+    companyName: "ICICI Bank Limited",
+    sector: "Banking & Financial Services (Private Sector)",
+    currentPrice: "₹1,422.80",
+    intrinsicValueRange: "₹1,050 – ₹1,750",
+    centralIntrinsicValue: "₹1,350",
+    upsidePercentage: "-5.1%",
+    marginOfSafety: "Slightly Premium (Requires ₹1,100–1,200 for Bargain)",
+    dividendYield: "0.8% Yield (₹11.00/share)",
+    buffettVerdict: "FAIRLY VALUED — 9.2/10 Business Quality (2.81x P/B; Preferred Entry Zone ₹1,100–1,200 for 15-20% Safety Margin)",
+    verdictBadge: "🟡 FAIR VALUE",
+    verdictColor: "text-amber-400 border-amber-500/30 bg-amber-500/10",
+
+    researchDate: "28 August 2026",
+    dataAsOf: "Includes FY26 Standalone Financials (₹75.89 EPS, ₹507 BVPS) & Q1 FY27 Results",
+
+    summaryHeader: "Premier Private Franchise (16-18% ROE, 1.38% GNPA, 4.36% NIM) — Trading at ~2.81x Standalone Book Value (Fair to Premium Zone)",
+
+    whyItFell: {
+      title: "Why Is ICICI Bank Trading ~3.8% Below Its ₹1,480 52-Week High?",
+      description: "ICICI Bank is trading near multi-year high valuations (~2.81x FY26 standalone book value), reflecting market recognition of its turnaround from the FY18-19 bad-loan era, resilient 4.36% NIM, and 19.6% YoY credit growth.",
+      keyPoints: [
+        "Demanding Valuation: At ~₹1,422.80, stock trades at ~2.81x FY26 standalone book value (₹507/share).",
+        "Remarkable Asset Quality Turnaround: Gross NPA dropped from corporate stress era peak (>7%) down to 1.38% (Q1 FY27).",
+        "Resilient Net Interest Margins: Q1 FY27 NIM expanded to 4.36% vs 4.34% YoY, defying sector-wide funding cost pressures.",
+        "Systemic Private Credit Leader: Advances grew 19.6% YoY to ₹16.31 Lakh Cr with deposits up 14% to ₹18.34 Lakh Cr."
+      ]
+    },
+
+    normalizedEarnings: {
+      title: "Buffett Residual Earnings & Book Value Compounding Engine",
+      description: "ICICI doubled standalone book value in 4 years (₹257 ➔ ₹507, 18.5% CAGR) through sustained 16–18% ROE and high PCR (74.7%).",
+      metrics: [
+        { label: "FY26 Standalone BVPS", value: "₹507.00 / share (18.5% 4-Yr CAGR)" },
+        { label: "FY26 Standalone EPS", value: "₹75.89 (20% 4-Yr CAGR)" },
+        { label: "Q1 FY27 Asset Quality", value: "1.38% GNPA / 0.35% NNPA (PCR 74.7%)" },
+        { label: "Capital Adequacy (CAR)", value: "17.18% (Tier-1 Cushion)" }
+      ]
+    },
+
+    intrinsicModel: {
+      method: "Buffett Residual Income & Sustainable P/B Valuation",
+      description: "Using ₹507 Standalone Book Value, 12% Cost of Equity, and 16–18% Sustainable ROE:",
+      scenarios: [
+        { name: "🔴 Bear Case", condition: "ROE moderates to 15-16% (2.0–2.2x Book)", intrinsicValue: "₹1,050 – ₹1,200", status: "bear" },
+        { name: "🟡 Conservative", condition: "ROE ~17% (2.2–2.4x Book)", intrinsicValue: "₹1,250 – ₹1,350", status: "conservative" },
+        { name: "🟢 Central Intrinsic", condition: "Sustainable 17% ROE Baseline", intrinsicValue: "₹1,350 / share", status: "base" },
+        { name: "🔵 Optimistic / Bull", condition: "ROE 18% + Ecosystem Synergies (2.8–3.0x Book)", intrinsicValue: "₹1,550 – ₹1,750", status: "bull" }
+      ]
+    },
+
+    buffettFramework: {
+      moatScore: "93/100 (iMobile Digital Ecosystem, Deposit Scale, Sandeep Bakhshi Governance)",
+      reinvestmentNote: "At ₹1,422.80 (2.81x FY26 book value), ICICI Bank is a 9.2/10 business trading at fair-to-premium valuation (~5% above ₹1,350 central intrinsic value). Preferred entry for a 15–20% safety margin is ₹1,100–1,200 (~2.2x book).",
+      buyThresholds: [
+        { priceRange: "₹1,400+", verdict: "🔴 Fair / Premium (Last Close: ₹1,422.80)", color: "text-red-400" },
+        { priceRange: "₹1,300 – ₹1,400", verdict: "🟡 Around Fair Value", color: "text-amber-300" },
+        { priceRange: "₹1,200 – ₹1,300", verdict: "🟢 Reasonably Attractive Zone", color: "text-emerald-300" },
+        { priceRange: "₹1,100 – ₹1,200", verdict: "🟢🟢 Attractive Entry (15-20% Safety Margin)", color: "text-emerald-400" },
+        { priceRange: "Below ₹1,050", verdict: "🟢🟢🟢 Potential Buffett Bargain (<2.0x P/B)", color: "text-cyan-300" }
+      ]
+    }
+  },
+  {
     id: "hcltech-ltd",
     ticker: "NSE: HCLTECH",
     companyName: "HCL Technologies",
