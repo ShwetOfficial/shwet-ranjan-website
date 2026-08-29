@@ -16,6 +16,8 @@ export interface StockCaseStudy {
   ticker: string;
   companyName: string;
   sector: string;
+  qualityScore: string;
+  qualityTag: string;
   currentPrice: string;
   intrinsicValueRange: string;
   centralIntrinsicValue: string;
@@ -60,6 +62,8 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
     ticker: "NSE: ICICIBANK",
     companyName: "ICICI Bank Limited",
     sector: "Banking & Financial Services (Private Sector)",
+    qualityScore: "9.2/10",
+    qualityTag: "Highest-Tier Private Bank",
     currentPrice: "₹1,422.80",
     intrinsicValueRange: "₹1,050 – ₹1,750",
     centralIntrinsicValue: "₹1,350",
@@ -125,6 +129,8 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
     ticker: "NSE: HCLTECH",
     companyName: "HCL Technologies",
     sector: "IT Services, ER&D & Enterprise Software",
+    qualityScore: "8.8/10",
+    qualityTag: "ER&D + Software IP Leader",
     currentPrice: "₹1,316.00",
     intrinsicValueRange: "₹1,000 – ₹1,800",
     centralIntrinsicValue: "₹1,350",
@@ -190,6 +196,8 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
     ticker: "NSE: SBIN",
     companyName: "State Bank of India",
     sector: "Banking & Financial Services (PSU)",
+    qualityScore: "8.3/10",
+    qualityTag: "Dominant Deposit Franchise",
     currentPrice: "₹1,047.50",
     intrinsicValueRange: "₹720 – ₹1,150",
     centralIntrinsicValue: "₹975",
@@ -255,6 +263,8 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
     ticker: "NSE: WIPRO",
     companyName: "Wipro Limited",
     sector: "IT Services & Cloud Consulting",
+    qualityScore: "7.5/10",
+    qualityTag: "High FCF Value Play",
     currentPrice: "₹180.40",
     intrinsicValueRange: "₹140 – ₹280",
     centralIntrinsicValue: "₹205",
@@ -320,13 +330,15 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
     ticker: "NSE: TCS",
     companyName: "Tata Consultancy Services",
     sector: "Global IT Services & Enterprise AI Transformation",
+    qualityScore: "9.5/10",
+    qualityTag: "Unrivaled Scale & Tata Moat",
     currentPrice: "₹2,344.00",
     intrinsicValueRange: "₹1,700 – ₹3,300",
     centralIntrinsicValue: "₹2,400",
     upsidePercentage: "+2.4% Upside",
     marginOfSafety: "2.3% Margin of Safety (At Fair Value)",
     dividendYield: "2.7% Yield (₹62.00/share)",
-    buffettVerdict: "FAIRLY VALUED — 9.0/10 Buffett Scorecard (Superior Moat, At Fair Value)",
+    buffettVerdict: "FAIRLY VALUED — 9.5/10 Buffett Scorecard (Superior Moat, At Fair Value)",
     verdictBadge: "🟡 FAIR VALUE",
     verdictColor: "text-amber-400 border-amber-500/30 bg-amber-500/10",
 
@@ -370,7 +382,7 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
 
     buffettFramework: {
       moatScore: "95/100 (Unrivaled Scale, 66 $100M+ Clients, Tata Brand)",
-      reinvestmentNote: "TCS is a superior business (9.0/10 vs Infosys 8.8/10), but at ₹2,344 it trades at fair value (~2% discount). Infosys at ₹1,144 offers a higher margin of safety (21%).",
+      reinvestmentNote: "TCS is a superior business (9.5/10 vs Infosys 8.8/10), but at ₹2,344 it trades at fair value (~2% discount). Infosys at ₹1,144 offers a higher margin of safety (21%).",
       buyThresholds: [
         { priceRange: "₹2,800+", verdict: "🔴 Expensive", color: "text-red-400" },
         { priceRange: "₹2,400 – ₹2,800", verdict: "🟡 Fair Value (Last Close: ₹2,344.00)", color: "text-amber-300" },
@@ -385,6 +397,8 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
     ticker: "NSE: INFY",
     companyName: "Infosys Limited",
     sector: "IT Services & Enterprise AI Infrastructure",
+    qualityScore: "8.8/10",
+    qualityTag: "Ultra-High ROE & Zero Debt",
     currentPrice: "₹1,143.65",
     intrinsicValueRange: "₹1,000 – ₹1,600",
     centralIntrinsicValue: "₹1,450",
@@ -450,6 +464,8 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
     ticker: "NSE: HDFCBANK",
     companyName: "HDFC Bank Limited",
     sector: "Banking & Financial Services",
+    qualityScore: "9.1/10",
+    qualityTag: "Systemic CASA Deposit Moat",
     currentPrice: "₹728",
     intrinsicValueRange: "₹730 – ₹750",
     centralIntrinsicValue: "₹734",
@@ -515,6 +531,8 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
     ticker: "NSE: ITC",
     companyName: "ITC Limited",
     sector: "FMCG & Consumer Staples",
+    qualityScore: "9.4/10",
+    qualityTag: "High FCF & FMCG Moat",
     currentPrice: "₹272",
     intrinsicValueRange: "₹350 – ₹390",
     centralIntrinsicValue: "₹368",

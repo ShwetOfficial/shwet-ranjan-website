@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { stockCaseStudiesData, StockCaseStudy } from "@/data/stock-case-studies";
 import Modal from "./modal";
-import { TrendingUp, AlertTriangle, ShieldCheck, DollarSign, ArrowUpRight, Zap, BarChart2, BookOpen, Calendar } from "lucide-react";
+import { TrendingUp, AlertTriangle, ShieldCheck, DollarSign, ArrowUpRight, Zap, BarChart2, BookOpen, Calendar, Star } from "lucide-react";
 
 export default function StockCaseStudies() {
   const [selectedId, setSelectedId] = useState<string>(stockCaseStudiesData[0]?.id || "hcltech-ltd");
@@ -114,7 +114,13 @@ export default function StockCaseStudies() {
             >
               <BarChart2 className={`w-4 h-4 ${isSelected ? "text-white" : "text-cobalt-400"}`} />
               <div className="text-left">
-                <span className="block text-white font-extrabold">{study.companyName}</span>
+                <div className="flex items-center gap-2">
+                  <span className="block text-white font-extrabold">{study.companyName}</span>
+                  <span className="px-1.5 py-0.5 rounded bg-amber-400/10 border border-amber-400/30 text-amber-300 font-mono text-[10px] font-bold shrink-0 flex items-center gap-0.5">
+                    <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
+                    <span>{study.qualityScore}</span>
+                  </span>
+                </div>
                 <span className="text-[10px] text-zinc-300/80 font-normal">{study.ticker}</span>
               </div>
             </button>
@@ -136,6 +142,10 @@ export default function StockCaseStudies() {
             <div className="flex items-center gap-3 mb-3 flex-wrap">
               <span className="font-mono text-xs text-cobalt-400 font-bold uppercase tracking-wider">
                 {currentStudy.sector}
+              </span>
+              <span className="px-3 py-1 rounded-full text-xs font-mono font-bold border border-amber-500/30 bg-amber-500/10 text-amber-300 flex items-center gap-1.5">
+                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                <span>QUALITY: {currentStudy.qualityScore}</span>
               </span>
               <span className={`px-3 py-1 rounded-full text-xs font-mono font-bold border ${currentStudy.verdictColor}`}>
                 {currentStudy.verdictBadge}
@@ -169,8 +179,8 @@ export default function StockCaseStudies() {
           </div>
         </div>
 
-        {/* 4 Metric Highlights Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        {/* 5 Metric Highlights Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
           <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
             <div className="flex items-center justify-between mb-1">
               <span className="font-mono text-[10px] font-bold text-zinc-300 uppercase tracking-widest block">
@@ -211,6 +221,19 @@ export default function StockCaseStudies() {
             <div className="font-display text-xl sm:text-2xl font-black text-amber-400 tracking-tight">{currentStudy.dividendYield.split(' (')[0]}</div>
             <span className="text-[11px] font-mono text-amber-300/90 mt-0.5 block font-semibold">
               {currentStudy.dividendYield.includes('(') ? `(${currentStudy.dividendYield.split('(')[1]}` : "Annual Cash Payout"}
+            </span>
+          </div>
+
+          <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800 overflow-hidden">
+            <span className="font-mono text-[10px] font-bold text-zinc-300 uppercase tracking-widest block mb-1">
+              Company Quality Rating
+            </span>
+            <div className="font-display text-xl sm:text-2xl font-black text-amber-300 flex items-center gap-1.5">
+              <Star className="w-5 h-5 fill-amber-400 text-amber-400 shrink-0" />
+              <span>{currentStudy.qualityScore}</span>
+            </div>
+            <span className="text-[11px] font-mono text-amber-300/90 mt-0.5 block font-semibold truncate">
+              {currentStudy.qualityTag}
             </span>
           </div>
         </div>
