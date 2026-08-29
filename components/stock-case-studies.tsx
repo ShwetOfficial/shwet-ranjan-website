@@ -31,6 +31,7 @@ export default function StockCaseStudies() {
       "tcs-ltd": "TCS",
       "wipro-ltd": "WIPRO",
       "sbi-ltd": "SBIN",
+      "hcltech-ltd": "HCLTECH",
     };
     const tickerKey = tickerMap[currentStudy.id] || currentStudy.ticker.replace("NSE: ", "").trim();
     setLoadingQuote(true);

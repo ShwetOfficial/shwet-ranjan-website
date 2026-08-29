@@ -44,6 +44,7 @@ const INDIAN_TICKERS: Record<string, string> = {
   LT: "LT.NS",
   ASIANPAINT: "ASIANPAINT.NS",
   SBIN: "SBIN.NS",
+  HCLTECH: "HCLTECH.NS",
 };
 
 // Built-in safe static fallback quotes dictionary for supported tickers
@@ -55,6 +56,7 @@ const FALLBACK_QUOTES: Record<string, FallbackQuote> = {
   TCS: { price: 2344.00, previousClose: 2344.00, change: 18.50, changePercent: 0.80, dayHigh: 2360.00, dayLow: 2330.00, currency: "INR" },
   WIPRO: { price: 180.40, previousClose: 180.40, change: 1.80, changePercent: 1.01, dayHigh: 182.50, dayLow: 178.90, currency: "INR" },
   SBIN: { price: 1047.50, previousClose: 1047.50, change: 0.00, changePercent: 0.00, dayHigh: 1060.00, dayLow: 1040.00, currency: "INR" },
+  HCLTECH: { price: 1316.00, previousClose: 1316.00, change: 0.00, changePercent: 0.00, dayHigh: 1330.00, dayLow: 1305.00, currency: "INR" },
   TITAN: { price: 3450.00, previousClose: 3408.00, change: 42.00, changePercent: 1.23, dayHigh: 3480.00, dayLow: 3410.00, currency: "INR" },
   AAPL: { price: 224.20, previousClose: 222.10, change: 2.10, changePercent: 0.95, dayHigh: 226.50, dayLow: 221.80, currency: "USD" },
   NVDA: { price: 128.50, previousClose: 125.10, change: 3.40, changePercent: 2.72, dayHigh: 130.20, dayLow: 124.80, currency: "USD" },

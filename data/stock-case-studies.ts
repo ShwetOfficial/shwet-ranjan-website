@@ -444,5 +444,70 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
         { priceRange: "Below ₹750", verdict: "🟢🟢🟢 Potential Buffett Bargain (≤1.5x P/B)", color: "text-cyan-300" }
       ]
     }
+  },
+  {
+    id: "hcltech-ltd",
+    ticker: "NSE: HCLTECH",
+    companyName: "HCL Technologies",
+    sector: "IT Services, ER&D & Enterprise Software",
+    currentPrice: "₹1,316.00",
+    intrinsicValueRange: "₹1,000 – ₹1,800",
+    centralIntrinsicValue: "₹1,350",
+    upsidePercentage: "+2.6%",
+    marginOfSafety: "2.5% Margin of Safety (At Fair Value)",
+    dividendYield: "4.1% Yield (₹54.00/share)",
+    buffettVerdict: "FAIRLY VALUED — 8.8/10 Buffett Scorecard (19.5x P/E; Entry Zone ₹1,080–1,150 for 15-20% Margin of Safety)",
+    verdictBadge: "🟡 FAIR VALUE",
+    verdictColor: "text-amber-400 border-amber-500/30 bg-amber-500/10",
+
+    researchDate: "28 August 2026",
+    dataAsOf: "Includes FY26 Financials (₹61.46 EPS) & Q1 FY27 Results ($171M Advanced AI Revenue)",
+
+    summaryHeader: "Strong ROIC (40.7%), Zero Debt, 99% FCF Conversion & $171M Advanced AI Revenue (+62.1% YoY) — Trading Near Fair Value",
+
+    whyItFell: {
+      title: "Why Has HCLTech Fallen ~26% From Its ₹1,780 52-Week High?",
+      description: "HCLTech's pullback from its peak of ₹1,780 reflects sector-wide valuation multiple compression, client discretionary spending drag, modest FY27 CC revenue guidance (1–4%), and FY26's slight EPS dip.",
+      keyPoints: [
+        "Multiple Compression: P/E re-rated from ~26x peak to 19.5x baseline.",
+        "FY26 Profit Moderation: Standalone EPS dipped from ₹64.16 (FY25) to ₹61.46 (FY26) as revenue growth outstripped margins.",
+        "Modest Growth Guidance: FY27 CC revenue growth guided at 1–4% with 17.5–18.5% EBIT margins.",
+        "AI Disruption Anxiety: Market uncertainty over traditional billable-hour IT headcount cannibalization."
+      ]
+    },
+
+    normalizedEarnings: {
+      title: "Owner Cash Flows, Zero Debt & High ROIC Engine",
+      description: "HCLTech exhibits high financial quality: ~22.1% ROE, 40.7% LTM ROIC, near-zero debt, and 99% FCF conversion (FCF/Net Income).",
+      metrics: [
+        { label: "LTM ROIC (Unleveraged)", value: "40.7% (Debt/Equity ~0.00)" },
+        { label: "LTM FCF Conversion", value: "99% of Reported Net Income" },
+        { label: "Q1 FY27 Advanced AI Rev", value: "$171 Million (+62.1% YoY CC)" },
+        { label: "Q1 FY27 Net New Bookings", value: "$2.4 Billion (Record Q1 Wins)" }
+      ]
+    },
+
+    intrinsicModel: {
+      method: "Buffett Owner Earnings & AI Productivity DCF Model",
+      description: "Using ₹64–67 Normalized EPS, 99% FCF conversion, 10% Discount Rate, and 10-Year Horizon:",
+      scenarios: [
+        { name: "🔴 Bear Case", condition: "AI Cannibalization / Weak Spend (3% EPS Growth)", intrinsicValue: "₹1,000 – ₹1,150", status: "bear" },
+        { name: "🟡 Conservative", condition: "Modest Recovery (~5-6% EPS Growth)", intrinsicValue: "₹1,250 – ₹1,350", status: "conservative" },
+        { name: "🟢 Base Central Intrinsic", condition: "AI Implementation Engine (~6% Growth)", intrinsicValue: "₹1,350 / share", status: "base" },
+        { name: "🔵 Bull Case", condition: "AI & HCLSoftware Acceleration (8-9% Growth)", intrinsicValue: "₹1,550 – ₹1,800", status: "bull" }
+      ]
+    },
+
+    buffettFramework: {
+      moatScore: "88/100 (ER&D DNA, HCLSoftware IP, OpenAI Partnership)",
+      reinvestmentNote: "At ₹1,316.00 (19.5x P/E, 4.1% dividend yield), HCLTech trades at a 2.5% discount to its ₹1,350 intrinsic value. Preferred entry zone for a 15–20% Margin of Safety is ₹1,080–1,150.",
+      buyThresholds: [
+        { priceRange: "₹1,550+", verdict: "🔴 Expensive", color: "text-red-400" },
+        { priceRange: "₹1,350 – ₹1,550", verdict: "🟡 Fair Value (Last Close: ₹1,316.00)", color: "text-amber-300" },
+        { priceRange: "₹1,150 – ₹1,350", verdict: "🟢 Reasonably Attractive Zone", color: "text-emerald-300" },
+        { priceRange: "₹1,080 – ₹1,150", verdict: "🟢🟢 Attractive (15-20% Safety Margin)", color: "text-emerald-400" },
+        { priceRange: "Below ₹1,000", verdict: "🟢🟢🟢 Potential Buffett Bargain", color: "text-cyan-300" }
+      ]
+    }
   }
 ];
