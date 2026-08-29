@@ -379,5 +379,70 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
         { priceRange: "Below ₹150", verdict: "🟢🟢🟢 Potential Bargain Zone", color: "text-cyan-300" }
       ]
     }
+  },
+  {
+    id: "sbi-ltd",
+    ticker: "NSE: SBIN",
+    companyName: "State Bank of India",
+    sector: "Banking & Financial Services (PSU)",
+    currentPrice: "₹1,047.50",
+    intrinsicValueRange: "₹720 – ₹1,150",
+    centralIntrinsicValue: "₹975",
+    upsidePercentage: "-6.9%",
+    marginOfSafety: "Fair Value (Requires ≤1.5x P/B for Bargain)",
+    dividendYield: "1.6% Yield (₹16.70/share)",
+    buffettVerdict: "FAIRLY VALUED — 8.3/10 Buffett Scorecard (2.04x P/B; Watch ROE Sustainability & Margin of Safety)",
+    verdictBadge: "🟡 FAIR VALUE",
+    verdictColor: "text-amber-400 border-amber-500/30 bg-amber-500/10",
+
+    researchDate: "28 August 2026",
+    dataAsOf: "Includes FY26 Reported Numbers (₹87.59 EPS, ₹512.31 BVPS) & Q1 FY27 Results",
+
+    summaryHeader: "India's Largest Bank (18.6% ROE, 1.49% GNPA) — Trading at ~2.04x Standalone Book Value (Fair Value Zone)",
+
+    whyItFell: {
+      title: "Why Has SBI Retracted From Its ₹1,234.70 52-Week High?",
+      description: "SBI's pullback from its 52-week peak of ₹1,234.70 reflects Net Interest Margin (NIM) compression across the banking sector, market caution over through-the-cycle bad loan risks, and valuation re-rating near 2.0x standalone book value.",
+      keyPoints: [
+        "NIM Compression: NIM moderated from 3.09% (FY25) to 2.91% (FY26) as deposit costs caught up with loan yields.",
+        "Valuation Re-rating: At ~₹1,047.50, stock trades at ~2.04x FY26 standalone book value (₹512.31/share).",
+        "PSU Management Discount: Governance & policy-driven lending obligations create a historical valuation ceiling.",
+        "Cycle Peak Anxiety: Investors questioning if 18.57% ROE is sustainable or represents a credit cycle peak."
+      ]
+    },
+
+    normalizedEarnings: {
+      title: "Buffett Residual Income & Book Value Compounding Engine",
+      description: "For banks, ROE is the engine of book-value growth. Retaining ~80% of 18% ROE allows standalone book value (₹512.31/share) to compound at ~14% annually.",
+      metrics: [
+        { label: "FY26 Standalone BVPS", value: "₹512.31 / share" },
+        { label: "FY26 Standalone EPS", value: "₹87.59 (25% 4-Yr CAGR)" },
+        { label: "Return on Equity (ROE)", value: "18.57% (ROA 1.12%)" },
+        { label: "Asset Quality (GNPA / NNPA)", value: "1.49% / 0.39% (Multi-Year Low)" }
+      ]
+    },
+
+    intrinsicModel: {
+      method: "Buffett Residual Income & Sustainable P/B Valuation",
+      description: "Using ₹512.31 Standalone Book Value, 12% Cost of Equity, and 16–18% Sustainable ROE:",
+      scenarios: [
+        { name: "🔴 Bear Case", condition: "ROE drops to 14-15% (1.4–1.6x Book)", intrinsicValue: "₹720 – ₹820", status: "bear" },
+        { name: "🟡 Base / Fair Case", condition: "ROE ~16-17% (1.6–1.8x Book)", intrinsicValue: "₹850 – ₹1,000", status: "conservative" },
+        { name: "🟢 Central Intrinsic", condition: "Sustainable 17% ROE Baseline", intrinsicValue: "₹975 / share", status: "base" },
+        { name: "🔵 Optimistic / Bull", condition: "ROE 18-19% + Subsidiaries (1.9–2.1x Book)", intrinsicValue: "₹1,050 – ₹1,150", status: "bull" }
+      ]
+    },
+
+    buffettFramework: {
+      moatScore: "92/100 (Unrivaled Scale, Low-Cost Deposit Franchise, Ecosystem Moat)",
+      reinvestmentNote: "At ₹1,047.50 (2.04x FY26 book value), SBI is at fair value. Classic Buffett margin of safety (≤1.5x book) demands entry at ₹750–850.",
+      buyThresholds: [
+        { priceRange: "₹1,050+", verdict: "🔴 Fair / Expensive (P/B > 2.0x)", color: "text-red-400" },
+        { priceRange: "₹950 – ₹1,050", verdict: "🟡 Fairly Valued (Last Close: ₹1,047.50)", color: "text-amber-300" },
+        { priceRange: "₹850 – ₹950", verdict: "🟢 Good Margin of Safety (1.7–1.8x P/B)", color: "text-emerald-300" },
+        { priceRange: "₹750 – ₹850", verdict: "🟢🟢 Very Attractive (1.5–1.6x P/B)", color: "text-emerald-400" },
+        { priceRange: "Below ₹750", verdict: "🟢🟢🟢 Potential Buffett Bargain (≤1.5x P/B)", color: "text-cyan-300" }
+      ]
+    }
   }
 ];
