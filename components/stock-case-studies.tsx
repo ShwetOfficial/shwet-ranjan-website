@@ -67,12 +67,17 @@ export default function StockCaseStudies() {
   const lastClosePrice = liveQuote?.previousClose || liveQuote?.price || fallbackStaticPrice;
   const currentLivePrice = liveQuote?.price || fallbackStaticPrice;
 
-  const dynamicUpside = rawCentralValue > lastClosePrice 
-    ? `+${(((rawCentralValue - lastClosePrice) / lastClosePrice) * 100).toFixed(1)}%`
-    : `${(((rawCentralValue - lastClosePrice) / lastClosePrice) * 100).toFixed(1)}%`;
-  const dynamicMargin = rawCentralValue > lastClosePrice
-    ? `${(((rawCentralValue - lastClosePrice) / lastClosePrice) * 100).toFixed(0)}% Margin of Safety`
-    : "At Fair Value";
+  const percentDiff = ((rawCentralValue - lastClosePrice) / lastClosePrice) * 100;
+  const dynamicUpside = percentDiff > 0 
+    ? `+${percentDiff.toFixed(1)}%`
+    : `${percentDiff.toFixed(1)}%`;
+  const dynamicMargin = percentDiff > 3
+    ? `${percentDiff.toFixed(0)}% Margin of Safety`
+    : percentDiff >= -3 && percentDiff <= 3
+    ? "At Fair Value (0% Safety Margin)"
+    : `${Math.abs(percentDiff).toFixed(1)}% Premium (0% Safety Margin)`;
+  const upsideColor = percentDiff > 0 ? "text-cyan-400" : "text-rose-400";
+  const marginColor = percentDiff > 0 ? "text-emerald-300" : "text-amber-300";
 
   return (
     <section id="stock-case-studies" className="py-24 px-4 sm:px-8 max-w-7xl mx-auto border-t border-white/10 relative text-white">
@@ -195,8 +200,8 @@ export default function StockCaseStudies() {
             <span className="font-mono text-[10px] font-bold text-zinc-300 uppercase tracking-widest block mb-1">
               Margin of Safety / Upside
             </span>
-            <div className="font-display text-xl sm:text-2xl font-black text-cyan-400">{dynamicUpside}</div>
-            <span className="text-[11px] font-mono text-emerald-300 mt-1 block">{dynamicMargin}</span>
+            <div className={`font-display text-xl sm:text-2xl font-black ${upsideColor}`}>{dynamicUpside}</div>
+            <span className={`text-[11px] font-mono ${marginColor} mt-1 block`}>{dynamicMargin}</span>
           </div>
 
           <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800 overflow-hidden">
