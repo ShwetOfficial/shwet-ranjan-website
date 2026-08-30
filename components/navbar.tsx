@@ -53,6 +53,21 @@ export default function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const originalBodyOverflow = document.body.style.overflow;
+      const originalHtmlOverflow = document.documentElement.style.overflow;
+
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+
+      return () => {
+        document.body.style.overflow = originalBodyOverflow;
+        document.documentElement.style.overflow = originalHtmlOverflow;
+      };
+    }
+  }, [mobileMenuOpen]);
+
   const primaryNavLinks = [
     { label: "Built Apps", href: "#projects", id: "projects" },
     { label: "Calculators", href: "#calculators", id: "calculators" },
@@ -197,7 +212,8 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
                     onMouseLeave={() => setLiveAppsOpen(false)}
-                    className="absolute top-12 right-0 w-80 sm:w-96 p-4 rounded-2xl bg-[#09090b]/95 border border-white/10 shadow-2xl backdrop-blur-2xl z-50 space-y-3 pointer-events-auto"
+                    onWheel={(e) => e.stopPropagation()}
+                    className="absolute top-12 right-0 w-80 sm:w-96 p-4 rounded-2xl bg-[#09090b]/95 border border-white/10 shadow-2xl backdrop-blur-2xl z-50 space-y-3 pointer-events-auto overscroll-contain"
                   >
                     <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
                       <span className="font-mono text-xs font-bold text-white flex items-center gap-2">
@@ -209,7 +225,10 @@ export default function Navbar() {
                       </span>
                     </div>
 
-                    <div className="space-y-2 max-h-[380px] overflow-y-auto pr-1">
+                    <div
+                      className="space-y-2 max-h-[380px] overflow-y-auto pr-1 overscroll-contain"
+                      onWheel={(e) => e.stopPropagation()}
+                    >
                       {liveApps.map((app) => (
                         <a
                           key={app.name}
