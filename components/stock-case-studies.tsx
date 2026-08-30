@@ -468,10 +468,10 @@ export default function StockCaseStudies() {
 
               {/* 5. Peter Lynch Scorecard & 10x Reality Check */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Lynch Scorecard Table */}
+                {/* Scorecard Table */}
                 <div className="space-y-3 p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
                   <h4 className="font-display text-base font-bold text-cyan-300">
-                    ⭐ Peter Lynch Scorecard
+                    ⭐ {currentStudy.fullAnalysis.investingStyle === "Warren Buffett" ? "Warren Buffett Scorecard" : "Peter Lynch Scorecard"}
                   </h4>
                   <div className="space-y-2">
                     {currentStudy.fullAnalysis.lynchScorecard.map((item, idx) => (
@@ -483,10 +483,10 @@ export default function StockCaseStudies() {
                   </div>
                 </div>
 
-                {/* 10x Math & Growth Triggers */}
+                {/* Compounding & Growth Triggers */}
                 <div className="space-y-4 p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
                   <h4 className="font-display text-base font-bold text-emerald-400">
-                    🚀 Tenbagger Reality Check & Growth Drivers
+                    🚀 {currentStudy.fullAnalysis.investingStyle === "Warren Buffett" ? "Intrinsic Compounding & Growth Drivers" : "Tenbagger Reality Check & Growth Drivers"}
                   </h4>
                   <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-2 text-xs font-mono">
                     <div>Target Market Cap: <span className="text-cyan-300 font-bold">{currentStudy.fullAnalysis.tenbaggerAnalysis.targetMarketCap}</span></div>
