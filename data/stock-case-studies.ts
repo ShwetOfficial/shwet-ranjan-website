@@ -11,6 +11,52 @@ export interface BuyThreshold {
   color: string;
 }
 
+export interface DetailedSegment {
+  name: string;
+  revenue: string;
+  profit: string;
+  margin: string;
+  quality: string;
+}
+
+export interface ScorecardItem {
+  factor: string;
+  score: string;
+  comment?: string;
+}
+
+export interface DetailedAnalysis {
+  investingStyle: "Peter Lynch" | "Warren Buffett";
+  classification: string;
+  threeSentenceStory: string;
+  segmentBreakdown: DetailedSegment[];
+  moatBreakdown: {
+    score: string;
+    points: string[];
+    caveats: string[];
+  };
+  quarterlySignalQ1FY27: {
+    revenue: string;
+    revenueGrowth: string;
+    pat: string;
+    patGrowth: string;
+    marginCompressionReason: string;
+  };
+  growthTriggers: string[];
+  tenbaggerAnalysis: {
+    targetMarketCap: string;
+    requiredPAT: string;
+    yearsAt12Percent: string;
+    yearsAt15Percent: string;
+    verdict: string;
+  };
+  scuttlebuttVerdict: string;
+  lynchScorecard: ScorecardItem[];
+  lynchVerdictSummary: string;
+  fiveThingsToWatch: string[];
+  risksAndGovernance?: string[];
+}
+
 export interface StockCaseStudy {
   id: string;
   ticker: string;
@@ -32,6 +78,10 @@ export interface StockCaseStudy {
   researchDate: string;
   dataAsOf: string;
   
+  // Framework Designation (Buffett vs Lynch)
+  framework?: "Peter Lynch" | "Warren Buffett";
+  frameworkBadge?: string;
+
   // Public-Friendly 4-Part Summary
   summaryHeader: string;
   whyItFell: {
@@ -54,9 +104,153 @@ export interface StockCaseStudy {
     reinvestmentNote: string;
     buyThresholds: BuyThreshold[];
   };
+
+  // Optional Rich Deep-Dive Detailed Analysis
+  fullAnalysis?: DetailedAnalysis;
 }
 
 export const stockCaseStudiesData: StockCaseStudy[] = [
+  {
+    id: "irctc-ltd",
+    ticker: "NSE: IRCTC",
+    companyName: "IRCTC Limited",
+    sector: "Monopoly Railway E-Commerce & Catering (PSU)",
+    qualityScore: "9.0/10",
+    qualityTag: "Digital Toll Booth & Monopoly Moat",
+    currentPrice: "₹485.65",
+    intrinsicValueRange: "₹563 – ₹983",
+    centralIntrinsicValue: "₹768",
+    upsidePercentage: "+58.1% Upside",
+    marginOfSafety: "36.8% Margin of Safety",
+    dividendYield: "1.8% Yield (₹8.75/share)",
+    buffettVerdict: "BUY-WATCHLIST (PETER LYNCH STALWART) — 9.0/10 Business Quality (27.9x P/E, ~37% Margin of Safety to Base ₹768 Intrinsic Value)",
+    verdictBadge: "🟢 BUY-WATCHLIST",
+    verdictColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+
+    researchDate: "28 August 2026",
+    dataAsOf: "Includes Q1 FY27 (June 2026) Results & FY26 Full-Year Financials",
+
+    framework: "Peter Lynch",
+    frameworkBadge: "🟢 PETER LYNCH STALWART",
+
+    summaryHeader: "Peter Lynch Stalwart (~27.9x P/E, 9.5/10 Moat, 46% ROCE) — Regulated Digital Toll Booth with Catering & Tourism Growth Optionality",
+
+    whyItFell: {
+      title: "Why Is IRCTC Trading at ₹485.65 (~27.9x P/E) After Slower PAT Growth?",
+      description: "IRCTC has matured from a Fast Grower into a High-Quality Stalwart. While FY26 revenue grew 11.6% (₹5,215 Cr), PAT growth slowed to 5.9% (₹1,393 Cr). In Q1 FY27, revenue surged +18.1% (₹1,369.5 Cr), but PAT stayed flat (-0.2% YoY to ₹330.2 Cr) due to temporary gratuity and post-retirement benefit expense spikes that compressed EBITDA margins from 34% to 28.2%.",
+      keyPoints: [
+        "Growth Profile Transition: Matured from 20%+ fast grower to high-quality Stalwart compounding at ~10-15%.",
+        "Q1 FY27 Margin Compression: EBITDA margin contracted from ~34% to 28.2% due to one-time employee benefit accounting hikes.",
+        "Segment Mix Shift: Faster growth in lower-margin catering (+34% YoY in Q1) dilutes consolidated EBITDA margin.",
+        "PSU Policy Discount: Government majority stake (62.4%) creates regulatory uncertainty over convenience fees & license terms."
+      ]
+    },
+
+    normalizedEarnings: {
+      title: "The Crown Jewel: High-Margin Internet Ticketing Cash Machine",
+      description: "IRCTC holds an ~89% share of online reserved ticketing with extraordinary ~82.5% segment profit margins (₹1,268 Cr profit on ₹1,536 Cr revenue in FY26). It operates as a regulated digital toll booth requiring zero capex for railway tracks or locomotives.",
+      metrics: [
+        { label: "FY26 Consolidated Revenue", value: "₹5,215 Cr (+11.6% YoY)" },
+        { label: "FY26 Consolidated PAT", value: "₹1,393 Cr (27.9x P/E)" },
+        { label: "Ticketing Margin", value: "82.5% Segment Profit Margin (₹1,268 Cr)" },
+        { label: "ROCE / ROE", value: "46% ROCE / 35% ROE (D/E 0.02)" }
+      ]
+    },
+
+    intrinsicModel: {
+      method: "Peter Lynch 5-Year Normalized EPS Scenario Matrix",
+      description: "Using FY26 baseline EPS of ₹17.42, evaluating 5-year compounding trajectories across bear, base, and bull valuation multiples:",
+      scenarios: [
+        { name: "🔴 Bear Case (8% EPS CAGR)", condition: "Ticketing growth stays muted; margins capped @ 22x P/E", intrinsicValue: "₹563", status: "bear" },
+        { name: "🟡 Conservative (10% EPS CAGR)", condition: "Modest ad monetization & catering volume growth @ 24x P/E", intrinsicValue: "₹672", status: "conservative" },
+        { name: "🟢 Base Intrinsic (12% EPS CAGR)", condition: "ARPU expansion + catering expansion @ 25x P/E", intrinsicValue: "₹768 / share", status: "base" },
+        { name: "🔵 Bull Case (15% EPS CAGR)", condition: "Tourism acceleration + e-catering margin recovery @ 28x P/E", intrinsicValue: "₹983", status: "bull" }
+      ]
+    },
+
+    buffettFramework: {
+      moatScore: "95/100 (Government Authorization, 89% Reserved Ticket Share, Captive Ecosystem)",
+      reinvestmentNote: "At ₹485.65 (27.9x P/E), IRCTC offers a ~36.8% margin of safety against our ₹768 central intrinsic value. Minimal incremental capex is needed for ticketing, driving 46% ROCE and robust dividend distribution.",
+      buyThresholds: [
+        { priceRange: "₹700+", verdict: "🔴 Expensive", color: "text-red-400" },
+        { priceRange: "₹600 – ₹700", verdict: "🟡 Reasonable only with >15% growth", color: "text-amber-300" },
+        { priceRange: "₹500 – ₹600", verdict: "🟢 Fundamental Interest Zone", color: "text-emerald-300" },
+        { priceRange: "₹425 – ₹500", verdict: "🟢🟢 Attractive Zone (Last Close: ₹485.65)", color: "text-emerald-400" },
+        { priceRange: "Below ₹400", verdict: "🟢🟢🟢 Exceptional Bargain Zone", color: "text-cyan-300" }
+      ]
+    },
+
+    fullAnalysis: {
+      investingStyle: "Peter Lynch",
+      classification: "🟢 STALWART — With Monopoly-Like Moat (Growth Optionality in Tourism & Catering)",
+      threeSentenceStory: "IRCTC is the government-authorised platform that sells railway tickets online and provides catering, Rail Neer packaged water, and tourism services to Indian railway passengers. Its biggest advantage is that Indian Railways gives it an extremely difficult-to-replicate position in the railway-ticketing ecosystem. Ordinary consumers understand the business effortlessly: Need a train ticket? → IRCTC. Need food on a train? → IRCTC. Need tourism packages? → IRCTC.",
+      segmentBreakdown: [
+        { name: "Internet Ticketing", revenue: "₹1,536 Cr (+7.7%)", profit: "₹1,268 Cr", margin: "82.5%", quality: "Crown Jewel Digital Toll Booth (89% share)" },
+        { name: "Catering", revenue: "₹2,399 Cr (+12.9%)", profit: "₹250 Cr", margin: "10.4%", quality: "Growth Driver (+34% Q1 FY27 YoY)" },
+        { name: "Tourism", revenue: "₹890 Cr (+19.5%)", profit: "₹128 Cr", margin: "14.4%", quality: "High-Margin Expansion (+36% profit growth)" },
+        { name: "Rail Neer", revenue: "₹391 Cr (+3.2%)", profit: "₹56 Cr", margin: "14.3%", quality: "Captive Bottled Water Distribution" },
+      ],
+      moatBreakdown: {
+        score: "9.5 / 10 (Highest Tier Moat)",
+        points: [
+          "Government Authorization: Sole authorised provider of online railway ticketing in India.",
+          "Digital Toll Booth Economics: Earns transaction revenue without owning trains, locomotives, tracks, or stations.",
+          "Entrenched User Habits & Network Effect: Hundreds of millions of Indian travelers defaulted to IRCTC.",
+          "High Switching Costs: Private aggregators still route back to Indian Railways / IRCTC gateway."
+        ],
+        caveats: [
+          "Regulatory Ownership Risk: Government owns ~62.4% and can alter convenience fees, licensing terms, or revenue splits.",
+          "Public Good Priority: Government may prioritize passenger convenience over maximizing shareholder profit margin."
+        ]
+      },
+      quarterlySignalQ1FY27: {
+        revenue: "₹1,369.5 Cr",
+        revenueGrowth: "+18.1% YoY",
+        pat: "₹330.2 Cr",
+        patGrowth: "-0.2% YoY",
+        marginCompressionReason: "EBITDA fell from ₹397.3 Cr (34% margin) to ₹386.7 Cr (28.2% margin) primarily due to one-off employee expense adjustments for gratuity enhancements and post-retirement benefits."
+      },
+      growthTriggers: [
+        "ARPU Monetization: Increasing non-convenience-fee revenue per passenger via advertising, payment services, e-catering, and insurance.",
+        "Catering Infrastructure Expansion: Surging Vande Bharat trains, premium pantry services, and e-catering (+34% YoY in Q1 FY27).",
+        "Tourism & Special Trains: Holiday packages, pilgrimage trains, hotel partnerships, and luxury rail experiences (+19.5% YoY in FY26).",
+        "Digital Ticketing Penetration: Steady growth in digital payments and reserved seating volumes across Indian Railways."
+      ],
+      tenbaggerAnalysis: {
+        targetMarketCap: "₹3,88,520 Cr (~₹3.89 Lakh Crore)",
+        requiredPAT: "₹15,600 Cr (11.2x current FY26 PAT of ₹1,393 Cr)",
+        yearsAt12Percent: "~21 Years",
+        yearsAt15Percent: "~18 Years",
+        verdict: "IRCTC is NOT a rapid tenbagger candidate from ₹485.65. It is a classic Peter Lynch Stalwart—a high-quality, dividend-paying 10–15% compounder."
+      },
+      scuttlebuttVerdict: "Ask 100 Indian passengers where they book train tickets—they immediately answer IRCTC. Even when users vent frustration over Tatkal server speed or app UI, they return to IRCTC because there is no alternative. Complaint + compulsory usage is the hallmark of a bulletproof moat.",
+      lynchScorecard: [
+        { factor: "Business Simplicity", score: "⭐⭐⭐⭐⭐ 5/5", comment: "Crystal clear model understood by ordinary consumers" },
+        { factor: "Competitive Moat", score: "⭐⭐⭐⭐⭐ 5/5", comment: "Government-backed 89% monopoly in reserved ticketing" },
+        { factor: "Financial Strength", score: "⭐⭐⭐⭐⭐ 5/5", comment: "Near zero debt (D/E ~0.02), ₹1,273 Cr operating cash flow" },
+        { factor: "Capital Return (ROCE)", score: "⭐⭐⭐⭐⭐ 5/5", comment: "46% ROCE / 35% ROE with minimal reinvestment capex" },
+        { factor: "Cash Flow Conversion", score: "⭐⭐⭐⭐½ 4.5/5", comment: "High conversion of net profit to operating cash flow" },
+        { factor: "Growth Runway", score: "⭐⭐⭐½ 3.5/5", comment: "Ticketing matured; upside driven by ARPU, catering & tourism" },
+        { factor: "Management Autonomy", score: "⭐⭐⭐ 3/5", comment: "PSU structure; decisions influenced by Railway Ministry policy" },
+        { factor: "Customer Stickiness", score: "⭐⭐⭐⭐⭐ 5/5", comment: "High habituation & default platform for Indian rail travel" },
+        { factor: "Regulatory Risk", score: "⭐⭐⭐ 3/5", comment: "Convenience fees and revenue split subject to ministry policy" },
+        { factor: "Valuation Discipline", score: "⭐⭐⭐½ 3.5/5", comment: "27.9x P/E is reasonable for a 9.5/10 moat (vs 50x peak)" }
+      ],
+      lynchVerdictSummary: "BUY-WATCHLIST — Business Quality: 9/10 | Moat: 9.5/10 | Attractiveness at ₹485: 7.5/10. IRCTC is a prime candidate for long-term gradual accumulation as a durable Stalwart compounder.",
+      fiveThingsToWatch: [
+        "① Internet ticketing revenue growth >10%",
+        "② Catering growth >15%",
+        "③ Tourism growth >15–20%",
+        "④ Consolidated PAT growth >12–15%",
+        "⑤ EBITDA margin stabilization around ~30%"
+      ],
+      risksAndGovernance: [
+        "Ecosystem Dependence: Low customer concentration, but 100% ecosystem dependence on Indian Railways regulatory framework.",
+        "Leadership Transition: Former CMD Sanjay Kumar Jain stepped down in July 2026; Rahul Himalian (Director Tourism & Marketing) assumed additional charge.",
+        "Pending Legal/Tax Matters: GST input-tax-credit claims and a ₹50.4 Cr National Anti-Profiteering Authority notice on Rail Neer (financially manageable vs balance sheet)."
+      ]
+    }
+  },
   {
     id: "icicibank-ltd",
     ticker: "NSE: ICICIBANK",

@@ -25,6 +25,7 @@ export default function StockCaseStudies() {
   React.useEffect(() => {
     let isMounted = true;
     const tickerMap: Record<string, string> = {
+      "irctc-ltd": "IRCTC",
       "itc-ltd": "ITC",
       "hdfc-bank": "HDFCBANK",
       "infosys-ltd": "INFY",
@@ -61,7 +62,7 @@ export default function StockCaseStudies() {
     };
   }, [selectedId, currentStudy]);
 
-  // Use Last Trading Day Closing Price as anchor for calculations (Buffett Model Standard)
+  // Use Last Trading Day Closing Price as anchor for calculations (Buffett / Lynch Model Standard)
   const rawCentralValue = parseFloat(currentStudy.centralIntrinsicValue.replace(/[^0-9.]/g, "")) || 368;
   const fallbackStaticPrice = parseFloat(currentStudy.currentPrice.replace(/[^0-9.]/g, "")) || 272;
   const lastClosePrice = liveQuote?.previousClose || liveQuote?.price || fallbackStaticPrice;
@@ -93,7 +94,7 @@ export default function StockCaseStudies() {
           </h2>
         </div>
         <p className="max-w-md font-sans text-zinc-300 text-sm sm:text-base leading-relaxed">
-          Warren Buffett-style fundamental intrinsic value case studies. Evaluating owner earnings, moat durability, temporary market panics, and safety margins.
+          Warren Buffett & Peter Lynch-style fundamental intrinsic value case studies. Evaluating owner earnings, monopoly moats, segment economics, and safety margins.
         </p>
       </div>
 
@@ -143,6 +144,11 @@ export default function StockCaseStudies() {
               <span className="font-mono text-xs text-cobalt-400 font-bold uppercase tracking-wider">
                 {currentStudy.sector}
               </span>
+              {currentStudy.frameworkBadge && (
+                <span className="px-3 py-1 rounded-full text-xs font-mono font-bold border border-cyan-500/30 bg-cyan-500/10 text-cyan-300">
+                  {currentStudy.frameworkBadge}
+                </span>
+              )}
               <span className="px-3 py-1 rounded-full text-xs font-mono font-bold border border-amber-500/30 bg-amber-500/10 text-amber-300 flex items-center gap-1.5">
                 <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                 <span>QUALITY: {currentStudy.qualityScore}</span>
@@ -281,9 +287,9 @@ export default function StockCaseStudies() {
             </div>
           </div>
 
-          {/* Column 2: Intrinsic Valuation Matrix & Buffett Buy Framework */}
+          {/* Column 2: Intrinsic Valuation Matrix & Buffett/Lynch Buy Framework */}
           <div className="space-y-6">
-            {/* DCF / Residual Scenario Matrix */}
+            {/* Scenario Matrix */}
             <div className="p-5 sm:p-6 rounded-2xl bg-zinc-950/80 border border-zinc-800 space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                 <div className="flex items-center gap-2 text-cobalt-400 font-mono text-xs font-bold uppercase tracking-wider">
@@ -316,11 +322,11 @@ export default function StockCaseStudies() {
               </div>
             </div>
 
-            {/* Buffett Buy Framework */}
+            {/* Buying Framework */}
             <div className="p-5 sm:p-6 rounded-2xl bg-zinc-950/80 border border-zinc-800 space-y-3">
               <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-bold uppercase tracking-wider">
                 <ShieldCheck className="w-4 h-4 shrink-0" />
-                <span>Buffett Valuation & Buying Framework</span>
+                <span>{currentStudy.framework === "Peter Lynch" ? "Peter Lynch Valuation & Buying Framework" : "Buffett Valuation & Buying Framework"}</span>
               </div>
               <div className="space-y-2 pt-1">
                 {currentStudy.buffettFramework.buyThresholds.map((t) => (
@@ -340,38 +346,233 @@ export default function StockCaseStudies() {
         <Modal
           isOpen={modalActive}
           onClose={() => setModalActive(false)}
-          title={`${currentStudy.companyName} (${currentStudy.ticker}) — Full Case Study`}
-          category={`Intrinsic Value: ${currentStudy.centralIntrinsicValue} • Current: ${currentStudy.currentPrice}`}
+          title={`${currentStudy.companyName} (${currentStudy.ticker}) — Comprehensive Analysis`}
+          category={`${currentStudy.framework || "Fundamental"} Analysis • Intrinsic: ${currentStudy.centralIntrinsicValue} • Last Close: ${currentStudy.currentPrice}`}
         >
-          <div className="space-y-6 font-sans text-white">
-            <div className="p-4 rounded-xl bg-cobalt-500/10 border-l-4 border-cobalt-500 text-sm text-zinc-200 flex flex-col gap-1">
-              <div><strong>Buffett Summary Verdict:</strong> {currentStudy.buffettVerdict}</div>
-              <div className="text-xs font-mono text-cyan-300 mt-1">
-                📅 Research Date: <strong>{currentStudy.researchDate}</strong> • Baseline: <strong>{currentStudy.dataAsOf}</strong>
+          {currentStudy.fullAnalysis ? (
+            /* Rich Multi-Section Detailed Analysis for Lynch / Detailed Studies */
+            <div className="space-y-8 font-sans text-white">
+              {/* Verdict Header Card */}
+              <div className="p-5 rounded-2xl bg-cobalt-500/10 border border-cobalt-500/30 text-sm text-zinc-200 space-y-2">
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <span className="font-mono text-xs font-bold text-cyan-300 uppercase tracking-widest">
+                    Framework: {currentStudy.fullAnalysis.investingStyle} Style Investing
+                  </span>
+                  <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                    {currentStudy.fullAnalysis.classification}
+                  </span>
+                </div>
+                <div className="font-display text-base font-bold text-white">
+                  {currentStudy.fullAnalysis.lynchVerdictSummary}
+                </div>
+                <div className="text-xs font-mono text-zinc-400">
+                  📅 Research Date: <strong>{currentStudy.researchDate}</strong> | Baseline Data: <strong>{currentStudy.dataAsOf}</strong>
+                </div>
+              </div>
+
+              {/* 1. The Story in 3 Sentences */}
+              <div className="space-y-3 p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
+                <h4 className="font-display text-lg font-bold text-cyan-400 flex items-center gap-2">
+                  <span>📖 1. The Story in 3 Sentences</span>
+                </h4>
+                <p className="text-zinc-200 text-sm leading-relaxed italic bg-zinc-950 p-4 rounded-xl border border-zinc-800">
+                  &ldquo;{currentStudy.fullAnalysis.threeSentenceStory}&rdquo;
+                </p>
+              </div>
+
+              {/* 2. Segment Economics Table */}
+              <div className="space-y-3 p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
+                <h4 className="font-display text-lg font-bold text-amber-400 flex items-center gap-2">
+                  <span>📊 2. Segment Economics Breakdown</span>
+                </h4>
+                <p className="text-xs text-zinc-300">
+                  Revenue alone is misleading—profitability reveals the true underlying cash machine.
+                </p>
+                <div className="overflow-x-auto pt-2">
+                  <table className="w-full text-left font-mono text-xs border-collapse">
+                    <thead>
+                      <tr className="border-b border-zinc-800 text-zinc-400 bg-zinc-950">
+                        <th className="p-3 font-bold">Segment</th>
+                        <th className="p-3 font-bold">FY26 Revenue</th>
+                        <th className="p-3 font-bold">Segment Profit</th>
+                        <th className="p-3 font-bold">Profit Margin</th>
+                        <th className="p-3 font-bold">Strategic Role</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {currentStudy.fullAnalysis.segmentBreakdown.map((seg, idx) => (
+                        <tr key={idx} className="border-b border-zinc-800/60 hover:bg-zinc-800/40 transition-colors">
+                          <td className="p-3 font-bold text-white">{seg.name}</td>
+                          <td className="p-3 text-cyan-300">{seg.revenue}</td>
+                          <td className="p-3 text-emerald-400 font-bold">{seg.profit}</td>
+                          <td className="p-3 text-amber-300 font-bold">{seg.margin}</td>
+                          <td className="p-3 text-zinc-300 font-sans text-[11px]">{seg.quality}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* 3. Moat & Government Relationship */}
+              <div className="space-y-4 p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
+                <h4 className="font-display text-lg font-bold text-emerald-400 flex items-center gap-2">
+                  <span>🏰 3. Moat Strength & Government Relationship</span>
+                </h4>
+                <div className="flex items-center gap-3">
+                  <span className="px-3 py-1 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-mono text-xs font-bold">
+                    Moat Score: {currentStudy.fullAnalysis.moatBreakdown.score}
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                  <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-2">
+                    <span className="font-mono text-xs font-bold text-emerald-400 block uppercase">Core Competitive Pillars</span>
+                    {currentStudy.fullAnalysis.moatBreakdown.points.map((pt, i) => (
+                      <div key={i} className="flex items-start gap-2 text-xs text-zinc-300 font-sans">
+                        <span className="text-emerald-400 font-bold">•</span>
+                        <span>{pt}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-2">
+                    <span className="font-mono text-xs font-bold text-amber-400 block uppercase">Government & Policy Caveats</span>
+                    {currentStudy.fullAnalysis.moatBreakdown.caveats.map((c, i) => (
+                      <div key={i} className="flex items-start gap-2 text-xs text-zinc-300 font-sans">
+                        <span className="text-amber-400 font-bold">•</span>
+                        <span>{c}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. Latest Earnings Signal & Margin Analysis */}
+              <div className="space-y-3 p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
+                <h4 className="font-display text-lg font-bold text-rose-400 flex items-center gap-2">
+                  <span>⚡ 4. Q1 FY27 Signal & Margin Compression Analysis</span>
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
+                    <span className="font-mono text-[10px] text-zinc-400 block uppercase">Q1 FY27 Revenue</span>
+                    <span className="font-mono text-sm font-bold text-emerald-400">{currentStudy.fullAnalysis.quarterlySignalQ1FY27.revenue} ({currentStudy.fullAnalysis.quarterlySignalQ1FY27.revenueGrowth})</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
+                    <span className="font-mono text-[10px] text-zinc-400 block uppercase">Q1 FY27 PAT</span>
+                    <span className="font-mono text-sm font-bold text-amber-300">{currentStudy.fullAnalysis.quarterlySignalQ1FY27.pat} ({currentStudy.fullAnalysis.quarterlySignalQ1FY27.patGrowth})</span>
+                  </div>
+                </div>
+                <p className="text-xs text-zinc-300 font-sans bg-zinc-950 p-3 rounded-xl border border-zinc-800 leading-relaxed">
+                  <strong>Why Profit Stayed Flat:</strong> {currentStudy.fullAnalysis.quarterlySignalQ1FY27.marginCompressionReason}
+                </p>
+              </div>
+
+              {/* 5. Peter Lynch Scorecard & 10x Reality Check */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Lynch Scorecard Table */}
+                <div className="space-y-3 p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
+                  <h4 className="font-display text-base font-bold text-cyan-300">
+                    ⭐ Peter Lynch Scorecard
+                  </h4>
+                  <div className="space-y-2">
+                    {currentStudy.fullAnalysis.lynchScorecard.map((item, idx) => (
+                      <div key={idx} className="flex items-center justify-between text-xs font-mono p-2 rounded bg-zinc-950 border border-zinc-800">
+                        <span className="text-zinc-300 font-bold">{item.factor}</span>
+                        <span className="text-amber-300 font-bold">{item.score}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 10x Math & Growth Triggers */}
+                <div className="space-y-4 p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
+                  <h4 className="font-display text-base font-bold text-emerald-400">
+                    🚀 Tenbagger Reality Check & Growth Drivers
+                  </h4>
+                  <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-2 text-xs font-mono">
+                    <div>Target Market Cap: <span className="text-cyan-300 font-bold">{currentStudy.fullAnalysis.tenbaggerAnalysis.targetMarketCap}</span></div>
+                    <div>Required PAT: <span className="text-emerald-400 font-bold">{currentStudy.fullAnalysis.tenbaggerAnalysis.requiredPAT}</span></div>
+                    <div>Years @ 12% CAGR: <span className="text-amber-300 font-bold">{currentStudy.fullAnalysis.tenbaggerAnalysis.yearsAt12Percent}</span></div>
+                    <div>Years @ 15% CAGR: <span className="text-amber-300 font-bold">{currentStudy.fullAnalysis.tenbaggerAnalysis.yearsAt15Percent}</span></div>
+                    <p className="font-sans text-xs text-zinc-300 pt-2 border-t border-zinc-800 leading-relaxed">
+                      {currentStudy.fullAnalysis.tenbaggerAnalysis.verdict}
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <span className="font-mono text-xs font-bold text-cyan-300 block uppercase">Key Long-Term Growth Engines</span>
+                    {currentStudy.fullAnalysis.growthTriggers.map((trig, i) => (
+                      <div key={i} className="flex items-start gap-2 text-xs font-sans text-zinc-300">
+                        <span className="text-cyan-400 font-bold">•</span>
+                        <span>{trig}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* 6. Scuttlebutt Test & What To Watch */}
+              <div className="space-y-4 p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
+                <h4 className="font-display text-base font-bold text-amber-400">
+                  🔍 Scuttlebutt Test & 5 Key Accumulation Triggers
+                </h4>
+                <p className="text-xs font-sans text-zinc-300 bg-zinc-950 p-4 rounded-xl border border-zinc-800 leading-relaxed">
+                  <strong>The Scuttlebutt Verdict:</strong> {currentStudy.fullAnalysis.scuttlebuttVerdict}
+                </p>
+                <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-2">
+                  <span className="font-mono text-xs font-bold text-emerald-400 block uppercase">5 Conditions to Become Aggressive Buyer</span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono text-zinc-300">
+                    {currentStudy.fullAnalysis.fiveThingsToWatch.map((w, idx) => (
+                      <div key={idx} className="p-2 rounded bg-zinc-900 border border-zinc-800 text-emerald-300 font-semibold">
+                        {w}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                {currentStudy.fullAnalysis.risksAndGovernance && (
+                  <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-2">
+                    <span className="font-mono text-xs font-bold text-rose-400 block uppercase">Governance & Leadership Transition Notes</span>
+                    {currentStudy.fullAnalysis.risksAndGovernance.map((r, i) => (
+                      <div key={i} className="flex items-start gap-2 text-xs font-sans text-zinc-300">
+                        <span className="text-rose-400 font-bold">•</span>
+                        <span>{r}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
+          ) : (
+            /* Standard Detailed Case Study view for other stocks */
+            <div className="space-y-6 font-sans text-white">
+              <div className="p-4 rounded-xl bg-cobalt-500/10 border-l-4 border-cobalt-500 text-sm text-zinc-200 flex flex-col gap-1">
+                <div><strong>Summary Verdict:</strong> {currentStudy.buffettVerdict}</div>
+                <div className="text-xs font-mono text-cyan-300 mt-1">
+                  📅 Research Date: <strong>{currentStudy.researchDate}</strong> • Baseline: <strong>{currentStudy.dataAsOf}</strong>
+                </div>
+              </div>
 
-            <div className="space-y-3">
-              <h4 className="font-display text-lg font-bold text-white">1. Market Context & Recent Price Decline</h4>
-              <p className="text-zinc-300 text-sm leading-relaxed whitespace-pre-line">
-                {currentStudy.whyItFell.description}
-              </p>
-            </div>
+              <div className="space-y-3">
+                <h4 className="font-display text-lg font-bold text-white">1. Market Context & Recent Price Decline</h4>
+                <p className="text-zinc-300 text-sm leading-relaxed whitespace-pre-line">
+                  {currentStudy.whyItFell.description}
+                </p>
+              </div>
 
-            <div className="space-y-3">
-              <h4 className="font-display text-lg font-bold text-white">2. Normalized Earnings vs Accounting Noise</h4>
-              <p className="text-zinc-300 text-sm leading-relaxed">
-                {currentStudy.normalizedEarnings.description}
-              </p>
-            </div>
+              <div className="space-y-3">
+                <h4 className="font-display text-lg font-bold text-white">2. Normalized Earnings vs Accounting Noise</h4>
+                <p className="text-zinc-300 text-sm leading-relaxed">
+                  {currentStudy.normalizedEarnings.description}
+                </p>
+              </div>
 
-            <div className="space-y-3">
-              <h4 className="font-display text-lg font-bold text-white">3. Economic Moat & Reinvestment Return</h4>
-              <p className="text-zinc-300 text-sm leading-relaxed">
-                {currentStudy.buffettFramework.reinvestmentNote}
-              </p>
+              <div className="space-y-3">
+                <h4 className="font-display text-lg font-bold text-white">3. Economic Moat & Reinvestment Return</h4>
+                <p className="text-zinc-300 text-sm leading-relaxed">
+                  {currentStudy.buffettFramework.reinvestmentNote}
+                </p>
+              </div>
             </div>
-          </div>
+          )}
         </Modal>
       )}
     </section>

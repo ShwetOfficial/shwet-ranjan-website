@@ -31,6 +31,7 @@ export interface FallbackQuote {
 
 // Known Indian tickers mapping to NSE symbols
 const INDIAN_TICKERS: Record<string, string> = {
+  IRCTC: "IRCTC.NS",
   ITC: "ITC.NS",
   HDFCBANK: "HDFCBANK.NS",
   RELIANCE: "RELIANCE.NS",
@@ -49,6 +50,7 @@ const INDIAN_TICKERS: Record<string, string> = {
 
 // Built-in safe static fallback quotes dictionary for supported tickers
 const FALLBACK_QUOTES: Record<string, FallbackQuote> = {
+  IRCTC: { price: 485.65, previousClose: 485.65, change: 0.00, changePercent: 0.00, dayHigh: 495.00, dayLow: 480.00, currency: "INR" },
   ITC: { price: 272.50, previousClose: 272.00, change: 3.20, changePercent: 1.19, dayHigh: 275.80, dayLow: 269.50, currency: "INR" },
   HDFCBANK: { price: 728.00, previousClose: 728.00, change: -4.50, changePercent: -0.61, dayHigh: 735.00, dayLow: 722.50, currency: "INR" },
   INFY: { price: 1143.65, previousClose: 1143.65, change: 14.20, changePercent: 1.26, dayHigh: 1152.00, dayLow: 1135.00, currency: "INR" },
