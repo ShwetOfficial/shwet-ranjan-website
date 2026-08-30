@@ -17,20 +17,32 @@ export default function Modal({ isOpen, onClose, title, category, children }: Mo
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
+
     if (isOpen) {
+      // Lock both body and html scroll to prevent background scrolling leakage
+      const originalBodyOverflow = document.body.style.overflow;
+      const originalHtmlOverflow = document.documentElement.style.overflow;
+
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+
       window.addEventListener("keydown", handleKeyDown);
+
+      return () => {
+        document.body.style.overflow = originalBodyOverflow;
+        document.documentElement.style.overflow = originalHtmlOverflow;
+        window.removeEventListener("keydown", handleKeyDown);
+      };
     }
-    return () => {
-      document.body.style.overflow = "unset";
-      window.removeEventListener("keydown", handleKeyDown);
-    };
   }, [isOpen, onClose]);
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 overscroll-contain"
+          onWheel={(e) => e.stopPropagation()}
+        >
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -46,10 +58,10 @@ export default function Modal({ isOpen, onClose, title, category, children }: Mo
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", duration: 0.5, bounce: 0.1 }}
-            className="relative z-10 w-full max-w-4xl max-h-[85vh] flex flex-col bg-[#121218] rounded-3xl border border-white/10 shadow-2xl overflow-hidden text-white"
+            className="relative z-10 w-full max-w-4xl max-h-[85vh] flex flex-col bg-[#121218] rounded-3xl border border-white/10 shadow-2xl overflow-hidden text-white overscroll-contain"
           >
             {/* Modal Header */}
-            <div className="sticky top-0 z-20 flex items-center justify-between px-6 py-5 bg-[#181822]/90 backdrop-blur-md border-b border-zinc-800">
+            <div className="sticky top-0 z-20 flex items-center justify-between px-6 py-5 bg-[#181822]/95 backdrop-blur-md border-b border-zinc-800 shrink-0">
               <div>
                 {category && (
                   <span className="font-mono text-xs uppercase tracking-widest text-cobalt-400 font-bold mb-1 block">
@@ -69,13 +81,13 @@ export default function Modal({ isOpen, onClose, title, category, children }: Mo
               </button>
             </div>
 
-            {/* Modal Content */}
-            <div className="p-6 sm:p-8 md:p-10 overflow-y-auto space-y-6 text-zinc-200 leading-relaxed">
+            {/* Modal Content - Isolated Scroll Container */}
+            <div className="p-6 sm:p-8 md:p-10 overflow-y-auto space-y-6 text-zinc-200 leading-relaxed flex-1 min-h-0 overscroll-contain">
               {children}
             </div>
 
             {/* Modal Footer */}
-            <div className="sticky bottom-0 z-20 px-6 py-4 bg-[#181822] border-t border-zinc-800 flex items-center justify-between text-xs font-mono text-zinc-300">
+            <div className="sticky bottom-0 z-20 px-6 py-4 bg-[#181822] border-t border-zinc-800 flex items-center justify-between text-xs font-mono text-zinc-300 shrink-0">
               <span>SHWET RANJAN — SYSTEM SPECIFICATION</span>
               <button
                 onClick={onClose}

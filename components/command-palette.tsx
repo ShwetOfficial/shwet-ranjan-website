@@ -25,7 +25,23 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
         onClose();
       }
     };
+
     window.addEventListener("keydown", handleKeyDown);
+
+    if (isOpen) {
+      const originalBodyOverflow = document.body.style.overflow;
+      const originalHtmlOverflow = document.documentElement.style.overflow;
+
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+
+      return () => {
+        document.body.style.overflow = originalBodyOverflow;
+        document.documentElement.style.overflow = originalHtmlOverflow;
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }
+
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
