@@ -1009,7 +1009,7 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
     verdictBadge: "🟡 FAIR VALUE",
     verdictColor: "text-amber-400 border-amber-500/30 bg-amber-500/10",
 
-    researchDate: "26 August 2026",
+    researchDate: "30 August 2026",
     dataAsOf: "Includes FY26 Full-Year & Q1 FY27 Numbers",
 
     framework: "Warren Buffett",
@@ -1149,7 +1149,7 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
     verdictBadge: "🟢 ATTRACTIVE",
     verdictColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
 
-    researchDate: "26 August 2026",
+    researchDate: "30 August 2026",
     dataAsOf: "Includes FY26 Full-Year & Q1 FY27 Numbers",
 
     framework: "Warren Buffett",
