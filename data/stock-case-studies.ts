@@ -107,6 +107,29 @@ export interface StockCaseStudy {
 
   // Optional Rich Deep-Dive Detailed Analysis
   fullAnalysis?: DetailedAnalysis;
+
+  // Dual Recommendation Details (Stitch-to-Stitch Buffett vs Lynch)
+  dualRecommendation?: {
+    buffett: {
+      verdict: string;
+      verdictBadge: string;
+      verdictColor: string;
+      moatRating: string;
+      fairValue: string;
+      safetyMargin: string;
+      keyRationale: string;
+    };
+    lynch: {
+      verdict: string;
+      verdictBadge: string;
+      verdictColor: string;
+      category: string;
+      pegRatio: string;
+      earningsGrowth: string;
+      keyRationale: string;
+    };
+    comparisonSummary: string;
+  };
 }
 
 export const stockCaseStudiesData: StockCaseStudy[] = [
@@ -127,7 +150,7 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
     verdictBadge: "🔴 SLIGHTLY PREMIUM",
     verdictColor: "text-red-400 border-red-500/30 bg-red-500/10",
 
-    researchDate: "28 August 2026",
+    researchDate: "30 August 2026",
     dataAsOf: "Includes FY26 Standalone Financials (₹75.89 EPS, ₹507 BVPS) & Q1 FY27 Results",
 
     framework: "Warren Buffett",
@@ -178,6 +201,28 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
         { priceRange: "₹1,100 – ₹1,200", verdict: "🟢🟢 Attractive Entry (15-20% Safety Margin)", color: "text-emerald-400" },
         { priceRange: "Below ₹1,050", verdict: "🟢🟢🟢 Potential Buffett Bargain (<2.0x P/B)", color: "text-cyan-300" }
       ]
+    },
+
+    dualRecommendation: {
+      buffett: {
+        verdict: "FAIR VALUE / ACCUMULATE ON DIPS",
+        verdictBadge: "🟡 BUFFETT: FAIR VALUE",
+        verdictColor: "text-amber-400 border-amber-500/30 bg-amber-500/10",
+        moatRating: "9.3 / 10 (Digital Ecosystem & CASA Moat)",
+        fairValue: "₹1,350",
+        safetyMargin: "0% MoS (5% Premium at ₹1,422)",
+        keyRationale: "Premier private franchise earning 16-18% ROE, but current 2.81x P/B requires ₹1,100–1,200 for 15-20% margin of safety."
+      },
+      lynch: {
+        verdict: "STALWART HOLD / WATCH PEG < 1.0",
+        verdictBadge: "🟡 LYNCH: STALWART HOLD",
+        verdictColor: "text-amber-400 border-amber-500/30 bg-amber-500/10",
+        category: "Stalwart (15–20% Compounder)",
+        pegRatio: "1.15 (PE 18.7x / Growth 16%)",
+        earningsGrowth: "19.6% YoY Credit Expansion",
+        keyRationale: "Strong earnings momentum offset by ~18.7x PE. PEG > 1.0 advises holding or waiting for price dip under ₹1,250."
+      },
+      comparisonSummary: "Buffett values ICICI's deposit moat & book value compounding (buy zone ₹1,100–1,200), whereas Lynch focuses on PEG 1.15 earnings velocity (buy zone PEG < 1.0)."
     },
 
     fullAnalysis: {
@@ -267,7 +312,7 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
     verdictBadge: "🟡 FAIR VALUE",
     verdictColor: "text-amber-400 border-amber-500/30 bg-amber-500/10",
 
-    researchDate: "28 August 2026",
+    researchDate: "30 August 2026",
     dataAsOf: "Includes FY26 Financials (₹61.46 EPS) & Q1 FY27 Results ($171M Advanced AI Revenue)",
 
     framework: "Warren Buffett",
@@ -406,7 +451,7 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
     verdictBadge: "🔴 SLIGHTLY PREMIUM",
     verdictColor: "text-red-400 border-red-500/30 bg-red-500/10",
 
-    researchDate: "28 August 2026",
+    researchDate: "30 August 2026",
     dataAsOf: "Includes FY26 Reported Numbers (₹87.59 EPS, ₹512.31 BVPS) & Q1 FY27 Results",
 
     framework: "Warren Buffett",
@@ -545,7 +590,7 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
     verdictBadge: "🟢 ATTRACTIVE VALUE",
     verdictColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
 
-    researchDate: "28 August 2026",
+    researchDate: "30 August 2026",
     dataAsOf: "Includes FY26 Annual Results & ₹150B Buyback Baseline",
 
     framework: "Warren Buffett",
@@ -684,7 +729,7 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
     verdictBadge: "🟡 FAIR VALUE",
     verdictColor: "text-amber-400 border-amber-500/30 bg-amber-500/10",
 
-    researchDate: "28 August 2026",
+    researchDate: "30 August 2026",
     dataAsOf: "Includes FY26 Annual Report (₹145.99 EPS) & Q1 FY27 Results",
 
     framework: "Warren Buffett",
@@ -824,7 +869,7 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
     verdictBadge: "🟢 VERY ATTRACTIVE",
     verdictColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
 
-    researchDate: "28 August 2026",
+    researchDate: "30 August 2026",
     dataAsOf: "Includes FY26 Full-Year Numbers & FY27 Guidance Baseline",
 
     framework: "Warren Buffett",
@@ -1244,7 +1289,7 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
     verdictBadge: "🟢 BUY-WATCHLIST",
     verdictColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
 
-    researchDate: "28 August 2026",
+    researchDate: "30 August 2026",
     dataAsOf: "Includes Q1 FY27 (June 2026) Results & FY26 Full-Year Financials",
 
     framework: "Peter Lynch",
