@@ -72,6 +72,7 @@ export default function StockCaseStudies() {
   React.useEffect(() => {
     let isMounted = true;
     const tickerMap: Record<string, string> = {
+      "hudco-ltd": "HUDCO",
       "irctc-ltd": "IRCTC",
       "itc-ltd": "ITC",
       "hdfc-bank": "HDFCBANK",

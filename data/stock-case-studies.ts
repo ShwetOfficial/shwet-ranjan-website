@@ -1412,5 +1412,168 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
         "Pending Legal/Tax Matters: GST input-tax-credit claims and a ₹50.4 Cr National Anti-Profiteering Authority notice on Rail Neer (financially manageable vs balance sheet)."
       ]
     }
+  },
+  {
+    id: "hudco-ltd",
+    ticker: "NSE: HUDCO",
+    companyName: "Housing and Urban Development Corporation Limited",
+    sector: "Housing & Infrastructure Finance (PSU NBFC)",
+    qualityScore: "8.0/10",
+    qualityTag: "Government Infrastructure & Housing Financier",
+    currentPrice: "₹178.00",
+    intrinsicValueRange: "₹163 – ₹432",
+    centralIntrinsicValue: "₹283",
+    upsidePercentage: "+59.0% Upside",
+    marginOfSafety: "37.1% Margin of Safety",
+    dividendYield: "3.4% Yield (₹6.05/share)",
+    buffettVerdict: "BUY / WATCH (PETER LYNCH FAST GROWER) — 8.0/10 Quality (8.4x P/E, 1.6x P/B, ~20% ROE, 0.05% Net NPA)",
+    verdictBadge: "🟢 BUY / WATCH",
+    verdictColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+
+    researchDate: "2 September 2026",
+    dataAsOf: "Includes FY26 Financials (PAT ₹4,034 Cr, EPS ₹20.15, BVPS ₹114) & Q1 FY27 Results (PAT ₹851 Cr)",
+
+    framework: "Peter Lynch",
+    frameworkBadge: "🟢 PETER LYNCH FAST GROWER",
+
+    summaryHeader: "Peter Lynch Fast Grower / Stalwart Hybrid (~8.4x P/E, 1.6x P/B, ~20% ROE, 0.05% NNPA) — Rapidly Expanding Government Urban Infrastructure Financier",
+
+    whyItFell: {
+      title: "Why Is HUDCO Trading at ~8.4x P/E & 1.6x P/B Despite ~50% PAT Growth?",
+      description: "HUDCO expanded its loan book from ₹92,654 Cr (FY24) to ₹1,60,547 Cr (FY26) with FY26 PAT surging 49% to ₹4,034 Cr and Q1 FY27 PAT up 35% to ₹851 Cr. Market valuation remains discounted at 8.4x P/E due to PSU ownership discount, Net Interest Margin compression (3.22% → 2.91%), credit risk in infrastructure financing, borrower concentration (top 20 borrowers = 74% of advances), and capital consumption as CRAR declined from 46.6% to 39.9%.",
+      keyPoints: [
+        "PSU Governance & Valuation Discount: Trades at ~8.4x P/E as public sector ownership limits market valuation multiples.",
+        "Borrower Concentration Risk: Top 20 borrowers represent ~74% of total advances and 76% of exposure, raising single-event credit risk.",
+        "NIM Compression Drag: Net Interest Margin compressed from 3.22% (FY25) to 2.91% (FY26) as rapid loan expansion outpaced spread yields.",
+        "Capital Consumption: Rapid ~29% YoY loan expansion reduced CRAR from 46.6% to 39.9%, necessitating ₹70,000 Cr fundraising authorization."
+      ]
+    },
+
+    normalizedEarnings: {
+      title: "High-Quality Government Credit Portfolio & Outstanding Asset Quality",
+      description: "HUDCO maintains exceptional asset quality with Gross NPA dropping to 0.96% and Net NPA at a multi-year low of 0.05% (95% Provision Coverage Ratio). Supported by AAA domestic credit ratings and low-cost sovereign funding access, HUDCO earns healthy ~18-20% ROE.",
+      metrics: [
+        { label: "FY26 Consolidated PAT", value: "₹4,034 Cr (+49% YoY)" },
+        { label: "Loan Asset Book", value: "₹1,60,547 Cr (+29% YoY)" },
+        { label: "Asset Quality (GNPA / NNPA)", value: "0.96% / 0.05% (95% PCR)" },
+        { label: "FY26 ROE & Valuation", value: "~18.4–20% ROE | 1.6x P/B | 8.4x P/E" }
+      ]
+    },
+
+    intrinsicModel: {
+      method: "Peter Lynch Valuation & Exit P/E Scenario Matrix (FY29 Horizons)",
+      description: "Using FY26 EPS baseline of ₹20.15 and book value of ₹114/share, evaluating 3-year exit scenarios:",
+      scenarios: [
+        { name: "🔴 Bear Case (5% EPS CAGR)", condition: "NIM falls to 2.3% & NPAs rise @ 7x P/E", intrinsicValue: "₹163", status: "bear" },
+        { name: "🟡 Conservative (10% EPS CAGR)", condition: "Modest loan growth & stable spreads @ 9x P/E", intrinsicValue: "₹241", status: "conservative" },
+        { name: "🟢 Base Intrinsic (12% EPS CAGR)", condition: "12% EPS growth + 10x exit P/E baseline", intrinsicValue: "₹283 / share", status: "base" },
+        { name: "🔵 Bull Case (15% EPS CAGR)", condition: "15% EPS growth + 12x exit P/E re-rating", intrinsicValue: "₹367", status: "bull" },
+        { name: "🚀 Very Bullish (18% EPS CAGR)", condition: "18% EPS growth + 13x exit P/E re-rating", intrinsicValue: "₹432", status: "bull" }
+      ]
+    },
+
+    buffettFramework: {
+      moatScore: "70/100 (Government Access, Sovereign Credit Rating, AAA Borrowing Advantage)",
+      reinvestmentNote: "At ₹178 (8.4x P/E, 1.6x P/B), HUDCO trades at a 37.1% discount to its ₹283 central intrinsic value. Supported by ~20% ROE and a 3.4% dividend yield, valuation is the strongest pillar of the investment thesis.",
+      buyThresholds: [
+        { priceRange: "₹300+", verdict: "🔴 Expensive (>2.5x P/B)", color: "text-red-400" },
+        { priceRange: "₹240 – ₹300", verdict: "🟡 Around Fair Value Zone", color: "text-amber-300" },
+        { priceRange: "₹190 – ₹240", verdict: "🟢 Reasonable Entry Zone", color: "text-emerald-300" },
+        { priceRange: "₹150 – ₹190", verdict: "🟢🟢 Highly Attractive Entry (Last Close: ₹178.00)", color: "text-emerald-400" },
+        { priceRange: "Below ₹150", verdict: "🟢🟢🟢 Exceptional Bargain (<1.3x P/B, PEG < 0.5)", color: "text-cyan-300" }
+      ]
+    },
+
+    dualRecommendation: {
+      buffett: {
+        verdict: "REASONABLE VALUE / ACCUMULATE ON DIPS",
+        verdictBadge: "🛡️ BUFFETT: FAIR-TO-CHEAP",
+        verdictColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+        moatRating: "7.0 / 10 (PSU Sovereign Access Moat)",
+        fairValue: "₹283",
+        safetyMargin: "37.1% MoS (At ₹178)",
+        keyRationale: "PSU infrastructure lender with ~20% ROE trading at 1.6x P/B. Monitoring required for top-20 borrower concentration (74%) and NIM compression."
+      },
+      lynch: {
+        verdict: "FAST GROWER BUY (PEG ~0.56)",
+        verdictBadge: "⚡ LYNCH: FAST GROWER BUY",
+        verdictColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+        category: "Fast Grower / Stalwart Hybrid",
+        pegRatio: "0.56 (PE 8.4x / Growth 15%)",
+        earningsGrowth: "29% Loan Growth / 15-20% Normalized EPS Velocity",
+        keyRationale: "Exceptional PEG ratio (0.56) and 8.4x P/E matching rapid loan book expansion target toward ₹3 Lakh Crore by FY30."
+      },
+      comparisonSummary: "Buffett evaluates HUDCO on 1.6x Price-to-Book and 20% sustainable ROE, while Lynch highlights the low PEG (0.56) and mismatch between 8.4x P/E and 15-20% normalized earnings velocity."
+    },
+
+    fullAnalysis: {
+      investingStyle: "Peter Lynch",
+      classification: "🟢 FAST GROWER — Government Urban Infrastructure Financier (8.4x P/E, 1.6x P/B, 0.05% NNPA)",
+      threeSentenceStory: "HUDCO is a government-owned housing and urban infrastructure financier that borrows money at AAA-rated low costs to fund state government agencies, municipal infrastructure, water supply, sewage, roads, and housing projects. Transitioning from a housing lender into a fast-growing infrastructure financier, HUDCO expanded its loan book by ~29% YoY to ₹1,60,547 Cr in FY26 while keeping Net NPA at an exceptionally clean 0.05%. Trading at roughly 8.4x P/E and 1.6x P/B with ~20% ROE and a 3.4% dividend yield, HUDCO offers a rare Lynch-style valuation mismatch between rapid growth and cheap pricing.",
+      segmentBreakdown: [
+        { name: "Urban Infrastructure Loans", revenue: "₹8,200 Cr", profit: "₹2,500 Cr", margin: "30.5%", quality: "Primary Growth Engine (Water, Roads, Power, Transport)" },
+        { name: "Housing Finance Loans", revenue: "₹4,500 Cr", profit: "₹1,350 Cr", margin: "30.0%", quality: "Core Legacy Public Housing & EWS Loans" },
+        { name: "Fee & Treasury Operations", revenue: "₹627 Cr", profit: "₹184 Cr", margin: "29.3%", quality: "Liquidity Buffer & Consultancy Fees" }
+      ],
+      moatBreakdown: {
+        score: "7.0 / 10 (PSU Sovereign Funding & Scale Moat)",
+        points: [
+          "Sovereign Credit Profile: Sovereign backing & AAA domestic rating enable lower borrowing costs in domestic and international debt markets.",
+          "Public Sector Relationships: Decades of institutional project-financing relationships with state governments and urban development authorities.",
+          "Project Appraisal Expertise: Decades of deep domain experience in large urban infrastructure and housing project evaluations.",
+          "Scale Advantage: Expanding loan assets (~₹1.61 Lakh Cr) spreading overhead expenses across a massive loan book."
+        ],
+        caveats: [
+          "High Concentration Risk: Top 20 borrowers account for ~74% of total advances and 76% of total exposure.",
+          "NIM Compression: Net Interest Margin compressed from 3.22% in FY25 to 2.91% in FY26.",
+          "PSU Governance Trade-off: Political objectives and government ownership may limit management autonomy and pricing power."
+        ]
+      },
+      quarterlySignalQ1FY27: {
+        revenue: "₹3,737 Cr",
+        revenueGrowth: "+35.0% YoY PAT Growth",
+        pat: "₹851 Cr",
+        patGrowth: "+35.0% YoY",
+        marginCompressionReason: "Q1 FY27 benefited from stable NIMs, expanded external commercial borrowings (ECB), and the absence of prior year FCNR foreign exchange translation losses."
+      },
+      growthTriggers: [
+        "₹3 Lakh Crore Loan Book Target: Management targeting almost 2x loan book expansion by FY2030 (from ~₹1.61 Lakh Cr).",
+        "Indian Urbanization Supercycle: Enormous nationwide demand for urban water supply, sewerage, metro transport, and affordable housing.",
+        "International Borrowing Optimization: Diversifying into External Commercial Borrowings (ECB) to lower borrowing costs and stabilize NIMs.",
+        "Shareholders' ₹70,000 Cr Fund Raising Authorization: Approved at August 2026 AGM to support high-velocity loan disbursements."
+      ],
+      tenbaggerAnalysis: {
+        targetMarketCap: "₹3,58,000 Cr (~₹3.58 Lakh Crore)",
+        requiredPAT: "₹35,000 Cr (vs current FY26 PAT of ₹4,034 Cr)",
+        yearsAt12Percent: "~18 Years",
+        yearsAt15Percent: "~15 Years",
+        verdict: "HUDCO is not a swift tenbagger due to financial capital intensity, but is a high-probability 15-18% long-term compounder and re-rating candidate at 8.4x P/E."
+      },
+      scuttlebuttVerdict: "Ask state infrastructure bodies or municipal urban development authorities where they seek non-bank long-term project debt—HUDCO and PFC/REC are the top choices. The government connection grants HUDCO preferred access to master infrastructure projects.",
+      lynchScorecard: [
+        { factor: "Business Simplicity", score: "⭐⭐⭐⭐⭐ 5/5", comment: "Borrow low, lend high, collect interest" },
+        { factor: "Growth Velocity", score: "⭐⭐⭐⭐⭐ 5/5", comment: "29% loan book expansion in FY26" },
+        { factor: "Asset Quality", score: "⭐⭐⭐⭐½ 4.5/5", comment: "0.96% GNPA / 0.05% NNPA with 95% PCR" },
+        { factor: "Capital Adequacy", score: "⭐⭐⭐⭐½ 4.5/5", comment: "39.93% CRAR provides strong growth buffer" },
+        { factor: "Sustainable ROE", score: "⭐⭐⭐⭐ 4/5", comment: "~18.4–20% normalized ROE engine" },
+        { factor: "Competitive Moat", score: "⭐⭐⭐½ 3.5/5", comment: "AAA rating, sovereign backing & PSU access" },
+        { factor: "Customer Concentration", score: "⭐⭐½ 2.5/5", comment: "Top 20 = ~74% of total advances" },
+        { factor: "Governance / Autonomy", score: "⭐⭐⭐ 3/5", comment: "PSU structure; political trade-offs" },
+        { factor: "Valuation Discipline", score: "⭐⭐⭐⭐⭐ 5/5", comment: "8.4x P/E, 1.6x P/B, PEG 0.56" },
+        { factor: "Compounder Potential", score: "⭐⭐⭐ 3/5", comment: "15-18% annualized compounder + re-rating candidate" }
+      ],
+      lynchVerdictSummary: "BUY / WATCH — Business Quality: 8/10 | Growth: 9/10 | Asset Quality: 8.5/10 | Valuation: 8.5/10. HUDCO is one of the most compelling valuation opportunities, offering 15–20% compounding potential at 8.4x P/E.",
+      fiveThingsToWatch: [
+        "① Loan book growth sustaining >15–20% YoY",
+        "② Gross NPA remaining <1.5% and Net NPA <0.25%",
+        "③ Net Interest Margin (NIM) holding ≥2.8–3.0%",
+        "④ Return on Equity (ROE) maintaining ≥15–18%",
+        "⑤ Top-20 borrower concentration gradually reducing below 70%"
+      ],
+      risksAndGovernance: [
+        "Concentrated Borrower Risk: Top 20 borrowers constitute ~74% of total advances, making asset quality sensitive to large infrastructure project delays.",
+        "NIM Sensitivity: Fast loan expansion consuming capital (CRAR 46.6% → 39.9%) while spread compression (3.22% → 2.91%) requires vigilant funding cost control."
+      ]
+    }
   }
 ];
