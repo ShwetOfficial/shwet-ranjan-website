@@ -107,10 +107,10 @@ export const projectsData: Project[] = [
   },
   {
     id: "verifyreels-ai-engine",
-    title: "VerifyReels.com – AI-Powered Viral Video Fact-Checker",
+    title: "VerifyReels AI – Multimodal Fact Verification & Claims Engine",
     category: "Technology & AI",
-    summary: "Multimodal AI platform that fact-checks viral video content from YouTube, Instagram, X (Twitter), TikTok, and Facebook using live web search and deep verification.",
-    fullDescription: "Built VerifyReels.com to combat viral media misinformation across social platforms (YouTube Shorts, Instagram Reels, X/Twitter, TikTok, Facebook). The system transcribes speech-to-text, extracts core factual claims using LLMs, and verifies claim accuracy in real-time using low-latency live web sources and deep search verification, with direct WhatsApp bot checking.",
+    summary: "Multimodal AI platform that transcribes video streams, extracts structured factual claims via LLMs, and executes low-latency web source verification.",
+    fullDescription: "Engineered a multimodal verification engine that ingests video streams across major networks (YouTube, Instagram, X/Twitter, Facebook). The architecture transcribes speech-to-text, extracts verifiable claims using LLM pipelines, and cross-references claim validity against live web sources in under 5 seconds.",
     impactMetrics: [
       { label: "Supported Platforms", value: "5 Networks" },
       { label: "Fact Check Latency", value: "< 5s" },

@@ -368,9 +368,9 @@ export function InvoicingAppSimulator() {
         <div className="flex items-center gap-2 text-zinc-300 font-bold">
           <span>⚠️ DUMMY SIMULATION ENVIRONMENT — Illustrative Invoicing Ledger</span>
         </div>
-        <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold">
+        <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-500/20 border border-blue-500/30 text-blue-300 text-[10px] font-bold">
           <Globe className="w-3 h-3" />
-          <span>Public Access Web App</span>
+          <span>Authorized Client & Business Web App</span>
         </div>
       </div>
 

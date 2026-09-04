@@ -2,10 +2,9 @@ import React from "react";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/navbar";
 import Hero from "@/components/hero";
-import CustomCursor from "@/components/custom-cursor";
 
 // Below-the-fold sections dynamically imported to reduce initial JS payload
-const ScrollVelocityMarquee = dynamic(() => import("@/components/scroll-velocity-marquee"), {
+const ProjectsShowcase = dynamic(() => import("@/components/projects-showcase"), {
   ssr: true,
 });
 
@@ -13,11 +12,11 @@ const BentoPillars = dynamic(() => import("@/components/bento-pillars"), {
   ssr: true,
 });
 
-const ProjectsShowcase = dynamic(() => import("@/components/projects-showcase"), {
+const Calculators = dynamic(() => import("@/components/calculators"), {
   ssr: true,
 });
 
-const Calculators = dynamic(() => import("@/components/calculators"), {
+const StockCaseStudies = dynamic(() => import("@/components/stock-case-studies"), {
   ssr: true,
 });
 
@@ -29,15 +28,11 @@ const SkillsMatrix = dynamic(() => import("@/components/skills-matrix"), {
   ssr: true,
 });
 
-const LabExploring = dynamic(() => import("@/components/lab-exploring"), {
-  ssr: true,
-});
-
-const StockCaseStudies = dynamic(() => import("@/components/stock-case-studies"), {
-  ssr: true,
-});
-
 const InsightsIndex = dynamic(() => import("@/components/insights-index"), {
+  ssr: true,
+});
+
+const EngagementModels = dynamic(() => import("@/components/engagement-models"), {
   ssr: true,
 });
 
@@ -47,71 +42,39 @@ const ContactFooter = dynamic(() => import("@/components/contact-footer"), {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-canvas text-obsidian relative selection:bg-cobalt-700 selection:text-white overflow-x-hidden w-full max-w-full">
-      {/* Custom Contextual Cursor Follower */}
-      <CustomCursor />
-
+    <main className="min-h-screen bg-[#0B0F17] text-zinc-100 relative selection:bg-cobalt-700 selection:text-white overflow-x-hidden w-full max-w-full">
       {/* Floating Glass Navbar with Cmd + K Command Palette */}
       <Navbar />
 
       {/* Hero Section */}
       <Hero />
 
-      {/* Dynamic Velocity Scroll Marquee 1 */}
-      <ScrollVelocityMarquee
-        items={[
-          "BUSINESS OPERATOR",
-          "GST TAX ARCHITECT",
-          "ENTERPRISE SOFTWARE",
-          "AI AUTOMATION",
-          "FINANCIAL SIMULATORS",
-          "ASYMMETRIC LEVERAGE",
-        ]}
-        baseVelocity={2}
-        className="bg-zinc-950/80 border-y border-white/10"
-      />
-
-      {/* Four Pillars Bento Grid */}
-      <BentoPillars />
-
-      {/* Selected Works & Case Studies with Architecture Flowcharts */}
+      {/* 01. Selected Works & Built Systems Showcase */}
       <ProjectsShowcase />
 
-      {/* Dynamic Velocity Scroll Marquee 2 (Reverse Direction) */}
-      <ScrollVelocityMarquee
-        items={[
-          "E-COM TAX AUTOMATION ENGINE",
-          "ENTERPRISE CRM DISPATCHER",
-          "VERIFYREELS AI FACT-CHECKER",
-          "GST PORTAL EXTENSION",
-          "INTRINSIC VALUE MODELING",
-        ]}
-        baseVelocity={2.5}
-        direction="right"
-        className="bg-zinc-950/80 border-y border-white/10"
-      />
+      {/* 02. Four Pillars Bento Grid */}
+      <BentoPillars />
 
-      {/* Financial & GST Simulators / Calculators Lab */}
+      {/* 03. Financial & GST Simulators / Calculators Lab */}
       <Calculators />
 
-      {/* The Narrative, Journey & Philosophy */}
-      <JourneyPhilosophy />
-
-      {/* Analytical Skills Matrix */}
-      <SkillsMatrix />
-
-      {/* Real-time Lab & Exploring */}
-      <LabExploring />
-
-      {/* Stock Research & Fundamental Intrinsic Value Case Studies */}
+      {/* 04. Stock Research & Fundamental Intrinsic Value Case Studies */}
       <StockCaseStudies />
 
-      {/* Editorial Writing Index */}
+      {/* 05. The Narrative, Journey & Operating Philosophy */}
+      <JourneyPhilosophy />
+
+      {/* 06. Analytical Skills Matrix */}
+      <SkillsMatrix />
+
+      {/* 07. Editorial Writing Index */}
       <InsightsIndex />
 
-      {/* Direct Contact & Footer Dock */}
+      {/* 08. Strategic Advisory & Engagement Models */}
+      <EngagementModels />
+
+      {/* 09. Direct Contact & Advisory Footer Dock */}
       <ContactFooter />
     </main>
   );
 }
-

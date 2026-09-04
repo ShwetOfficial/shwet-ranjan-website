@@ -25,7 +25,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
 
-      const sections = ["projects", "calculators", "pillars", "journey", "insights"];
+      const sections = ["projects", "pillars", "calculators", "stock-case-studies", "journey", "insights", "advisory"];
       for (const section of sections) {
         const el = document.getElementById(section);
         if (el) {
@@ -69,11 +69,12 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   const primaryNavLinks = [
-    { label: "Built Apps", href: "#projects", id: "projects" },
-    { label: "Calculators", href: "#calculators", id: "calculators" },
+    { label: "Built Platforms", href: "#projects", id: "projects" },
     { label: "Core Pillars", href: "#pillars", id: "pillars" },
-    { label: "Journey", href: "#journey", id: "journey" },
+    { label: "Simulators", href: "#calculators", id: "calculators" },
+    { label: "Valuation", href: "#stock-case-studies", id: "stock-case-studies" },
     { label: "Insights", href: "#insights", id: "insights" },
+    { label: "Advisory", href: "#advisory", id: "advisory" },
   ];
 
   const liveApps = [
@@ -142,20 +143,19 @@ export default function Navbar() {
         className="fixed top-4 left-0 right-0 z-40 px-4 sm:px-8 flex justify-center pointer-events-none"
       >
         <div
-          className={`pointer-events-auto w-full max-w-6xl flex items-center justify-between px-5 sm:px-7 py-3 rounded-full transition-all duration-500 ${
+          className={`pointer-events-auto w-full max-w-7xl flex items-center justify-between px-4 sm:px-6 py-2.5 sm:py-3 rounded-full transition-all duration-500 flex-nowrap ${
             scrolled
-              ? "bg-[#09090b]/90 shadow-2xl shadow-black/80 backdrop-blur-2xl border border-white/10"
-              : "bg-[#121218]/80 shadow-lg backdrop-blur-md border border-white/10"
+              ? "bg-[#0B0F17]/95 shadow-2xl shadow-black/90 backdrop-blur-2xl border border-white/10"
+              : "bg-[#121620]/90 shadow-lg backdrop-blur-md border border-white/10"
           }`}
         >
           {/* Left: Brand Identity */}
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-2.5 shrink-0">
             <a
               href="#"
-              data-cursor="HOME"
-              className="flex items-center gap-2.5 group text-white font-display font-black text-base sm:text-lg whitespace-nowrap"
+              className="flex items-center gap-2 group text-white font-display font-black text-sm sm:text-base whitespace-nowrap"
             >
-              <span className="w-8 h-8 rounded-full bg-cobalt-600 text-white flex items-center justify-center font-mono text-xs font-bold tracking-tighter transition-transform group-hover:scale-105 shadow-md shadow-cobalt-600/30">
+              <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-cobalt-600 text-white flex items-center justify-center font-mono text-xs font-bold tracking-tighter transition-transform group-hover:scale-105 shadow-md shadow-cobalt-600/30">
                 SR
               </span>
               <span className="tracking-tight font-black uppercase text-white">SHWET RANJAN</span>
@@ -163,14 +163,14 @@ export default function Navbar() {
           </div>
 
           {/* Center: Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-2 font-mono text-xs uppercase tracking-widest font-bold text-zinc-300">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2 font-mono text-[11px] xl:text-xs uppercase tracking-wider font-bold text-zinc-300">
             {primaryNavLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
                 <a
                   key={link.label}
                   href={link.href}
-                  className={`relative px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap ${
+                  className={`relative px-2.5 xl:px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap ${
                     isActive ? "text-white font-extrabold" : "hover:text-white text-zinc-300"
                   }`}
                 >
@@ -188,20 +188,19 @@ export default function Navbar() {
           </nav>
 
           {/* Right: Search & Contact CTA */}
-          <div className="flex items-center gap-2.5 shrink-0 relative">
+          <div className="flex items-center gap-2 shrink-0 relative">
             {/* Live Interactive Status Pill */}
             <div className="relative">
               <button
                 onClick={() => setLiveAppsOpen((prev) => !prev)}
                 onMouseEnter={() => setLiveAppsOpen(true)}
-                className="hidden xl:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-[11px] font-mono text-emerald-400 whitespace-nowrap transition-all cursor-pointer shadow-sm hover:scale-105"
-                data-cursor="LIVE APPS"
+                className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-[11px] font-mono text-emerald-400 whitespace-nowrap transition-all cursor-pointer shadow-sm hover:scale-105"
               >
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <span className="font-bold">5 Live Systems Online</span>
+                <span className="font-bold">5 Live Systems</span>
               </button>
 
               {/* Live Systems Popover Dropdown */}

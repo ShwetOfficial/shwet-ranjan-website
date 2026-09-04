@@ -24,12 +24,12 @@ export default function Hero3dBackground() {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     let isReducedMotion = mediaQuery.matches;
 
-    // Dynamic Pixel Ratio Scaler (Cap at 2.0 to prevent GPU overheat on 4K/Retina)
+    // Dynamic Pixel Ratio Scaler (Cap at 2.0 to prevent GPU overheat)
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
     const updateSize = () => {
       const w = window.innerWidth;
-      const h = canvas.parentElement?.offsetHeight || 800;
+      const h = canvas.parentElement?.offsetHeight || 850;
       canvas.width = Math.floor(w * dpr);
       canvas.height = Math.floor(h * dpr);
       canvas.style.width = `${w}px`;
@@ -47,14 +47,14 @@ export default function Hero3dBackground() {
     // Mouse tracking & Scroll position state
     const mouse = {
       x: window.innerWidth / 2,
-      y: (canvas.parentElement?.offsetHeight || 800) / 2,
+      y: (canvas.parentElement?.offsetHeight || 850) / 2,
       targetX: window.innerWidth / 2,
-      targetY: (canvas.parentElement?.offsetHeight || 800) / 2,
-      radius: 260,
+      targetY: (canvas.parentElement?.offsetHeight || 850) / 2,
+      radius: 280,
     };
 
     let lastClientX = window.innerWidth / 2;
-    let lastClientY = (canvas.parentElement?.offsetHeight || 800) / 2;
+    let lastClientY = (canvas.parentElement?.offsetHeight || 850) / 2;
 
     const updateMousePos = () => {
       const rect = canvas.getBoundingClientRect();
@@ -93,7 +93,7 @@ export default function Hero3dBackground() {
     }[] = [];
 
     const spawnGridPulse = () => {
-      if (gridPulses.length >= 10) return;
+      if (gridPulses.length >= 12) return;
       const isRow = Math.random() > 0.5;
       gridPulses.push({
         row: Math.floor(Math.random() * gridRows),
@@ -101,7 +101,7 @@ export default function Hero3dBackground() {
         progress: 0,
         speed: Math.random() * 0.02 + 0.015,
         isRow,
-        color: Math.random() > 0.5 ? "rgba(34, 211, 238, " : "rgba(59, 130, 246, ",
+        color: Math.random() > 0.5 ? "rgba(59, 130, 246, " : "rgba(34, 211, 238, ",
       });
     };
 
@@ -116,7 +116,7 @@ export default function Hero3dBackground() {
       }
 
       const w = window.innerWidth;
-      const h = canvas.parentElement?.offsetHeight || 800;
+      const h = canvas.parentElement?.offsetHeight || 850;
 
       ctx.clearRect(0, 0, w, h);
 
@@ -136,28 +136,28 @@ export default function Hero3dBackground() {
         vanishingPointY,
         w * 0.65
       );
-      horizonGrad.addColorStop(0, "rgba(59, 130, 246, 0.3)");
-      horizonGrad.addColorStop(0.3, "rgba(34, 211, 238, 0.15)");
-      horizonGrad.addColorStop(0.7, "rgba(139, 92, 246, 0.04)");
-      horizonGrad.addColorStop(1, "rgba(9, 9, 11, 0)");
+      horizonGrad.addColorStop(0, "rgba(59, 130, 246, 0.28)");
+      horizonGrad.addColorStop(0.35, "rgba(37, 99, 235, 0.14)");
+      horizonGrad.addColorStop(0.7, "rgba(29, 78, 216, 0.04)");
+      horizonGrad.addColorStop(1, "rgba(11, 15, 23, 0)");
 
       ctx.fillStyle = horizonGrad;
       ctx.beginPath();
       ctx.arc(vanishingPointX, vanishingPointY, w * 0.65, 0, Math.PI * 2);
       ctx.fill();
 
-      // Horizon Glow Laser Line
-      ctx.strokeStyle = "rgba(34, 211, 238, 0.4)";
+      // Horizon Laser Beam Line
+      ctx.strokeStyle = "rgba(59, 130, 246, 0.5)";
       ctx.lineWidth = 1.5;
       ctx.shadowColor = "#3b82f6";
-      ctx.shadowBlur = 16;
+      ctx.shadowBlur = 14;
       ctx.beginPath();
       ctx.moveTo(0, vanishingPointY);
       ctx.lineTo(w, vanishingPointY);
       ctx.stroke();
       ctx.shadowBlur = 0;
 
-      // 2. Render 3D Perspective Cyber Grid Plane
+      // 2. Render 3D Perspective Cyber Grid Plane with Mouse Wave Elevation
       const projectedGrid: { x: number; y: number; z: number }[][] = [];
 
       for (let r = 0; r <= gridRows; r++) {
@@ -172,7 +172,7 @@ export default function Hero3dBackground() {
           const spread = 1 + depth * 2.8;
           const screenX = vanishingPointX + colNorm * (w * 0.6) * spread;
 
-          // Mouse magnetic wave elevation (only if dynamic)
+          // Interactive 3D mouse wave elevation warping grid lines
           const dx = mouse.x - screenX;
           const dy = mouse.y - screenY;
           const dist = Math.hypot(dx, dy);
@@ -180,7 +180,7 @@ export default function Hero3dBackground() {
           let elevateZ = 0;
           if (!isStatic && dist < mouse.radius && dist > 0.001) {
             const force = 1 - dist / mouse.radius;
-            elevateZ = Math.sin(force * Math.PI) * -35;
+            elevateZ = Math.sin(force * Math.PI) * -38;
           }
 
           projectedGrid[r][c] = {
@@ -194,7 +194,7 @@ export default function Hero3dBackground() {
       // Draw Grid Horizontal Lines
       for (let r = 0; r <= gridRows; r++) {
         const rowNorm = r / gridRows;
-        const alpha = Math.min(0.75, Math.max(0.04, Math.pow(rowNorm, 1.4) * 0.8));
+        const alpha = Math.min(0.75, Math.max(0.04, Math.pow(rowNorm, 1.4) * 0.75));
 
         ctx.strokeStyle = `rgba(59, 130, 246, ${alpha})`;
         ctx.lineWidth = 1 + rowNorm * 0.8;
@@ -222,7 +222,7 @@ export default function Hero3dBackground() {
         ctx.stroke();
       }
 
-      // 3. Render Dynamic Motion Elements (Mouse Light Aura & Laser Pulses) only when motion is enabled
+      // 3. Render Dynamic Interactive Elements (Mouse Target Glow & Reticle Rings)
       if (!isStatic) {
         const mouseGrad = ctx.createRadialGradient(
           mouse.x,
@@ -232,9 +232,9 @@ export default function Hero3dBackground() {
           mouse.y,
           mouse.radius
         );
-        mouseGrad.addColorStop(0, "rgba(34, 211, 238, 0.35)");
-        mouseGrad.addColorStop(0.5, "rgba(59, 130, 246, 0.15)");
-        mouseGrad.addColorStop(1, "rgba(9, 9, 11, 0)");
+        mouseGrad.addColorStop(0, "rgba(59, 130, 246, 0.35)");
+        mouseGrad.addColorStop(0.5, "rgba(37, 99, 235, 0.15)");
+        mouseGrad.addColorStop(1, "rgba(11, 15, 23, 0)");
 
         ctx.fillStyle = mouseGrad;
         ctx.beginPath();
@@ -242,21 +242,21 @@ export default function Hero3dBackground() {
         ctx.fill();
 
         // Concentric Target Reticle Rings
-        ctx.strokeStyle = "rgba(34, 211, 238, 0.55)";
+        ctx.strokeStyle = "rgba(59, 130, 246, 0.6)";
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.arc(mouse.x, mouse.y, 22, 0, Math.PI * 2);
         ctx.stroke();
 
-        ctx.strokeStyle = "rgba(59, 130, 246, 0.3)";
+        ctx.strokeStyle = "rgba(34, 211, 238, 0.35)";
         ctx.setLineDash([4, 6]);
         ctx.beginPath();
-        ctx.arc(mouse.x, mouse.y, 45, time * 0.8, time * 0.8 + Math.PI * 2);
+        ctx.arc(mouse.x, mouse.y, 46, time * 0.8, time * 0.8 + Math.PI * 2);
         ctx.stroke();
         ctx.setLineDash([]);
 
-        // 4. Render Laser Pulses along Grid Lines
-        if (Math.random() < 0.06) spawnGridPulse();
+        // 4. Render Laser Pulses along 3D Grid Lines
+        if (Math.random() < 0.07) spawnGridPulse();
 
         for (let i = gridPulses.length - 1; i >= 0; i--) {
           const pulse = gridPulses[i];
@@ -275,7 +275,7 @@ export default function Hero3dBackground() {
               const pulseAlpha = Math.sin(pulse.progress * Math.PI) * 0.85;
 
               ctx.fillStyle = `${pulse.color}${pulseAlpha})`;
-              ctx.shadowColor = "#22d3ee";
+              ctx.shadowColor = "#3b82f6";
               ctx.shadowBlur = 10;
               ctx.beginPath();
               ctx.arc(pt.x, pt.y, 3.5, 0, Math.PI * 2);
@@ -290,7 +290,7 @@ export default function Hero3dBackground() {
               const pulseAlpha = Math.sin(pulse.progress * Math.PI) * 0.85;
 
               ctx.fillStyle = `${pulse.color}${pulseAlpha})`;
-              ctx.shadowColor = "#3b82f6";
+              ctx.shadowColor = "#22d3ee";
               ctx.shadowBlur = 10;
               ctx.beginPath();
               ctx.arc(pt.x, pt.y, 3.5, 0, Math.PI * 2);
@@ -306,7 +306,6 @@ export default function Hero3dBackground() {
       }
     };
 
-    // Motion preference change listener
     const handleMotionChange = (e: MediaQueryListEvent) => {
       isReducedMotion = e.matches;
       if (isReducedMotion) {
@@ -328,7 +327,6 @@ export default function Hero3dBackground() {
       mediaQuery.addListener(handleMotionChange);
     }
 
-    // IntersectionObserver: Pause animation loop when Hero is out of viewport
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
@@ -344,7 +342,6 @@ export default function Hero3dBackground() {
     );
     observer.observe(canvas);
 
-    // Initial frame render based on user motion preference
     if (isReducedMotion) {
       renderFrame(true);
     } else {
@@ -360,7 +357,7 @@ export default function Hero3dBackground() {
       if (mediaQuery.removeEventListener) {
         mediaQuery.removeEventListener("change", handleMotionChange);
       } else {
-        mediaQuery.removeListener(handleMotionChange);
+        mediaQuery.addListener(handleMotionChange);
       }
     };
   }, [mounted]);

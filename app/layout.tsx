@@ -25,22 +25,22 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SHWET RANJAN — Multi-Disciplinary Operator & Strategic Thinker",
-  description: "Building scalable businesses, untangling complex tax frameworks (GST), and engineering digital leverage. Operator across Business, Taxation, E-Commerce, and Software Technology.",
+  title: "SHWET RANJAN — Enterprise Systems Architect & Tax Compliance Infrastructure",
+  description: "Architecting enterprise operating systems, automated GST compliance frameworks, high-throughput software platforms, and quantitative capital allocation tools.",
   keywords: [
     "Shwet Ranjan",
-    "Business Strategy",
-    "Tax Compliance",
-    "GST Architecture",
+    "Enterprise Systems Architect",
+    "Tax Compliance Architecture",
+    "GST Automation Engine",
     "E-Commerce Operations",
-    "Full-Stack Software",
-    "Next.js Developer",
-    "Intrinsic Value Investor"
+    "Enterprise CRM",
+    "Capital Allocation",
+    "Intrinsic Value DCF Valuation"
   ],
   authors: [{ name: "Shwet Ranjan" }],
   openGraph: {
-    title: "SHWET RANJAN — Personal Flagship Hub",
-    description: "Building scalable businesses, untangling complex tax frameworks, and engineering digital leverage.",
+    title: "SHWET RANJAN — Enterprise Systems & Financial Architecture",
+    description: "Architecting enterprise operating systems, automated GST compliance, and high-throughput software platforms.",
     type: "website",
     locale: "en_US",
     siteName: "Shwet Ranjan",
@@ -129,7 +129,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-[#09090b] text-[#FAFAF9] antialiased selection:bg-cobalt-700 selection:text-white">
+      <body className="bg-[#0B0F17] text-[#FAFAF9] antialiased selection:bg-cobalt-700 selection:text-white">
         <SmoothScroll>
           {children}
         </SmoothScroll>

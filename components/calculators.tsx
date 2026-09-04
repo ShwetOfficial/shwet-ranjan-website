@@ -120,7 +120,7 @@ export default function Calculators() {
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cobalt-500/10 border border-cobalt-500/20 text-xs font-mono text-cobalt-400 font-bold uppercase tracking-widest mb-3">
             <Zap className="w-3.5 h-3.5" />
-            <span>02. LIVE INTERACTIVE SIMULATORS</span>
+            <span>03. FINANCIAL & COMPLIANCE SIMULATORS</span>
           </div>
           <h2 className="font-display text-4xl sm:text-5xl font-black text-white tracking-tight">
             Financial & Tax Calculators

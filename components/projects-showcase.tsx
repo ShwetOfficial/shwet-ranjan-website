@@ -139,13 +139,13 @@ export default function ProjectsShowcase() {
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cobalt-500/10 border border-cobalt-500/20 text-xs font-mono text-cobalt-400 font-semibold uppercase tracking-widest mb-3">
             <Zap className="w-3.5 h-3.5" />
-            <span>01. FEATURED BUILT PRODUCTS & SYSTEMS</span>
+            <span>01. BUILT ENTERPRISE SYSTEMS</span>
           </div>
           <h2 className="font-display text-4xl sm:text-5xl font-black text-white tracking-tight">
-            Interactive Product Showcase
+            Built Enterprise Platforms & Systems
           </h2>
           <p className="font-sans text-sm text-zinc-300 mt-2 max-w-2xl">
-            Explore live interactive previews of my 5 built software platforms, tax automation engines, enterprise CRM, and AI fact-checking tools.
+            Explore live interactive previews of my built software platforms, tax automation engines, enterprise CRM, and AI systems.
           </p>
         </div>
 
@@ -208,13 +208,17 @@ export default function ProjectsShowcase() {
                     {project.category}
                   </span>
                   <span className="font-mono text-xs text-zinc-300">{project.year}</span>
-                  {project.id === "ecom-tax-filing-engine" || project.id === "enterprise-tax-crm" || project.id === "gst-notice-extension" ? (
+                  {project.id === "taxamicus-ecom-automation" || project.id === "taxamicus-enterprise-crm" || project.id === "taxamicus-gst-chrome-extension" ? (
                     <span className="px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-[10px] font-bold flex items-center gap-1">
-                      🔒 Only for Internal Company Team & Enterprise Client Use
+                      🔒 Internal Team & Enterprise Client Access
+                    </span>
+                  ) : project.id === "taxamicus-invoicing-platform" ? (
+                    <span className="px-2.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 font-mono text-[10px] font-bold flex items-center gap-1">
+                      🔒 Authorized Client & Business Portal
                     </span>
                   ) : (
                     <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-[10px] font-bold flex items-center gap-1">
-                      🌐 Public Access Web App
+                      🌐 Public Access Web Platform
                     </span>
                   )}
                 </div>

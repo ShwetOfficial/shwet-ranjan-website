@@ -157,7 +157,7 @@ export default function StockCaseStudies() {
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cobalt-500/10 border border-cobalt-500/20 text-xs font-mono text-cobalt-400 font-bold uppercase tracking-widest mb-3">
             <Zap className="w-3.5 h-3.5" />
-            <span>09. PUBLIC EQUITY RESEARCH DIRECTORY</span>
+            <span>04. INSTITUTIONAL CAPITAL & VALUATION ENGINE</span>
           </div>
           <h2 className="font-display text-3xl sm:text-5xl font-black text-white tracking-tight">
             Buffett & Lynch Equity Screener

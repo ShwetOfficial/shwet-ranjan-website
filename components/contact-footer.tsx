@@ -77,7 +77,7 @@ export default function ContactFooter() {
         <div className="max-w-3xl space-y-6 relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cobalt-500/10 border border-cobalt-500/20 text-xs font-mono text-cobalt-400 font-bold uppercase tracking-widest">
             <Zap className="w-3.5 h-3.5" />
-            <span>09. DIRECT CHANNEL DOCK</span>
+            <span>09. DIRECT ADVISORY & EXECUTIVE CONTACT</span>
           </div>
 
           <h2 className="font-display text-4xl sm:text-6xl font-black tracking-tight leading-tight text-white">
