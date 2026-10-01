@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Command, ArrowRight, FileText, X, Zap } from "lucide-react";
 import { projectsData } from "@/data/projects";
@@ -12,6 +13,7 @@ interface CommandPaletteProps {
 }
 
 export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
+  const router = useRouter();
   const [query, setQuery] = useState("");
 
   useEffect(() => {
@@ -48,22 +50,22 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
   if (!isOpen) return null;
 
   const quickActions = [
-    { label: "Launch Live Apps Showcase (8 Systems)", sectionId: "#projects", type: "Section" },
-    { label: "Open Calculators Lab (VPOB, GST, D2C)", sectionId: "#calculators", type: "Tool" },
-    { label: "Stock Investment Case Studies (HAL, CDSL, BEL)", sectionId: "#stocks", type: "Research" },
-    { label: "View Four Pillars of Expertise", sectionId: "#pillars", type: "Section" },
-    { label: "Explore Journey & Ethics", sectionId: "#journey", type: "Section" },
-    { label: "Read Technical & Financial Essays", sectionId: "#insights", type: "Section" },
-    { label: "Contact Shwet Ranjan", sectionId: "#contact", type: "Contact" },
+    { label: "Launch Live Systems (8 Platforms)", route: "/systems", type: "Page" },
+    { label: "Open Calculators Lab (VPOB, GST, D2C)", route: "/calculators", type: "Tool" },
+    { label: "Equity Research (BEL, HUDCO, CDSL, HAL, IRCTC)", route: "/research", type: "Research" },
+    { label: "Live Valuation Terminal (DCF Modeler)", route: "/investing-modeler", type: "Terminal" },
+    { label: "Read Editorial Insights & Technical Essays", route: "/insights", type: "Articles" },
+    { label: "About Shwet Ranjan (Journey & Philosophy)", route: "/about", type: "About" },
+    { label: "Strategic Advisory & Consultation", route: "/advisory", type: "Advisory" },
   ];
 
   const simulatorActions = [
-    { label: "Launch Invoice OCR & Mod-36 Checksum Simulator", queryTag: "ocr invoice paddle", sectionId: "#projects", tag: "Simulator" },
-    { label: "Launch WhatsApp Sales CRM & Drip Cadence Engine", queryTag: "whatsapp crm sales baileys", sectionId: "#projects", tag: "Simulator" },
-    { label: "Launch Auto GST Registration & Legal Drafting OS", queryTag: "rent agreement noc deed legal drafting", sectionId: "#projects", tag: "Simulator" },
-    { label: "Launch VPOB & Amazon Prime 1-Day ROI Estimator", queryTag: "vpob amazon prime multi-state hub", sectionId: "#calculators", tag: "Calculator" },
-    { label: "Launch D2C Unit Economics & RTO Margin Calculator", queryTag: "d2c unit economics rto cogs cac", sectionId: "#calculators", tag: "Calculator" },
-    { label: "Launch GST Input Tax Credit (ITC) Leakage Audit Tool", queryTag: "gst itc 2b vendor leakage tax", sectionId: "#calculators", tag: "Calculator" },
+    { label: "Launch Invoice OCR & Mod-36 Checksum Simulator", queryTag: "ocr invoice paddle", route: "/systems", tag: "Simulator" },
+    { label: "Launch WhatsApp Sales CRM & Drip Cadence Engine", queryTag: "whatsapp crm sales baileys", route: "/systems", tag: "Simulator" },
+    { label: "Launch Auto GST Registration & Legal Drafting OS", queryTag: "rent agreement noc deed legal drafting", route: "/systems", tag: "Simulator" },
+    { label: "Launch VPOB & Amazon Prime 1-Day ROI Estimator", queryTag: "vpob amazon prime multi-state hub", route: "/calculators", tag: "Calculator" },
+    { label: "Launch D2C Unit Economics & RTO Margin Calculator", queryTag: "d2c unit economics rto cogs cac", route: "/calculators", tag: "Calculator" },
+    { label: "Launch GST Input Tax Credit (ITC) Leakage Audit Tool", queryTag: "gst itc 2b vendor leakage tax", route: "/calculators", tag: "Calculator" },
   ];
 
   const filteredSimulators = simulatorActions.filter((s) =>
@@ -81,11 +83,15 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
     e.category.toLowerCase().includes(query.toLowerCase())
   );
 
-  const handleSelect = (href: string) => {
+  const handleSelect = (route: string) => {
     onClose();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
+    if (route.startsWith("/")) {
+      router.push(route);
+    } else {
+      const target = document.querySelector(route);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
@@ -138,7 +144,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
                   {filteredSimulators.map((sim) => (
                     <button
                       key={sim.label}
-                      onClick={() => handleSelect(sim.sectionId)}
+                      onClick={() => handleSelect(sim.route)}
                       className="w-full px-3.5 py-2.5 rounded-xl hover:bg-amber-500/10 flex items-center justify-between text-xs font-sans text-zinc-200 hover:text-amber-300 transition-colors text-left group border border-transparent hover:border-amber-500/30"
                     >
                       <div className="flex items-center gap-2.5">
@@ -163,7 +169,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
                   {quickActions.map((act) => (
                     <button
                       key={act.label}
-                      onClick={() => handleSelect(act.sectionId)}
+                      onClick={() => handleSelect(act.route)}
                       className="w-full px-3.5 py-2.5 rounded-xl hover:bg-zinc-900 flex items-center justify-between text-xs font-sans text-zinc-200 hover:text-white transition-colors group border border-transparent hover:border-zinc-800"
                     >
                       <div className="flex items-center gap-2.5">
@@ -186,7 +192,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
                   {filteredProjects.map((p) => (
                     <button
                       key={p.id}
-                      onClick={() => handleSelect("#projects")}
+                      onClick={() => handleSelect("/systems")}
                       className="w-full px-3.5 py-2.5 rounded-xl hover:bg-zinc-900 flex items-center justify-between text-xs font-sans text-zinc-200 hover:text-white transition-colors text-left group border border-transparent hover:border-zinc-800"
                     >
                       <div>
@@ -211,7 +217,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
                   {filteredEssays.map((e) => (
                     <button
                       key={e.id}
-                      onClick={() => handleSelect("#insights")}
+                      onClick={() => handleSelect("/insights")}
                       className="w-full px-3.5 py-2.5 rounded-xl hover:bg-zinc-900 flex items-center justify-between text-xs font-sans text-zinc-200 hover:text-white transition-colors text-left group border border-transparent hover:border-zinc-800"
                     >
                       <div>

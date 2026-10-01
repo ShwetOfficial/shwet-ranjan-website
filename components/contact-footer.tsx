@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Mail, Copy, Check, ArrowUp, Linkedin, Twitter, MessageSquare, Globe, Zap } from "lucide-react";
 
@@ -202,6 +203,45 @@ export default function ContactFooter() {
               </form>
             )}
           </div>
+        </div>
+      </div>
+
+      {/* Site Navigation Directory */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 py-8 border-t border-zinc-800 text-xs font-mono">
+        <div>
+          <span className="text-zinc-500 uppercase tracking-widest font-bold block mb-2">Systems & Software</span>
+          <ul className="space-y-1.5 text-zinc-300">
+            <li><Link href="/systems" className="hover:text-white transition">8 Built Platforms</Link></li>
+            <li><Link href="/systems" className="hover:text-white transition">WhatsApp Sales CRM</Link></li>
+            <li><Link href="/systems" className="hover:text-white transition">GST Purchase OCR</Link></li>
+            <li><Link href="/systems" className="hover:text-white transition">Auto Legal Drafter</Link></li>
+          </ul>
+        </div>
+        <div>
+          <span className="text-zinc-500 uppercase tracking-widest font-bold block mb-2">Calculators Lab</span>
+          <ul className="space-y-1.5 text-zinc-300">
+            <li><Link href="/calculators" className="hover:text-white transition">All Simulators</Link></li>
+            <li><Link href="/calculators" className="hover:text-white transition">GST ITC Leakage</Link></li>
+            <li><Link href="/calculators" className="hover:text-white transition">D2C Unit Economics</Link></li>
+            <li><Link href="/calculators" className="hover:text-white transition">VPOB Prime ROI</Link></li>
+          </ul>
+        </div>
+        <div>
+          <span className="text-zinc-500 uppercase tracking-widest font-bold block mb-2">Equity & Research</span>
+          <ul className="space-y-1.5 text-zinc-300">
+            <li><Link href="/research" className="hover:text-white transition">Case Studies (5 Stocks)</Link></li>
+            <li><Link href="/investing-modeler" className="hover:text-white transition">Live DCF Terminal</Link></li>
+            <li><Link href="/insights" className="hover:text-white transition">Technical Insights</Link></li>
+          </ul>
+        </div>
+        <div>
+          <span className="text-zinc-500 uppercase tracking-widest font-bold block mb-2">About & Advisory</span>
+          <ul className="space-y-1.5 text-zinc-300">
+            <li><Link href="/about" className="hover:text-white transition">Journey & Ethics</Link></li>
+            <li><Link href="/about" className="hover:text-white transition">Skills Matrix</Link></li>
+            <li><Link href="/advisory" className="hover:text-white transition">Advisory Retainer</Link></li>
+            <li><Link href="/advisory#contact" className="hover:text-white transition">Direct Consultation</Link></li>
+          </ul>
         </div>
       </div>
 
