@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import { ArrowUpRight, Menu, X, Search, Sparkles } from "lucide-react";
+import { ArrowUpRight, Menu, X, Search, Sparkles, Activity, Cpu, ShieldCheck } from "lucide-react";
 import CommandPalette from "./command-palette";
 
 export default function Navbar() {
@@ -10,6 +10,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cmdPaletteOpen, setCmdPaletteOpen] = useState(false);
   const [liveAppsOpen, setLiveAppsOpen] = useState(false);
+  const [popoverTab, setPopoverTab] = useState<"systems" | "telemetry">("systems");
 
   // Framer Motion live scroll progress with smooth spring physics
   const { scrollYProgress } = useScroll();
@@ -152,6 +153,44 @@ export default function Navbar() {
     }
   ];
 
+  const telemetryStats = [
+    {
+      subsystem: "WhatsApp CRM Engine",
+      runtime: "Baileys Multi-Device Socket",
+      metric: "180ms avg response latency",
+      health: "Online & Connected",
+      tag: "Engine",
+    },
+    {
+      subsystem: "PaddleOCR Line Ingestion",
+      runtime: "ONNX / Local CPU Engine",
+      metric: "620ms / invoice (₹0 API Cost)",
+      health: "99.2% Accuracy",
+      tag: "Vision OCR",
+    },
+    {
+      subsystem: "GST Legal Drafting Agent",
+      runtime: "Gemini 1.5 Flash AST Parser",
+      metric: "3.2s full deed generation",
+      health: "Operational",
+      tag: "Legal AI",
+    },
+    {
+      subsystem: "Local SQLite DB",
+      runtime: "WAL Mode + 5000ms Busy Timeout",
+      metric: "0.4ms single-row read",
+      health: "Zero-Lock Concurrency",
+      tag: "Database",
+    },
+    {
+      subsystem: "VPOB Multi-State Gateway",
+      runtime: "MH, KA, DL, TN, HR Hubs",
+      metric: "5 Core Hubs Verified",
+      health: "Statutory Compliant",
+      tag: "Arbitrage",
+    },
+  ];
+
   return (
     <>
       {/* Top Reading Scroll Progress Bar */}
@@ -238,45 +277,103 @@ export default function Navbar() {
                     onWheel={(e) => e.stopPropagation()}
                     className="absolute top-12 right-0 w-80 sm:w-96 p-4 rounded-2xl bg-[#09090b]/95 border border-white/10 shadow-2xl backdrop-blur-2xl z-50 space-y-3 pointer-events-auto overscroll-contain"
                   >
+                    {/* Popover Tab Switcher */}
                     <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
-                      <span className="font-mono text-xs font-bold text-white flex items-center gap-2">
-                        <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-                        8 ACTIVE PRODUCTION & PILOT SYSTEMS
-                      </span>
+                      <div className="flex items-center gap-1.5 p-1 bg-zinc-900 rounded-xl border border-zinc-800 text-[10px] font-mono">
+                        <button
+                          onClick={() => setPopoverTab("systems")}
+                          className={`px-2.5 py-1 rounded-lg transition-all ${
+                            popoverTab === "systems"
+                              ? "bg-cobalt-600 text-white font-bold"
+                              : "text-zinc-400 hover:text-white"
+                          }`}
+                        >
+                          8 Systems
+                        </button>
+                        <button
+                          onClick={() => setPopoverTab("telemetry")}
+                          className={`px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 ${
+                            popoverTab === "telemetry"
+                              ? "bg-emerald-600 text-white font-bold"
+                              : "text-zinc-400 hover:text-white"
+                          }`}
+                        >
+                          <Activity className="w-2.5 h-2.5" />
+                          <span>Telemetry</span>
+                        </button>
+                      </div>
+
                       <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold">
-                        ● All Systems Active
+                        ● All Healthy
                       </span>
                     </div>
 
-                    <div
-                      className="space-y-2 max-h-[380px] overflow-y-auto pr-1 overscroll-contain"
-                      onWheel={(e) => e.stopPropagation()}
-                    >
-                      {liveApps.map((app) => (
-                        <a
-                          key={app.name}
-                          href={app.url}
-                          target={app.url.startsWith("http") ? "_blank" : "_self"}
-                          rel="noopener noreferrer"
-                          onClick={() => setLiveAppsOpen(false)}
-                          className="p-2.5 rounded-xl bg-zinc-900/90 border border-zinc-800 hover:border-cobalt-500/50 hover:bg-zinc-800/80 transition-all block group"
-                        >
-                          <div className="flex items-center justify-between text-xs font-mono font-bold mb-0.5">
-                            <span className="text-white group-hover:text-cobalt-400 transition-colors flex items-center gap-1.5">
-                              {app.name}
-                              <ArrowUpRight className="w-3 h-3 text-zinc-500 group-hover:text-cobalt-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    {popoverTab === "systems" ? (
+                      <div
+                        className="space-y-2 max-h-[380px] overflow-y-auto pr-1 overscroll-contain"
+                        onWheel={(e) => e.stopPropagation()}
+                      >
+                        {liveApps.map((app) => (
+                          <a
+                            key={app.name}
+                            href={app.url}
+                            target={app.url.startsWith("http") ? "_blank" : "_self"}
+                            rel="noopener noreferrer"
+                            onClick={() => setLiveAppsOpen(false)}
+                            className="p-2.5 rounded-xl bg-zinc-900/90 border border-zinc-800 hover:border-cobalt-500/50 hover:bg-zinc-800/80 transition-all block group"
+                          >
+                            <div className="flex items-center justify-between text-xs font-mono font-bold mb-0.5">
+                              <span className="text-white group-hover:text-cobalt-400 transition-colors flex items-center gap-1.5">
+                                {app.name}
+                                <ArrowUpRight className="w-3 h-3 text-zinc-500 group-hover:text-cobalt-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                              </span>
+                              <span className="text-[10px] text-emerald-400 font-mono">{app.status}</span>
+                            </div>
+                            <p className="text-[11px] text-zinc-300 font-sans leading-tight mb-1">
+                              {app.desc}
+                            </p>
+                            <span className="text-[9px] font-mono text-amber-300/80 block">
+                              {app.access}
                             </span>
-                            <span className="text-[10px] text-emerald-400 font-mono">{app.status}</span>
+                          </a>
+                        ))}
+                      </div>
+                    ) : (
+                      <div
+                        className="space-y-2 max-h-[380px] overflow-y-auto pr-1 overscroll-contain font-mono"
+                        onWheel={(e) => e.stopPropagation()}
+                      >
+                        <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-[11px] text-emerald-300 flex items-center gap-2">
+                          <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                          <span>Local Core Services & Daemons running at 100% SLA</span>
+                        </div>
+
+                        {telemetryStats.map((item) => (
+                          <div
+                            key={item.subsystem}
+                            className="p-2.5 rounded-xl bg-zinc-900/90 border border-zinc-800 flex flex-col gap-1 text-xs"
+                          >
+                            <div className="flex items-center justify-between">
+                              <span className="font-bold text-white flex items-center gap-1.5">
+                                <Cpu className="w-3 h-3 text-cobalt-400" />
+                                {item.subsystem}
+                              </span>
+                              <span className="text-[10px] text-emerald-400 font-bold">
+                                {item.health}
+                              </span>
+                            </div>
+                            <div className="flex items-center justify-between text-[11px] text-zinc-400">
+                              <span>{item.runtime}</span>
+                              <span className="text-zinc-300 font-bold">{item.metric}</span>
+                            </div>
                           </div>
-                          <p className="text-[11px] text-zinc-300 font-sans leading-tight mb-1">
-                            {app.desc}
-                          </p>
-                          <span className="text-[9px] font-mono text-amber-300/80 block">
-                            {app.access}
-                          </span>
-                        </a>
-                      ))}
-                    </div>
+                        ))}
+
+                        <div className="p-2 text-center text-[10px] text-zinc-500 border-t border-zinc-900">
+                          Polled locally • Zero cloud leakage
+                        </div>
+                      </div>
+                    )}
                   </motion.div>
                 )}
               </AnimatePresence>

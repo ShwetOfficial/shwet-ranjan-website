@@ -1575,5 +1575,168 @@ export const stockCaseStudiesData: StockCaseStudy[] = [
         "Pending Legal/Tax Matters: GST input-tax-credit claims and a ₹50.4 Cr National Anti-Profiteering Authority notice on Rail Neer (financially manageable vs balance sheet)."
       ]
     }
+  },
+  {
+    id: "bharat-electronics-ltd",
+    ticker: "NSE: BEL",
+    companyName: "Bharat Electronics Limited",
+    sector: "Aerospace & Defense Electronics (Navratna PSU)",
+    qualityScore: "9.2/10",
+    qualityTag: "Monopoly Radar, EW & Missile Electronics Supplier",
+    currentPrice: "₹295.00",
+    intrinsicValueRange: "₹260 – ₹415",
+    centralIntrinsicValue: "₹345",
+    upsidePercentage: "+16.9% Upside",
+    marginOfSafety: "14.5% Margin of Safety",
+    dividendYield: "1.2% Yield (₹3.50/share)",
+    buffettVerdict: "ACCUMULATE ON DIPS (PETER LYNCH FAST GROWER) — 9.2/10 Quality (Zero Debt, 28%+ ROE, ₹76,000+ Cr Order Book)",
+    verdictBadge: "🟢 BUY ON DIPS",
+    verdictColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+
+    researchDate: "18 September 2026",
+    dataAsOf: "Includes FY26 Audited Financials (Revenue ₹20,268 Cr, PAT ₹4,020 Cr, EPS ₹5.50) & Q1 FY27 Order Inflow Updates",
+
+    framework: "Peter Lynch",
+    frameworkBadge: "🟢 PETER LYNCH STALWART / FAST GROWER",
+
+    summaryHeader: "Peter Lynch Fast Grower (Zero Debt, 28.4% ROE, ₹76,000+ Cr Order Book) — Indigenization Champion in Radar, Electronic Warfare & C4I Systems",
+
+    whyItFell: {
+      title: "Why Is BEL Trading Near ₹295 After a 3-Year Parabolic Defense Run?",
+      description: "BEL delivered a massive multi-year re-rating driven by Make-in-India defense indigenization mandates. The stock is currently consolidating around ₹295 due to elevated trailing P/E multiples (~53x), quarterly milestone revenue lumpiness inherent to large defense procurement cycles, global semiconductor supply chain tightness, and market profit-taking across PSU capital goods.",
+      keyPoints: [
+        "Elevated Valuation Multiples: Trades at ~50–54x P/E following defense sector re-rating, leaving minimal cushion for execution delays.",
+        "Contract Lumpiness: Government defense deliveries fluctuate heavily between quarters (Q4 typically accounts for 40%+ of annual revenue).",
+        "Raw Material & Chip Bottlenecks: Defense-grade semiconductor lead times remain volatile, occasionally stretching final integration schedules.",
+        "Monopsony Client Structure: Indian Ministry of Defence accounts for over 80% of total revenue, giving the buyer extreme price review leverage."
+      ]
+    },
+
+    normalizedEarnings: {
+      title: "Pristine Balance Sheet with High Net Cash Reserves & 34% ROCE",
+      description: "BEL operates with zero funded debt, ₹8,200+ Cr in surplus cash and bank balances, and an order backlog exceeding ₹76,000 Cr (~3.8x annual sales). Supported by proprietary R&D spending (~7% of sales) and high technological entry barriers, BEL compounds capital at 28–34% ROCE.",
+      metrics: [
+        { label: "FY26 Consolidated Revenue", value: "₹20,268 Cr (+14.2% YoY)" },
+        { label: "FY26 Net Profit (PAT)", value: "₹4,020 Cr (+16.5% YoY)" },
+        { label: "Order Book Backlog", value: "₹76,250 Cr (~3.8x FY26 Revenue)" },
+        { label: "Capital Efficiency & Solvency", value: "Zero Debt | ₹8,200 Cr Cash | 28.4% ROE" }
+      ]
+    },
+
+    intrinsicModel: {
+      method: "Peter Lynch Discounted Owner Earnings & Terminal Defense Multiples",
+      description: "Baseline FY26 EPS of ₹5.50 projected at 16–18% medium-term earnings CAGR supported by sovereign order execution:",
+      scenarios: [
+        { name: "🔴 Bear Case (10% EPS CAGR)", condition: "Defense order deferrals & margin normalization @ 32x exit P/E", intrinsicValue: "₹260", status: "bear" },
+        { name: "🟡 Conservative (14% EPS CAGR)", condition: "Steady execution of QRSAM & radars @ 38x exit P/E", intrinsicValue: "₹315", status: "conservative" },
+        { name: "🟢 Base Intrinsic (17% EPS CAGR)", condition: "Order book conversion + export scaling @ 42x exit P/E", intrinsicValue: "₹345 / share", status: "base" },
+        { name: "🔵 Bull Case (20% EPS CAGR)", condition: "Surge in electronic warfare & naval suites @ 46x exit P/E", intrinsicValue: "₹395", status: "bull" },
+        { name: "🚀 Defense Sovereign Expansion", condition: "Major export wins & non-defense diversification @ 50x exit P/E", intrinsicValue: "₹415", status: "bull" }
+      ]
+    },
+
+    buffettFramework: {
+      moatScore: "92/100 (Sovereign Sole-Source Supplier, Military Clearances, Integrated R&D Labs)",
+      reinvestmentNote: "BEL is one of India's few authentic defense monopolies with decades of proprietary software IP embedded in weapon systems. At ₹295, the stock is fairly valued to slightly discounted against its ₹345 fair value. Long-term compounding investors should accumulate aggressively on market pullbacks toward ₹260–₹275.",
+      buyThresholds: [
+        { priceRange: "₹340+", verdict: "🔴 Fully Valued / Trim on Euphoria (>55x P/E)", color: "text-red-400" },
+        { priceRange: "₹300 – ₹340", verdict: "🟡 Fair Value Range / Hold", color: "text-amber-300" },
+        { priceRange: "₹270 – ₹300", verdict: "🟢 Prime Accumulation Zone (Last Close: ₹295.00)", color: "text-emerald-300" },
+        { priceRange: "₹240 – ₹270", verdict: "🟢🟢 Strong Margin of Safety (<35x forward P/E)", color: "text-emerald-400" },
+        { priceRange: "Below ₹240", verdict: "🟢🟢🟢 Deep Value Screaming Buy (Extreme Moat Bargain)", color: "text-cyan-300" }
+      ]
+    },
+
+    dualRecommendation: {
+      buffett: {
+        verdict: "WIDE-MOAT BUSINESS / ACCUMULATE ON PULLBACKS",
+        verdictBadge: "🛡️ BUFFETT: 9.2/10 MOAT",
+        verdictColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+        moatRating: "9.2 / 10 (Sovereign Defense Monopoly)",
+        fairValue: "₹345",
+        safetyMargin: "14.5% MoS (At ₹295)",
+        keyRationale: "Debt-free compounder with unmatched military R&D moat, ~28% ROE, and ₹8,200 Cr net cash. Staggered buying recommended during cyclical defense sector sell-offs."
+      },
+      lynch: {
+        verdict: "PETER LYNCH STALWART / FAST GROWER",
+        verdictBadge: "⚡ LYNCH: FAST GROWER",
+        verdictColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+        category: "Fast Grower / Stalwart",
+        pegRatio: "2.4x (Reflects sector premium for 28% ROIC)",
+        earningsGrowth: "16–18% Projected CAGR",
+        keyRationale: "Order book visibility spanning 3.8 years provides earnings predictability rare in capital goods. High cash balance eliminates financial vulnerability."
+      },
+      comparisonSummary: "Both Buffett and Lynch frameworks identify BEL as an exceptional quality business. Lynch highlights the multi-year backlog and earnings runway; Buffett emphasizes the immense structural barrier to entry created by military certifications and proprietary electronic warfare IP."
+    },
+
+    fullAnalysis: {
+      investingStyle: "Peter Lynch",
+      classification: "Peter Lynch Fast Grower / Monopoly Stalwart",
+      threeSentenceStory: "Bharat Electronics is the undisputed crown jewel of Indian military electronics, manufacturing 70%+ of the nation's air defense radars, missile guidance packages, and naval electronic warfare systems. With zero funded debt, over ₹8,200 Cr in cash, and an order backlog exceeding ₹76,000 Cr, it possesses multi-year revenue visibility shielded from foreign competition. At ~53x P/E, systematic accumulation during broader market corrections offers an elite risk-adjusted compounding vehicle.",
+      segmentBreakdown: [
+        { name: "Radars & Air Defence Electronics", revenue: "₹8,450 Cr", profit: "₹2,100 Cr", margin: "24.8%", quality: "⭐⭐⭐⭐⭐ Exceptional (Akash, QRSAM, Ashwini radars)" },
+        { name: "Electronic Warfare & Avionics", revenue: "₹5,200 Cr", profit: "₹1,320 Cr", margin: "25.4%", quality: "⭐⭐⭐⭐⭐ High IP Moat (Su-30, LCA Tejas integration)" },
+        { name: "Naval Systems & Sonars", revenue: "₹3,400 Cr", profit: "₹780 Cr", margin: "22.9%", quality: "⭐⭐⭐⭐ Strong (Combat management suites for Indian Navy)" },
+        { name: "Non-Defense Systems (EVMs, Railways, Smart City)", revenue: "₹3,218 Cr", profit: "₹580 Cr", margin: "18.0%", quality: "⭐⭐⭐ Growing (Election Commission EVMs, Kavach signaling)" }
+      ],
+      moatBreakdown: {
+        score: "92/100",
+        points: [
+          "Sole-source provider for strategic military platforms with 60+ years of institutional defense IP.",
+          "Extreme switching costs: Weapon software and radar protocols cannot be swapped without recertifying entire military airframes.",
+          "Consistently reinvests 6–7% of turnover into internal R&D, outpacing private domestic competitors."
+        ],
+        caveats: [
+          "Customer concentration in a single buyer (Indian Armed Forces / MoD).",
+          "Export revenues remain under 5% of turnover despite global defense equipment demand."
+        ]
+      },
+      quarterlySignalQ1FY27: {
+        revenue: "₹4,198 Cr",
+        revenueGrowth: "+19.6% YoY",
+        pat: "₹776 Cr",
+        patGrowth: "+46.1% YoY",
+        marginCompressionReason: "EBITDA margins expanded to 24.3% due to higher indigenous value-add and operating leverage across radar deliveries."
+      },
+      growthTriggers: [
+        "Execution of mega-programs: QRSAM (Quick Reaction Surface-to-Air Missile), Akash Prime, and Next-Gen Corvette electronic suites.",
+        "Railway Kavach anti-collision deployment across 10,000+ track kilometers.",
+        "Non-defense electronics push into medical devices, EV battery management systems, and smart city infrastructure."
+      ],
+      tenbaggerAnalysis: {
+        targetMarketCap: "₹21,50,000 Cr (~$250 Billion)",
+        requiredPAT: "₹42,000 Cr (10.4x current FY26 PAT)",
+        yearsAt12Percent: "~20 Years",
+        yearsAt15Percent: "~16 Years",
+        verdict: "From a ₹2.15 Lakh Crore base, BEL is an institutional wealth compounder rather than a speculative 10-bagger rocket. Expect steady 14–18% annual return compounding."
+      },
+      scuttlebuttVerdict: "Every major indigenous Indian defense platform—from the LCA Tejas fighter and INS Vikrant aircraft carrier to the Akash missile shield—relies on BEL for its computational brain and radar eyes. Private entrants collaborate with BEL rather than displace it.",
+      lynchScorecard: [
+        { factor: "Business Simplicity", score: "⭐⭐⭐⭐ 4/5", comment: "Electronics manufacturing with complex military domain expertise" },
+        { factor: "Competitive Moat", score: "⭐⭐⭐⭐⭐ 5/5", comment: "Government-backed sole source supplier with military clearances" },
+        { factor: "Financial Strength", score: "⭐⭐⭐⭐⭐ 5/5", comment: "Zero debt, ₹8,200+ Cr in cash, fortress balance sheet" },
+        { factor: "Capital Return (ROCE)", score: "⭐⭐⭐⭐⭐ 5/5", comment: "34% ROCE / 28.4% ROE with high self-financed reinvestment" },
+        { factor: "Cash Flow Conversion", score: "⭐⭐⭐⭐½ 4.5/5", comment: "Strong operating cash flow conversion tracking milestone completions" },
+        { factor: "Growth Runway", score: "⭐⭐⭐⭐ 4/5", comment: "Long multi-decade runway driven by defense indigenization & exports" },
+        { factor: "Management Autonomy", score: "⭐⭐⭐½ 3.5/5", comment: "Navratna PSU with proven technological execution track record" },
+        { factor: "Customer Stickiness", score: "⭐⭐⭐⭐⭐ 5/5", comment: "Permanent lock-in due to integrated combat software platforms" },
+        { factor: "Regulatory Risk", score: "⭐⭐⭐ 3/5", comment: "Budget allocations and procurement timelines subject to MoD policy" },
+        { factor: "Valuation Discipline", score: "⭐⭐⭐ 3/5", comment: "Trades at ~50x P/E; requires disciplined accumulation on dips" }
+      ],
+      lynchVerdictSummary: "BUY ON DIPS / WATCHLIST — Business Quality: 9.2/10 | Moat: 9.5/10 | Attractiveness at ₹295: 7.8/10. An indispensable sovereign defense asset to buy systematically whenever market panic offers discounts.",
+      fiveThingsToWatch: [
+        "① Annual order inflow pacing toward ₹25,000+ Cr target",
+        "② Indigenization ratio on QRSAM and long-range radar assemblies",
+        "③ Semiconductor and component procurement lead times",
+        "④ Commercialization of Kavach railway safety orders",
+        "⑤ EBITDA margin stability above 23.5%"
+      ],
+      risksAndGovernance: [
+        "Sovereign Customer Dependency: Over 80% revenue tied directly to Indian MoD budgetary outlays.",
+        "Geopolitical Chip Constraints: High-end radar gallium-nitride (GaN) components depend on global supply lines.",
+        "Fixed-Price Contract Inflation: Input material inflation on multi-year contracts can temporarily clip operating margins if not index-linked."
+      ]
+    }
   }
 ];
+

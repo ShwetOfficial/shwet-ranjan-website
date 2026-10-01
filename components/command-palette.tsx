@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Command, ArrowRight, FileText, X } from "lucide-react";
+import { Search, Command, ArrowRight, FileText, X, Zap } from "lucide-react";
 import { projectsData } from "@/data/projects";
 import { insightsData } from "@/data/insights";
 
@@ -48,13 +48,27 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
   if (!isOpen) return null;
 
   const quickActions = [
-    { label: "Launch Apps Showcase", sectionId: "#projects", type: "Section" },
-    { label: "Open Calculators Lab", sectionId: "#calculators", type: "Tool" },
-    { label: "View Four Pillars", sectionId: "#pillars", type: "Section" },
+    { label: "Launch Live Apps Showcase (8 Systems)", sectionId: "#projects", type: "Section" },
+    { label: "Open Calculators Lab (VPOB, GST, D2C)", sectionId: "#calculators", type: "Tool" },
+    { label: "Stock Investment Case Studies (HAL, CDSL, BEL)", sectionId: "#stocks", type: "Research" },
+    { label: "View Four Pillars of Expertise", sectionId: "#pillars", type: "Section" },
     { label: "Explore Journey & Ethics", sectionId: "#journey", type: "Section" },
-    { label: "Read Editorial Insights", sectionId: "#insights", type: "Section" },
+    { label: "Read Technical & Financial Essays", sectionId: "#insights", type: "Section" },
     { label: "Contact Shwet Ranjan", sectionId: "#contact", type: "Contact" },
   ];
+
+  const simulatorActions = [
+    { label: "Launch Invoice OCR & Mod-36 Checksum Simulator", queryTag: "ocr invoice paddle", sectionId: "#projects", tag: "Simulator" },
+    { label: "Launch WhatsApp Sales CRM & Drip Cadence Engine", queryTag: "whatsapp crm sales baileys", sectionId: "#projects", tag: "Simulator" },
+    { label: "Launch Auto GST Registration & Legal Drafting OS", queryTag: "rent agreement noc deed legal drafting", sectionId: "#projects", tag: "Simulator" },
+    { label: "Launch VPOB & Amazon Prime 1-Day ROI Estimator", queryTag: "vpob amazon prime multi-state hub", sectionId: "#calculators", tag: "Calculator" },
+    { label: "Launch D2C Unit Economics & RTO Margin Calculator", queryTag: "d2c unit economics rto cogs cac", sectionId: "#calculators", tag: "Calculator" },
+    { label: "Launch GST Input Tax Credit (ITC) Leakage Audit Tool", queryTag: "gst itc 2b vendor leakage tax", sectionId: "#calculators", tag: "Calculator" },
+  ];
+
+  const filteredSimulators = simulatorActions.filter((s) =>
+    !query || s.label.toLowerCase().includes(query.toLowerCase()) || s.queryTag.toLowerCase().includes(query.toLowerCase())
+  );
 
   const filteredProjects = projectsData.filter((p) =>
     p.title.toLowerCase().includes(query.toLowerCase()) ||
@@ -102,7 +116,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search 5 built apps, calculators, essays, or navigation..."
+              placeholder="Search 8 platforms, OCR/CRM simulators, calculators, essays, or keywords (e.g. 'ocr', 'vpob')..."
               className="w-full bg-transparent text-sm font-sans text-white placeholder-zinc-500 focus:outline-none"
             />
             <button
@@ -115,6 +129,31 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
 
           {/* Results Area */}
           <div className="max-h-[60vh] overflow-y-auto p-4 space-y-4">
+            {filteredSimulators.length > 0 && (
+              <div>
+                <span className="font-mono text-[10px] font-bold text-amber-400 uppercase tracking-widest px-2 mb-2 block">
+                  Interactive Simulators & Calculators:
+                </span>
+                <div className="space-y-1">
+                  {filteredSimulators.map((sim) => (
+                    <button
+                      key={sim.label}
+                      onClick={() => handleSelect(sim.sectionId)}
+                      className="w-full px-3.5 py-2.5 rounded-xl hover:bg-amber-500/10 flex items-center justify-between text-xs font-sans text-zinc-200 hover:text-amber-300 transition-colors text-left group border border-transparent hover:border-amber-500/30"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <Zap className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                        <span className="font-medium">{sim.label}</span>
+                      </div>
+                      <span className="font-mono text-[10px] text-amber-400/80 uppercase font-semibold shrink-0 ml-2">
+                        {sim.tag}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {!query && (
               <div>
                 <span className="font-mono text-[10px] font-bold text-zinc-500 uppercase tracking-widest px-2 mb-2 block">

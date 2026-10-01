@@ -11,12 +11,14 @@ export default function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window) return;
+
     setMounted(true);
-    if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const onMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
-      if (!isVisible) setIsVisible(true);
+      setIsVisible(true);
 
       const target = e.target as HTMLElement | null;
       const cursorTarget = target?.closest("[data-cursor]") as HTMLElement | null;
@@ -33,14 +35,14 @@ export default function CustomCursor() {
 
     const onMouseLeave = () => setIsVisible(false);
 
-    window.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseleave", onMouseLeave);
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    document.addEventListener("mouseleave", onMouseLeave, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);
     };
-  }, [isVisible]);
+  }, []);
 
   if (!mounted || !isVisible) return null;
 

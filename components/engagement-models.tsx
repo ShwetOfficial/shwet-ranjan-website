@@ -145,8 +145,59 @@ export default function EngagementModels() {
         ))}
       </div>
 
+      {/* Quantified Client Impact Strip */}
+      <div className="mt-12 p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-zinc-950/80 via-[#0E131F]/90 to-zinc-950/80 border border-white/10 shadow-2xl relative overflow-hidden">
+        <div className="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-zinc-800/80 gap-4">
+          <div>
+            <span className="font-mono text-xs font-bold text-emerald-400 uppercase tracking-wider block">
+              Quantified Track Record & Operational Impact
+            </span>
+            <h4 className="font-display text-xl sm:text-2xl font-bold text-white mt-1">
+              Measurable Outcomes Across Client Deployments
+            </h4>
+          </div>
+          <span className="font-mono text-xs text-zinc-400">
+            Audited results across E-Com Sellers & Enterprises
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6">
+          <div className="p-4 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 flex flex-col justify-between">
+            <span className="font-mono text-2xl sm:text-3xl font-black text-emerald-400">₹14.8L+</span>
+            <span className="font-sans text-xs font-bold text-white mt-2 block">ITC Cash Flow Unlocked</span>
+            <p className="font-sans text-[11px] text-zinc-300 mt-1 leading-relaxed">
+              Auto GSTR-2B invoice reconciliation flagging delinquent vendors before filing deadlines.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 flex flex-col justify-between">
+            <span className="font-mono text-2xl sm:text-3xl font-black text-amber-400">+31.4%</span>
+            <span className="font-sans text-xs font-bold text-white mt-2 block">Amazon Buy Box Lift</span>
+            <p className="font-sans text-[11px] text-zinc-300 mt-1 leading-relaxed">
+              Multi-state VPOB hub deployment unlocking 1-day Prime delivery badges in MH, KA & DL.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 flex flex-col justify-between">
+            <span className="font-mono text-2xl sm:text-3xl font-black text-cyan-400">90%</span>
+            <span className="font-sans text-xs font-bold text-white mt-2 block">Turnaround Time Eliminated</span>
+            <p className="font-sans text-[11px] text-zinc-300 mt-1 leading-relaxed">
+              AI multimodal drafting generating statutory Rent Agreements, NOCs & Deeds in &lt;4 seconds.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 flex flex-col justify-between">
+            <span className="font-mono text-2xl sm:text-3xl font-black text-cobalt-400">99.2%</span>
+            <span className="font-sans text-xs font-bold text-white mt-2 block">Invoice OCR Line Precision</span>
+            <p className="font-sans text-[11px] text-zinc-300 mt-1 leading-relaxed">
+              On-premise PaddleOCR 3.x with Mod-36 checksum auto-healing at ₹0 marginal API cost.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Executive Brief Request Banner */}
-      <div className="mt-12 p-6 sm:p-8 rounded-3xl bg-zinc-900/90 border border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+      <div className="mt-8 p-6 sm:p-8 rounded-3xl bg-zinc-900/90 border border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
         <div className="space-y-1">
           <div className="flex items-center gap-2 text-xs font-mono text-cobalt-400 font-bold uppercase">
             <FileText className="w-4 h-4" />

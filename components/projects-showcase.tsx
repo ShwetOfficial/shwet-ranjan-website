@@ -60,6 +60,42 @@ import {
   LayoutGrid
 } from "lucide-react";
 
+function LazySimulatorCard({ children }: { children: React.ReactNode }) {
+  const [inView, setInView] = useState(false);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "350px" }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={containerRef} className="min-h-[260px]">
+      {inView ? (
+        children
+      ) : (
+        <div className="h-[260px] rounded-2xl bg-zinc-950/40 border border-zinc-800/40 flex flex-col items-center justify-center font-mono text-xs text-zinc-500 gap-2">
+          <div className="w-2.5 h-2.5 rounded-full bg-cobalt-400 animate-ping" />
+          <span>Loading Interactive Architecture Simulator...</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ProjectsShowcase() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
@@ -75,6 +111,7 @@ export default function ProjectsShowcase() {
       : projectsData.filter((p) => p.category === selectedCategory);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, id: string) => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) return;
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -316,7 +353,9 @@ export default function ProjectsShowcase() {
                 externalUrl={project.linkUrl}
               >
                 {simulatorContent ? (
-                  simulatorContent
+                  <LazySimulatorCard>
+                    {simulatorContent}
+                  </LazySimulatorCard>
                 ) : (
                   <div className="py-12 text-center text-zinc-300 font-mono text-xs">
                     Interactive architecture preview active for {project.title}

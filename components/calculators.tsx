@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Calculator, ShieldAlert, TrendingUp, RefreshCw, CheckCircle2, ArrowRight, Zap } from "lucide-react";
 
 export default function Calculators() {
-  const [activeTab, setActiveTab] = useState<"gst" | "d2c">("gst");
+  const [activeTab, setActiveTab] = useState<"gst" | "d2c" | "vpob">("gst");
 
   // GST State
   const [grossSales, setGrossSales] = useState<number>(2500000);
@@ -21,6 +21,12 @@ export default function Calculators() {
   const [cac, setCac] = useState<number>(400);
   const [shippingCost, setShippingCost] = useState<number>(120);
 
+  // VPOB Multi-State & Amazon Prime State
+  const [monthlyGmv, setMonthlyGmv] = useState<number>(1500000);
+  const [targetStatesCount, setTargetStatesCount] = useState<number>(2);
+  const [avgOrderValue, setAvgOrderValue] = useState<number>(1200);
+  const [primeUpliftPct, setPrimeUpliftPct] = useState<number>(30);
+
   const [copied, setCopied] = useState(false);
   const [shareCopied, setShareCopied] = useState(false);
 
@@ -31,7 +37,7 @@ export default function Calculators() {
     if (!params.toString()) return; // Already clean!
 
     const modeParam = params.get("mode");
-    if (modeParam === "gst" || modeParam === "d2c") {
+    if (modeParam === "gst" || modeParam === "d2c" || modeParam === "vpob") {
       setActiveTab(modeParam);
     }
 
@@ -46,6 +52,11 @@ export default function Calculators() {
     if (params.has("rtoPct")) setRtoPct(Number(params.get("rtoPct")));
     if (params.has("cac")) setCac(Number(params.get("cac")));
     if (params.has("shippingCost")) setShippingCost(Number(params.get("shippingCost")));
+
+    if (params.has("monthlyGmv")) setMonthlyGmv(Number(params.get("monthlyGmv")));
+    if (params.has("targetStatesCount")) setTargetStatesCount(Number(params.get("targetStatesCount")));
+    if (params.has("avgOrderValue")) setAvgOrderValue(Number(params.get("avgOrderValue")));
+    if (params.has("primeUpliftPct")) setPrimeUpliftPct(Number(params.get("primeUpliftPct")));
 
     // Clean address bar back to pristine shwetranjan.com or shwetranjan.com/#calculators
     const cleanUrl = window.location.hash
@@ -78,10 +89,24 @@ export default function Calculators() {
   const cm3PerOrder = sellingPrice - cogs - weightedFreightPerOrder - gatewayFee - cac;
   const cm3MarginPct = (cm3PerOrder / sellingPrice) * 100;
 
+  // VPOB Calculations
+  const monthlyOrders = Math.max(1, Math.floor(monthlyGmv / avgOrderValue));
+  const projectedSalesUplift = monthlyGmv * (primeUpliftPct / 100);
+  const monthlyFreightSavings = monthlyOrders * 32;
+  const annualVpobCost = targetStatesCount * 14999;
+  const annualGrossGain = (projectedSalesUplift * 12 * 0.22) + (monthlyFreightSavings * 12);
+  const netAnnualProfitExpansion = annualGrossGain - annualVpobCost;
+  const roiMultiple = (annualGrossGain / Math.max(1, annualVpobCost)).toFixed(1);
+
   const handleCopyBreakdown = () => {
-    const text = activeTab === "gst"
-      ? `GST Audit Breakdown (Taxamicus Calculator)\nGross Sales: ${formatINR(grossSales)}\nOutput Tax (${taxRate}%): ${formatINR(outputTax)}\nEligible ITC: ${formatINR(eligibleITC)}\nLocked GSTR-2B ITC: ${formatINR(lockedITC)}\nNet GST Payable: ${formatINR(netTaxPayable)}`
-      : `D2C Unit Economics Breakdown (Taxamicus Calculator)\nSelling Price: ${formatINR(sellingPrice)}\nCOGS: ${formatINR(cogs)}\nCAC: ${formatINR(cac)}\nCM3 Contribution: ${formatINR(cm3PerOrder)} (${cm3MarginPct.toFixed(1)}%)`;
+    let text = "";
+    if (activeTab === "gst") {
+      text = `GST Audit Breakdown (Taxamicus Calculator)\nGross Sales: ${formatINR(grossSales)}\nOutput Tax (${taxRate}%): ${formatINR(outputTax)}\nEligible ITC: ${formatINR(eligibleITC)}\nLocked GSTR-2B ITC: ${formatINR(lockedITC)}\nNet GST Payable: ${formatINR(netTaxPayable)}`;
+    } else if (activeTab === "d2c") {
+      text = `D2C Unit Economics Breakdown (Taxamicus Calculator)\nSelling Price: ${formatINR(sellingPrice)}\nCOGS: ${formatINR(cogs)}\nCAC: ${formatINR(cac)}\nCM3 Contribution: ${formatINR(cm3PerOrder)} (${cm3MarginPct.toFixed(1)}%)`;
+    } else {
+      text = `VPOB Prime 1-Day ROI Audit (Taxamicus Calculator)\nMonthly GMV: ${formatINR(monthlyGmv)}\nTarget Expansion States: ${targetStatesCount}\nProjected Sales Uplift: +${primeUpliftPct}% (${formatINR(projectedSalesUplift)}/mo)\nAnnual Courier Savings: ${formatINR(monthlyFreightSavings * 12)}\nNet Annual Profit Expansion: ${formatINR(netAnnualProfitExpansion)} (${roiMultiple}x ROI)`;
+    }
 
     navigator.clipboard.writeText(text);
     setCopied(true);
@@ -98,13 +123,18 @@ export default function Calculators() {
       params.set("taxRate", taxRate.toString());
       params.set("purchases", purchases.toString());
       params.set("delinquentVendorPct", delinquentVendorPct.toString());
-    } else {
+    } else if (activeTab === "d2c") {
       params.set("sellingPrice", sellingPrice.toString());
       params.set("cogs", cogs.toString());
       params.set("prepaidPct", prepaidPct.toString());
       params.set("rtoPct", rtoPct.toString());
       params.set("cac", cac.toString());
       params.set("shippingCost", shippingCost.toString());
+    } else {
+      params.set("monthlyGmv", monthlyGmv.toString());
+      params.set("targetStatesCount", targetStatesCount.toString());
+      params.set("avgOrderValue", avgOrderValue.toString());
+      params.set("primeUpliftPct", primeUpliftPct.toString());
     }
 
     const shareableUrl = `${window.location.origin}${window.location.pathname}?${params.toString()}#calculators`;
@@ -151,6 +181,17 @@ export default function Calculators() {
               data-cursor="CALCULATOR"
             >
               D2C Unit Economics
+            </button>
+            <button
+              onClick={() => setActiveTab("vpob")}
+              className={`px-5 py-2.5 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all ${
+                activeTab === "vpob"
+                  ? "bg-cobalt-600 text-white shadow-lg shadow-cobalt-600/30"
+                  : "text-zinc-300 hover:text-white"
+              }`}
+              data-cursor="CALCULATOR"
+            >
+              VPOB Prime ROI
             </button>
           </div>
 
@@ -456,6 +497,187 @@ export default function Calculators() {
               <span>Shwet Ranjan D2C OS</span>
               <a href="#contact" className="text-emerald-400 hover:underline flex items-center gap-1 font-bold">
                 <span>Inquire D2C Strategy</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* VPOB PRIME 1-DAY MULTI-STATE ROI CALCULATOR */}
+      {activeTab === "vpob" && (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-8 rounded-3xl bg-[#121218] border border-white/10 shadow-2xl relative overflow-hidden">
+          <div className="absolute -top-24 -right-24 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
+          {/* Left Inputs */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="border-b border-zinc-800 pb-4">
+              <span className="text-xs font-mono text-amber-400 uppercase tracking-wider font-semibold">
+                Multi-State Hub Expansion
+              </span>
+              <h3 className="text-xl font-bold text-white mt-1">Amazon Prime 1-Day & VPOB Arbitrage</h3>
+              <p className="text-sm text-zinc-300 mt-1">
+                Calculate direct sales expansion from Prime badges in high-GMV states (MH, KA, DL, TN, HR) vs. virtual office GST compliance.
+              </p>
+            </div>
+
+            {/* Input 1: Monthly GMV */}
+            <div>
+              <div className="flex justify-between items-center text-sm font-medium text-zinc-200 mb-2">
+                <span>Current Monthly GMV</span>
+                <span className="font-mono text-amber-400 font-bold">{formatINR(monthlyGmv)}</span>
+              </div>
+              <input
+                type="range"
+                min="300000"
+                max="10000000"
+                step="100000"
+                value={monthlyGmv}
+                onChange={(e) => setMonthlyGmv(Number(e.target.value))}
+                className="w-full accent-amber-400 h-2 bg-zinc-800 rounded-lg cursor-pointer"
+              />
+              <div className="flex justify-between text-[11px] text-zinc-300 mt-1 font-mono">
+                <span>₹3L / mo</span>
+                <span>₹50L / mo</span>
+                <span>₹1 Cr / mo</span>
+              </div>
+            </div>
+
+            {/* Input 2: Number of Target States */}
+            <div>
+              <div className="flex justify-between items-center text-sm font-medium text-zinc-200 mb-2">
+                <span>Target Expansion States (VPOB Hubs)</span>
+                <span className="font-mono text-amber-400 font-bold">{targetStatesCount} States</span>
+              </div>
+              <div className="grid grid-cols-5 gap-2">
+                {[1, 2, 3, 4, 5].map((num) => (
+                  <button
+                    key={num}
+                    onClick={() => setTargetStatesCount(num)}
+                    className={`py-2 text-xs font-mono rounded-lg border transition-all ${
+                      targetStatesCount === num
+                        ? "bg-amber-500/20 border-amber-500 text-amber-300 font-bold"
+                        : "bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-zinc-200"
+                    }`}
+                  >
+                    {num} {num === 1 ? "State" : "States"}
+                  </button>
+                ))}
+              </div>
+              <p className="text-[11px] text-zinc-300 mt-1.5 font-mono">
+                Recommended initial hubs: Maharashtra (Bhiwandi), Karnataka (Bengaluru), Delhi NCR (Gurugram)
+              </p>
+            </div>
+
+            {/* Input 3 & 4 Grid: AOV and Prime Uplift */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800">
+                <div className="flex justify-between items-center text-xs font-medium text-zinc-300 mb-2">
+                  <span>Average Order Value (AOV)</span>
+                  <span className="font-mono text-white font-bold">{formatINR(avgOrderValue)}</span>
+                </div>
+                <input
+                  type="range"
+                  min="400"
+                  max="5000"
+                  step="50"
+                  value={avgOrderValue}
+                  onChange={(e) => setAvgOrderValue(Number(e.target.value))}
+                  className="w-full accent-amber-400 h-1.5 bg-zinc-800 rounded-lg cursor-pointer"
+                />
+                <span className="text-[10px] text-zinc-300 font-mono mt-1 block">
+                  Est. monthly orders: ~{monthlyOrders.toLocaleString()}
+                </span>
+              </div>
+
+              <div className="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800">
+                <div className="flex justify-between items-center text-xs font-medium text-zinc-300 mb-2">
+                  <span>Prime 1-Day Conversion Uplift</span>
+                  <span className="font-mono text-emerald-400 font-bold">+{primeUpliftPct}%</span>
+                </div>
+                <input
+                  type="range"
+                  min="10"
+                  max="45"
+                  step="1"
+                  value={primeUpliftPct}
+                  onChange={(e) => setPrimeUpliftPct(Number(e.target.value))}
+                  className="w-full accent-emerald-400 h-1.5 bg-zinc-800 rounded-lg cursor-pointer"
+                />
+                <span className="text-[10px] text-zinc-300 font-mono mt-1 block">
+                  Industry avg: +25% to +35% Buy Box lift
+                </span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 pt-2">
+              <button
+                onClick={handleCopyBreakdown}
+                className="px-4 py-2 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 text-xs font-mono rounded-lg border border-zinc-700 transition flex items-center gap-2"
+              >
+                {copied ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <RefreshCw className="w-3.5 h-3.5" />}
+                <span>{copied ? "Audit Copied!" : "Copy VPOB Breakdown"}</span>
+              </button>
+
+              <button
+                onClick={handleShareLink}
+                className="px-4 py-2 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 text-xs font-mono rounded-lg border border-zinc-700 transition flex items-center gap-2"
+              >
+                <Zap className="w-3.5 h-3.5 text-amber-400" />
+                <span>{shareCopied ? "Link Copied!" : "Share Calculation"}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Right Metrics Panel */}
+          <div className="lg:col-span-5 bg-zinc-950/70 border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between backdrop-blur-sm">
+            <div>
+              <span className="text-xs font-mono text-zinc-300 uppercase tracking-wider block">
+                Net Annual Value Creation
+              </span>
+
+              {/* Primary Metric */}
+              <div className="mt-3 p-4 rounded-xl bg-gradient-to-br from-amber-500/10 to-emerald-500/10 border border-amber-500/20">
+                <span className="text-xs text-zinc-400 block">Annual Net Profit Expansion</span>
+                <span className="text-3xl font-mono font-extrabold text-white mt-1 block">
+                  {formatINR(netAnnualProfitExpansion)}
+                </span>
+                <div className="flex items-center gap-2 mt-2">
+                  <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold">
+                    {roiMultiple}x Annual ROI
+                  </span>
+                  <span className="text-[11px] text-zinc-300">after all VPOB & compliance fees</span>
+                </div>
+              </div>
+
+              {/* Breakdown List */}
+              <div className="mt-4 space-y-3 font-mono text-xs">
+                <div className="flex justify-between items-center py-2 border-b border-zinc-800/80">
+                  <span className="text-zinc-300">Prime Sales Uplift / Month</span>
+                  <span className="text-emerald-400 font-bold">+{formatINR(projectedSalesUplift)}</span>
+                </div>
+
+                <div className="flex justify-between items-center py-2 border-b border-zinc-800/80">
+                  <span className="text-zinc-300">Local Fulfillment Savings / Yr</span>
+                  <span className="text-emerald-400 font-bold">+{formatINR(monthlyFreightSavings * 12)}</span>
+                </div>
+
+                <div className="flex justify-between items-center py-2 border-b border-zinc-800/80">
+                  <span className="text-zinc-300">Annual VPOB & Filing Cost</span>
+                  <span className="text-red-400 font-bold">-{formatINR(annualVpobCost)}</span>
+                </div>
+
+                <div className="flex justify-between items-center py-2 text-zinc-300">
+                  <span>Intra-state Delivery Time</span>
+                  <span className="text-amber-300 font-bold">1 Day vs 4-5 Days National</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-4 border-t border-zinc-800 flex items-center justify-between text-xs font-mono text-zinc-300">
+              <span>Taxamicus VPOB OS</span>
+              <a href="#contact" className="text-amber-400 hover:underline flex items-center gap-1 font-bold">
+                <span>Deploy VPOB Hubs</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
             </div>

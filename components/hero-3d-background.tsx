@@ -24,11 +24,17 @@ export default function Hero3dBackground() {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     let isReducedMotion = mediaQuery.matches;
 
-    // Dynamic Pixel Ratio Scaler (Cap at 2.0 to prevent GPU overheat)
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Detect mobile viewport
+    let isMobile = window.innerWidth < 768;
+
+    // Dynamic Pixel Ratio Scaler (Cap at 1.25 on mobile, 2.0 on desktop to prevent GPU overhead)
+    const getDpr = () => isMobile ? Math.min(window.devicePixelRatio || 1, 1.25) : Math.min(window.devicePixelRatio || 1, 2);
+    let dpr = getDpr();
 
     const updateSize = () => {
       const w = window.innerWidth;
+      isMobile = w < 768;
+      dpr = getDpr();
       const h = canvas.parentElement?.offsetHeight || 850;
       canvas.width = Math.floor(w * dpr);
       canvas.height = Math.floor(h * dpr);
@@ -50,7 +56,7 @@ export default function Hero3dBackground() {
       y: (canvas.parentElement?.offsetHeight || 850) / 2,
       targetX: window.innerWidth / 2,
       targetY: (canvas.parentElement?.offsetHeight || 850) / 2,
-      radius: 280,
+      radius: isMobile ? 180 : 280,
     };
 
     let lastClientX = window.innerWidth / 2;
@@ -77,10 +83,12 @@ export default function Hero3dBackground() {
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // 3D Perspective Grid Parameters
-    const gridCols = 38;
-    const gridRows = 28;
+    // 3D Perspective Grid Parameters (Scale down on mobile for high FPS)
+    const gridCols = isMobile ? 22 : 38;
+    const gridRows = isMobile ? 16 : 28;
     let time = 0;
+    let lastFrameTimestamp = 0;
+    const frameInterval = isMobile ? 1000 / 35 : 1000 / 60; // 35fps on mobile, 60fps on desktop
 
     // Laser Data Pulses travelling along 3D Grid Lines
     const gridPulses: {
@@ -93,7 +101,8 @@ export default function Hero3dBackground() {
     }[] = [];
 
     const spawnGridPulse = () => {
-      if (gridPulses.length >= 12) return;
+      const maxPulses = isMobile ? 5 : 12;
+      if (gridPulses.length >= maxPulses) return;
       const isRow = Math.random() > 0.5;
       gridPulses.push({
         row: Math.floor(Math.random() * gridRows),
@@ -105,8 +114,17 @@ export default function Hero3dBackground() {
       });
     };
 
-    const renderFrame = (isStatic = false) => {
+    const renderFrame = (isStatic = false, currentTimestamp = 0) => {
       if (!isVisible && !isStatic) return;
+
+      if (!isStatic && currentTimestamp) {
+        const elapsed = currentTimestamp - lastFrameTimestamp;
+        if (elapsed < frameInterval) {
+          animationFrameId = requestAnimationFrame((ts) => renderFrame(false, ts));
+          return;
+        }
+        lastFrameTimestamp = currentTimestamp;
+      }
 
       if (!isStatic) {
         time += 0.015;
