@@ -32,12 +32,13 @@ export const skillsMatrixData: SkillCategory[] = [
     title: "Technology & Software",
     badge: "FULL-STACK & AI",
     skills: [
-      { name: "Full-Stack Web Development", level: 92, note: "Next.js, React, TypeScript, Node.js" },
-      { name: "AI APIs & Workflow Automation", level: 90, note: "LLM Agents, Python Scripts, Webhooks" },
-      { name: "CSS Systems & UI/UX Craft", level: 94, note: "Tailwind CSS, Framer Motion, Design Tokens" },
-      { name: "Database & Cloud Architecture", level: 84, note: "PostgreSQL, Vercel, REST APIs" }
+      { name: "Full-Stack Web Development", level: 94, note: "Next.js, React, TypeScript, Node.js, FastAPI" },
+      { name: "Computer Vision & Invoice OCR", level: 95, note: "PaddleOCR 3.x, LayoutLM, Mod-36 Checksums" },
+      { name: "Conversational AI & WhatsApp Engines", level: 93, note: "Baileys WebSockets, Gemini Flash Auto-Pilot" },
+      { name: "Legal & Statutory Drafting AI", level: 92, note: "Gemini Multimodal, NOC, Rent & Partnership Deeds" },
+      { name: "Database & Cloud Architecture", level: 88, note: "SQLite WAL, Atomic Snapshots, PM2, REST APIs" }
     ],
-    frameworks: ["Next.js App Router", "Tailwind CSS v3/v4", "Framer Motion", "Python Pandas/ETL", "Git / GitHub"]
+    frameworks: ["PaddleOCR 3.x", "Baileys WhatsApp Engine", "Gemini 1.5 / Multimodal", "Next.js App Router", "FastAPI / Python", "Socket.io", "SQLite WAL", "Meta CAPI"]
   },
   {
     title: "Investing & Capital",

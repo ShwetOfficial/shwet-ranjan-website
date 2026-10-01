@@ -51,6 +51,9 @@ Bloomberg/Koyfin-style equity valuation terminal hosted at shwetranjan.com/inves
 3. Financial Invoicing Platform (invoice.taxamicus.in): Cloud invoicing portal generating B2B/B2C invoices and GSTR-1 JSON dumps.
 4. VerifyReels.com (verifyreels.com): AI video fact-checker & WhatsApp verification bot.
 5. GST Portal Chrome Extension: Silent notice checker & GSTR-1 vs 3B rate comparison extension inside gst.gov.in.
+6. Taxamicus Sales CRM & WhatsApp Drip Engine: Production-ready multi-agent WhatsApp CRM powered by @whiskeysockets/baileys, Gemini 1.5 Flash Auto-Pilot, service-aware VPOB/GST/Docs drip cadences, and Meta CAPI conversion webhooks.
+7. 99% Precision GST Invoice OCR Engine: Self-hosted PaddleOCR 3.x line-item extractor with spatial coordinate analysis, statutory Mod-36 GSTIN checksum validation, and JSON/Excel exports.
+8. Auto GST Registration & Legal Drafter: 90% automated GST registration engine with Gemini Multimodal legal drafting of Owner NOCs, Commercial Rent Agreements, and Partnership Deeds.
 
 ================================================================================
 5. KEY FINANCIAL & BUSINESS FORMULAS

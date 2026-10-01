@@ -35,6 +35,18 @@ const TaxamicusWordPressSimulator = dynamic(
   () => import("./app-simulators").then((mod) => mod.TaxamicusWordPressSimulator),
   { ssr: false }
 );
+const SalesCrmSimulator = dynamic(
+  () => import("./app-simulators").then((mod) => mod.SalesCrmSimulator),
+  { ssr: false }
+);
+const PurchaseInvoiceOcrSimulator = dynamic(
+  () => import("./app-simulators").then((mod) => mod.PurchaseInvoiceOcrSimulator),
+  { ssr: false }
+);
+const AutoGstDraftingSimulator = dynamic(
+  () => import("./app-simulators").then((mod) => mod.AutoGstDraftingSimulator),
+  { ssr: false }
+);
 
 import {
   ExternalLink,
@@ -103,6 +115,12 @@ export default function ProjectsShowcase() {
         return <StockMarketInvestingSimulator />;
       case "taxamicus-wordpress-portal":
         return <TaxamicusWordPressSimulator />;
+      case "taxamicus-sales-crm":
+        return <SalesCrmSimulator />;
+      case "gst-purchase-invoice-ocr":
+        return <PurchaseInvoiceOcrSimulator />;
+      case "auto-gst-registration-drafting":
+        return <AutoGstDraftingSimulator />;
       default:
         return null;
     }
@@ -120,6 +138,12 @@ export default function ProjectsShowcase() {
         return "verifyreels.com";
       case "taxamicus-gst-chrome-extension":
         return "return.gst.gov.in/returns/auth/dashboard";
+      case "taxamicus-sales-crm":
+        return "localhost:3000/sales-crm (Internal WhatsApp Engine)";
+      case "gst-purchase-invoice-ocr":
+        return "localhost:8000/api/ocr (PaddleOCR 3.x Local)";
+      case "auto-gst-registration-drafting":
+        return "localhost:5000/gst-drafter (Gemini Multimodal)";
       case "intrinsic-value-modeler":
         return "shwetranjan.com/investing-modeler";
       case "taxamicus-wordpress-portal":
@@ -208,7 +232,11 @@ export default function ProjectsShowcase() {
                     {project.category}
                   </span>
                   <span className="font-mono text-xs text-zinc-300">{project.year}</span>
-                  {project.id === "taxamicus-ecom-automation" || project.id === "taxamicus-enterprise-crm" || project.id === "taxamicus-gst-chrome-extension" ? (
+                  {project.id === "taxamicus-sales-crm" || project.id === "gst-purchase-invoice-ocr" || project.id === "auto-gst-registration-drafting" ? (
+                    <span className="px-2.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-mono text-[10px] font-bold flex items-center gap-1">
+                      ⚡ Production-Ready Engine (Internal Staging / Pilot)
+                    </span>
+                  ) : project.id === "taxamicus-ecom-automation" || project.id === "taxamicus-enterprise-crm" || project.id === "taxamicus-gst-chrome-extension" ? (
                     <span className="px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-[10px] font-bold flex items-center gap-1">
                       🔒 Internal Team & Enterprise Client Access
                     </span>
@@ -233,7 +261,7 @@ export default function ProjectsShowcase() {
                     <GitCommit className="w-3.5 h-3.5 text-cobalt-400" />
                   </button>
 
-                  {project.linkUrl && (
+                  {project.linkUrl ? (
                     <a
                       href={project.linkUrl}
                       target="_blank"
@@ -244,6 +272,15 @@ export default function ProjectsShowcase() {
                       <span>Launch Platform</span>
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
+                  ) : (
+                    <button
+                      onClick={() => setActiveModalProject(project)}
+                      className="px-4 py-2 rounded-xl bg-cobalt-600 hover:bg-cobalt-500 text-white font-mono text-xs font-bold transition-all flex items-center gap-1.5 shadow-lg shadow-cobalt-600/30"
+                      data-cursor="SIMULATOR"
+                    >
+                      <span>Interactive Simulator</span>
+                      <Sparkles className="w-3.5 h-3.5" />
+                    </button>
                   )}
                 </div>
               </div>

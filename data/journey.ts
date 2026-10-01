@@ -62,17 +62,18 @@ export const journeyTimeline: Milestone[] = [
     skillsGained: ["Next.js", "TypeScript", "React", "Python ETL", "Tailwind CSS", "REST & AI APIs"]
   },
   {
-    year: "SYNTHESIS",
-    phase: "05. Multi-Disciplinary Operator & Investor",
-    title: "Synthesis: Business • Tax • Tech • Capital",
-    location: "Global",
-    description: "Operating at the intersection of business strategy, tax precision, software automation, and fundamental equity investing. Building scalable ventures and high-leverage tools.",
+    year: "SYNTHESIS (2025–2026)",
+    phase: "05. Multi-Disciplinary Operator & AI Systems Architect",
+    title: "Synthesis: Business • Tax • Computer Vision • Conversational AI",
+    location: "Kolkata / Delhi / Global",
+    description: "Operating at the intersection of business strategy, Indian tax precision, deep computer vision, and autonomous generative workflows. Architecting high-leverage production platforms that eliminate compliance bottlenecks and accelerate customer conversion.",
     keyTakeaways: [
-      "Combining tax compliance knowledge with automated software tools",
-      "Applying Buffett & Lynch intrinsic value estimation to public equities & software assets",
-      "Building enduring systems with zero tolerance for unnecessary friction"
+      "Built self-hosted 99% precision Indian GST invoice OCR pipeline using PaddleOCR 3.x with statutory Mod-36 checksum verification",
+      "Engineered automated legal drafting engine generating GST-compliant NOCs, Rent Agreements & Partnership Deeds via Gemini Multimodal",
+      "Architected real-time multi-agent WhatsApp Sales CRM powered by Baileys WebSockets, Gemini Flash Auto-Pilot, and service-aware drip cadences",
+      "Applying Buffett & Lynch intrinsic value estimation to public equities, SaaS ventures & capital reinvestment"
     ],
-    skillsGained: ["Strategic Leadership", "System Architecture", "Capital Allocation", "Product Strategy", "AI Workflow Engineering"]
+    skillsGained: ["Computer Vision OCR", "Conversational AI CRM", "Legal Drafting Automation", "Statutory GST Architecture", "Capital Allocation", "Full-Stack Engineering"]
   }
 ];
 

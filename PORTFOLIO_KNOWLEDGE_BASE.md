@@ -113,6 +113,24 @@ A dedicated Bloomberg/Koyfin-style equity valuation terminal hosted at `shwetran
 - **Description**: Browser extension that runs silently inside the official Indian GST portal (`gst.gov.in`).
 - **Core Functionality**: Auto-checks notice history, highlights GSTR-1 vs GSTR-3B mismatch discrepancies, and warns of supplier filing delinquencies in real time.
 
+### 6. Taxamicus Sales CRM & AI Auto-Pilot WhatsApp Drip Engine
+- **Category**: Technology & AI / Sales Operations
+- **Description**: Production-ready conversational Sales CRM & Drip Engine designed for high-conversion GST compliance and Virtual Place of Business (VPOB) client acquisition.
+- **Core Functionality**: Real-time WhatsApp connectivity via pure Node.js WebSockets (`@whiskeysockets/baileys`), Google Gemini 1.5 Flash AI Auto-Pilot with human takeover detection, service-aware automated follow-up cadences (Track A: VPOB E-Commerce Amazon Prime 1-Day Advantage, Track B: GST Registration, Track C: Missing Document Reminders) enforced strictly within Indian Business Hours (10:00 AM – 7:30 PM IST), multi-agent Socket.io Kanban sync, and closed-loop Meta CAPI webhook dispatch to n8n.
+- **Status**: Production-Ready (Internal Staging / Local Engine)
+
+### 7. 99% Precision GST Purchase & Sales Invoice OCR Engine
+- **Category**: Tax Compliance / Computer Vision
+- **Description**: Self-hosted document intelligence engine for Indian GST purchase and sales invoices across PDF, JPG, PNG, and WebP formats.
+- **Core Functionality**: Deploys local PaddleOCR 3.x (PP-OCRv4/v3) deep learning models with zero third-party API costs. Uses spatial coordinate analysis to distinguish Supplier (`Billed By`) vs Buyer (`Bill To`) GSTINs, executes 15-character Mod-36 checksum verification with automatic typo self-healing (`O` $\rightarrow$ `0`, `I` $\rightarrow$ `1`, `B` $\rightarrow$ `8`, `S` $\rightarrow$ `5`), performs line-item HSN/SAC table extraction, and runs mathematical reconciliation across tax slabs with one-click JSON/Excel exports.
+- **Status**: Production-Ready (Internal Staging / Local Engine)
+
+### 8. Auto GST Registration & Autonomous Legal Drafting Engine
+- **Category**: Tax Compliance / Generative AI
+- **Description**: End-to-end automation workflow engine designed to compress the manual GST registration cycle by 90%.
+- **Core Functionality**: Uses Google GenAI multimodal pipelines to cross-examine uploaded identity proofs and electricity bills, audits address parity against the Principal Place of Business, and autonomously drafts legally binding, stamp-duty-compliant documents—including Property Owner NOCs, Commercial Rent Agreements (with automated Indian currency word conversion and escalation clauses), and Multi-Partner Partnership Deeds. Features `sharp` image sanitation and a Chrome extension injector for `gst.gov.in`.
+- **Status**: Production-Ready (Internal Staging / Local Engine)
+
 ---
 
 ## 5. Key Financial & Business Logic

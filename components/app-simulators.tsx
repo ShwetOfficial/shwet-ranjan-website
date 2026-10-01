@@ -27,7 +27,17 @@ import {
   PieChart,
   Download,
   Lock,
-  Eye
+  Eye,
+  FileText,
+  Scan,
+  Copy,
+  CheckCheck,
+  Phone,
+  UserCheck,
+  RefreshCw,
+  Terminal,
+  FileCode,
+  ArrowRight
 } from "lucide-react";
 
 // ==========================================
@@ -1251,3 +1261,1087 @@ export function TaxamicusWordPressSimulator() {
     </div>
   );
 }
+
+// ========================================================
+// 8. TAXAMICUS SALES CRM & AI WHATSAPP AUTO-PILOT SIMULATOR
+// ========================================================
+export function SalesCrmSimulator() {
+  const [activeLeadId, setActiveLeadId] = useState("lead_1");
+  const [autoPilotEnabled, setAutoPilotEnabled] = useState(true);
+  const [isTyping, setIsTyping] = useState(false);
+  const [customMsg, setCustomMsg] = useState("");
+
+  const leads = [
+    {
+      id: "lead_1",
+      name: "Rohan Verma",
+      phone: "+91 70035 57928",
+      stage: "Collecting Docs",
+      track: "DOCS",
+      service: "GST Registration (Single State)",
+      dealValue: "₹499",
+      dripStep: 2,
+      lastMsg: "Do I need to send electricity bill of the landlord or owner?",
+      time: "10:14 AM"
+    },
+    {
+      id: "lead_2",
+      name: "Vikram Singhania",
+      phone: "+91 98201 44321",
+      stage: "New Lead",
+      track: "VPOB",
+      service: "VPOB E-Commerce (Karnataka & Delhi)",
+      dealValue: "₹24,000",
+      dripStep: 1,
+      lastMsg: "Need Amazon Prime 1-day badge for Bangalore warehouse.",
+      time: "09:42 AM"
+    },
+    {
+      id: "lead_3",
+      name: "Ananya Rao",
+      phone: "+91 99881 22334",
+      stage: "Qualified",
+      track: "GST",
+      service: "GST Multi-State Expansion",
+      dealValue: "₹4,999",
+      dripStep: 0,
+      lastMsg: "What are the documents needed for a private limited company?",
+      time: "Yesterday"
+    }
+  ];
+
+  const activeLead = leads.find((l) => l.id === activeLeadId) || leads[0];
+
+  const [chatHistory, setChatHistory] = useState<{ [key: string]: { id: string; from: "client" | "bot" | "agent"; text: string; time: string; isDrip?: boolean }[] }>({
+    lead_1: [
+      { id: "m1", from: "client", text: "Hi, I want GST registration for my e-commerce business. What is the fee and process?", time: "10:02 AM" },
+      { id: "m2", from: "bot", text: "Hello Rohan! Welcome to Taxamicus. Our single-state GST registration is ₹499 all-inclusive. Our CA team handles end-to-end filing, ARN tracking, and certificate issuance within 3-7 working days.", time: "10:02 AM" },
+      { id: "m3", from: "client", text: "Do I need to send electricity bill of the landlord or owner?", time: "10:14 AM" },
+      { id: "m4", from: "bot", text: "Yes, exactly! We need a clear photo or PDF of the recent Electricity Bill (within 2 months) along with the owner's Aadhaar or PAN to draft the free NOC & consent letter. You can share them right here on WhatsApp!", time: "10:14 AM" }
+    ],
+    lead_2: [
+      { id: "m1", from: "client", text: "Need Amazon Prime 1-day badge for Bangalore warehouse.", time: "09:42 AM" },
+      { id: "m2", from: "bot", text: "Hi Vikram! Following up on your VPOB inquiry.\n\nDid you know that having a registered virtual office & warehouse in Karnataka gets your products the Amazon Prime 1-Day Delivery badge, boosting your sales and Buy Box conversion by 30%+?\n\nOur plan includes 100% GST-approved address, Rent Agreement, NOC & Electricity Bill for ₹12,000/year.", time: "09:43 AM", isDrip: true }
+    ],
+    lead_3: [
+      { id: "m1", from: "client", text: "What are the documents needed for a private limited company?", time: "Yesterday" },
+      { id: "m2", from: "bot", text: "Hi Ananya! For a Pvt Ltd company, we require: 1. Certificate of Incorporation, 2. Company PAN, 3. Board Resolution authorizing director, 4. Directors' PAN & Aadhaar, and 5. Registered office address proof (Electricity bill + NOC).", time: "Yesterday" }
+    ]
+  });
+
+  const activeMessages = chatHistory[activeLead.id] || [];
+
+  const handleSendCustomMessage = (textToSend?: string) => {
+    const text = textToSend || customMsg;
+    if (!text.trim()) return;
+
+    const newMsg = {
+      id: `out_${Date.now()}`,
+      from: autoPilotEnabled ? ("bot" as const) : ("agent" as const),
+      text: text.trim(),
+      time: "Just now"
+    };
+
+    setChatHistory((prev) => ({
+      ...prev,
+      [activeLead.id]: [...(prev[activeLead.id] || []), newMsg]
+    }));
+    if (!textToSend) setCustomMsg("");
+
+    // Simulate client reply if sent by agent
+    if (!autoPilotEnabled) {
+      setIsTyping(true);
+      setTimeout(() => {
+        setIsTyping(false);
+        setChatHistory((prev) => ({
+          ...prev,
+          [activeLead.id]: [
+            ...(prev[activeLead.id] || []),
+            {
+              id: `in_${Date.now()}`,
+              from: "client" as const,
+              text: "Got it! Reviewing the details and sending over the documents shortly.",
+              time: "Just now"
+            }
+          ]
+        }));
+      }, 1500);
+    }
+  };
+
+  const handleSimulateClientInquiry = () => {
+    setIsTyping(true);
+    setTimeout(() => {
+      const incoming = {
+        id: `in_${Date.now()}`,
+        from: "client" as const,
+        text: "Could you send the official bank account details so I can complete payment?",
+        time: "Just now"
+      };
+
+      setChatHistory((prev) => ({
+        ...prev,
+        [activeLead.id]: [...(prev[activeLead.id] || []), incoming]
+      }));
+      setIsTyping(false);
+
+      if (autoPilotEnabled) {
+        setTimeout(() => {
+          setChatHistory((prev) => ({
+            ...prev,
+            [activeLead.id]: [
+              ...(prev[activeLead.id] || []),
+              {
+                id: `bot_${Date.now()}`,
+                from: "bot" as const,
+                text: "Here are our official settlement details:\n• Account Name: TAXAMICUS LEGAL TECH PVT LTD\n• Bank: Kotak Mahindra Bank\n• UPI ID: taxamicus@kotak\n\nOnce paid, please share the screenshot here and our team will generate your TRN immediately!",
+                time: "Just now"
+              }
+            ]
+          }));
+        }, 1200);
+      }
+    }, 1000);
+  };
+
+  const handleCannedSnippet = (shortcut: "/docs" | "/vpob" | "/bank") => {
+    if (shortcut === "/docs") {
+      handleSendCustomMessage("📋 GST Document Checklist:\n1. PAN Card\n2. Aadhaar Card\n3. Electricity Bill or Rent Agreement\n4. Passport Photo\n\nYou can upload photos or PDFs directly here!");
+    } else if (shortcut === "/vpob") {
+      handleSendCustomMessage("🏢 VPOB State Pricing:\n• Plan A (Standard VPOB): ₹12,000/yr (Address, NOC, Rent Agreement & EB)\n• Plan B (Complete Compliance): ₹14,999/yr (VPOB + 1-Year GSTR-1/3B filing + Audit)\n\nAvailable across WB, Delhi, Karnataka, Haryana, UP, MP, Bihar, Punjab & Gujarat.");
+    } else {
+      handleSendCustomMessage("🏦 Payment & Settlement Details:\n• Account: Taxamicus Legal Tech Pvt Ltd\n• Bank: Kotak Mahindra Bank\n• UPI: taxamicus@kotak\n• Amount: " + activeLead.dealValue);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Top Banner Status */}
+      <div className="p-4 rounded-2xl bg-zinc-950/80 border border-white/10 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+            <Phone className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-display font-bold text-sm text-white">Taxamicus Sales CRM Engine</span>
+              <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-mono font-bold border border-emerald-500/30 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Baileys Socket Active
+              </span>
+            </div>
+            <p className="font-mono text-xs text-zinc-300">
+              Real-time multi-agent live chat • Google Gemini 1.5 Flash Auto-Pilot • IST Business Hours Engine
+            </p>
+          </div>
+        </div>
+
+        {/* Auto-Pilot Toggle */}
+        <div className="flex items-center gap-2">
+          <span className="font-mono text-xs text-zinc-300 font-bold">Auto-Pilot:</span>
+          <button
+            onClick={() => setAutoPilotEnabled(!autoPilotEnabled)}
+            className={`px-3 py-1.5 rounded-xl font-mono text-xs font-bold transition-all flex items-center gap-1.5 ${
+              autoPilotEnabled
+                ? "bg-cobalt-600 text-white shadow-lg shadow-cobalt-600/30"
+                : "bg-zinc-800 text-zinc-300 border border-zinc-700"
+            }`}
+          >
+            <Bot className="w-3.5 h-3.5" />
+            {autoPilotEnabled ? "Gemini AI ON" : "Human Takeover"}
+          </button>
+        </div>
+      </div>
+
+      {/* 3-Column Interactive Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        {/* Left Column: Leads Pipeline (4 cols) */}
+        <div className="lg:col-span-4 p-4 rounded-2xl bg-zinc-950 border border-zinc-800/80 space-y-3">
+          <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
+            <span className="font-mono text-xs font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
+              <Layers className="w-3.5 h-3.5 text-cobalt-400" />
+              Live Inbound Pipeline
+            </span>
+            <span className="font-mono text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+              3 Active Leads
+            </span>
+          </div>
+
+          <div className="space-y-2">
+            {leads.map((lead) => (
+              <button
+                key={lead.id}
+                onClick={() => setActiveLeadId(lead.id)}
+                className={`w-full p-3 rounded-xl border text-left transition-all ${
+                  activeLeadId === lead.id
+                    ? "bg-zinc-900 border-cobalt-500/80 shadow-md shadow-cobalt-500/10"
+                    : "bg-zinc-900/40 border-zinc-800/80 hover:border-zinc-700"
+                }`}
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-display font-bold text-xs text-white">{lead.name}</span>
+                  <span className="font-mono text-[10px] text-zinc-400">{lead.time}</span>
+                </div>
+                <div className="flex items-center justify-between gap-1 mb-1.5">
+                  <span className="font-mono text-[11px] text-cobalt-300">{lead.phone}</span>
+                  <span className="font-mono text-[10px] font-bold text-emerald-400">{lead.dealValue}</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className={`px-2 py-0.5 rounded text-[9px] font-mono font-bold ${
+                    lead.stage === "Collecting Docs" ? "bg-amber-500/20 text-amber-300 border border-amber-500/30" :
+                    lead.stage === "New Lead" ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30" :
+                    "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+                  }`}>
+                    {lead.stage}
+                  </span>
+                  <span className="px-1.5 py-0.5 rounded text-[9px] font-mono text-zinc-400 bg-zinc-800">
+                    Track: {lead.track}
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {/* Business Hours Indicator */}
+          <div className="p-3 rounded-xl bg-zinc-900/60 border border-zinc-800 text-xs font-mono space-y-1">
+            <div className="flex items-center justify-between text-zinc-300">
+              <span>IST Hours Filter:</span>
+              <span className="text-emerald-400 font-bold">10:00 - 19:30 IST</span>
+            </div>
+            <p className="text-[10px] text-zinc-400">
+              Anti-Spam lock prevents automated messages outside official working hours.
+            </p>
+          </div>
+        </div>
+
+        {/* Center Column: Live WhatsApp Chat Window (5 cols) */}
+        <div className="lg:col-span-5 p-4 rounded-2xl bg-[#0e1621] border border-zinc-800 flex flex-col justify-between h-[460px]">
+          {/* Chat Header */}
+          <div className="flex items-center justify-between pb-3 border-b border-zinc-800/80">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-full bg-cobalt-600 flex items-center justify-center font-bold text-xs text-white">
+                {activeLead.name.charAt(0)}
+              </div>
+              <div>
+                <span className="font-display font-bold text-xs text-white block">{activeLead.name}</span>
+                <span className="font-mono text-[10px] text-emerald-400 flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  Online on WhatsApp
+                </span>
+              </div>
+            </div>
+            <span className="px-2 py-0.5 rounded bg-zinc-800 text-[10px] font-mono text-zinc-300">
+              {activeLead.service.split("(")[0]}
+            </span>
+          </div>
+
+          {/* Messages Scroll Area */}
+          <div className="flex-1 overflow-y-auto py-3 space-y-2.5 pr-1">
+            {activeMessages.map((msg) => (
+              <div
+                key={msg.id}
+                className={`flex flex-col ${
+                  msg.from === "client" ? "items-start" : "items-end"
+                }`}
+              >
+                <div
+                  className={`max-w-[85%] p-3 rounded-2xl text-xs font-sans leading-relaxed whitespace-pre-line ${
+                    msg.from === "client"
+                      ? "bg-[#182533] text-zinc-200 rounded-tl-sm border border-white/5"
+                      : "bg-[#2b5278] text-white rounded-tr-sm border border-cobalt-400/20"
+                  }`}
+                >
+                  {msg.isDrip && (
+                    <div className="flex items-center gap-1 text-[9px] font-mono text-cyan-300 font-bold mb-1 pb-1 border-b border-cyan-400/20">
+                      <Zap className="w-3 h-3 text-cyan-300" />
+                      AUTO DRIP CADENCE (Track {activeLead.track})
+                    </div>
+                  )}
+                  {msg.text}
+                  <div className="flex items-center justify-end gap-1 mt-1 text-[9px] text-zinc-300 font-mono">
+                    <span>{msg.time}</span>
+                    {msg.from !== "client" && <CheckCheck className="w-3 h-3 text-cyan-300" />}
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {isTyping && (
+              <div className="flex items-center gap-1.5 p-2 rounded-xl bg-[#182533] w-24 text-[10px] text-zinc-400 font-mono">
+                <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce" />
+                <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce delay-100" />
+                <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce delay-200" />
+                <span>typing...</span>
+              </div>
+            )}
+          </div>
+
+          {/* Quick Canned Snippet Triggers */}
+          <div className="pt-2 border-t border-zinc-800/80 space-y-2">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="font-mono text-[9px] text-zinc-400 font-bold">SNIPPETS:</span>
+              <button
+                onClick={() => handleCannedSnippet("/docs")}
+                className="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-mono text-[10px] font-bold transition-all"
+              >
+                /docs
+              </button>
+              <button
+                onClick={() => handleCannedSnippet("/vpob")}
+                className="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-mono text-[10px] font-bold transition-all"
+              >
+                /vpob
+              </button>
+              <button
+                onClick={() => handleCannedSnippet("/bank")}
+                className="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-mono text-[10px] font-bold transition-all"
+              >
+                /bank
+              </button>
+              <button
+                onClick={handleSimulateClientInquiry}
+                className="ml-auto px-2 py-0.5 rounded bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-mono text-[10px] font-bold transition-all"
+              >
+                + Sim Client Reply
+              </button>
+            </div>
+
+            {/* Input Form */}
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                placeholder="Type reply or test auto-pilot..."
+                value={customMsg}
+                onChange={(e) => setCustomMsg(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSendCustomMessage()}
+                className="flex-1 px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-cobalt-500 font-sans"
+              />
+              <button
+                onClick={() => handleSendCustomMessage()}
+                className="p-2 rounded-xl bg-cobalt-600 hover:bg-cobalt-500 text-white font-mono transition-all"
+              >
+                <Send className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Drip Engine & Safeguards Inspector (3 cols) */}
+        <div className="lg:col-span-3 p-4 rounded-2xl bg-zinc-950 border border-zinc-800/80 space-y-4">
+          <div>
+            <span className="font-mono text-xs font-bold text-zinc-300 uppercase tracking-wider block mb-1">
+              Drip Follow-Up Engine
+            </span>
+            <div className="p-2.5 rounded-xl bg-zinc-900/60 border border-zinc-800 text-[11px] font-mono space-y-1">
+              <div className="flex justify-between">
+                <span className="text-zinc-400">Assigned Track:</span>
+                <span className="text-cyan-400 font-bold">Track {activeLead.track}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-zinc-400">Current Step:</span>
+                <span className="text-white font-bold">{activeLead.dripStep} of 4</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Drip Cadence Steps Visualizer */}
+          <div className="space-y-2">
+            <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-widest block">
+              Cadence Schedule:
+            </span>
+            <div className="space-y-1.5 text-xs font-sans">
+              <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between text-[11px]">
+                <span className="text-emerald-300 font-semibold">1. Value Hook / Prime 1-Day</span>
+                <span className="font-mono text-[9px] text-emerald-400">Delivered ✓</span>
+              </div>
+              <div className="p-2 rounded-lg bg-cobalt-500/10 border border-cobalt-500/30 flex items-center justify-between text-[11px]">
+                <span className="text-cobalt-200 font-semibold">2. 4.9★ Review Proof</span>
+                <span className="font-mono text-[9px] text-cobalt-400">Queued</span>
+              </div>
+              <div className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-between text-[11px]">
+                <span className="text-zinc-400">3. Gentle Breakup / Close</span>
+                <span className="font-mono text-[9px] text-zinc-500">Day 6</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Anti-Spam Safeguards Audit */}
+          <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-2 text-[10px] font-mono">
+            <span className="text-zinc-300 font-bold block uppercase tracking-wider">
+              Anti-Spam Safeguards:
+            </span>
+            <div className="flex items-center gap-1.5 text-emerald-400">
+              <Check className="w-3 h-3 text-emerald-400" />
+              <span>Client Last-Msg Interceptor Active</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-emerald-400">
+              <Check className="w-3 h-3 text-emerald-400" />
+              <span>Self-Healing Drip Persistence</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-emerald-400">
+              <Check className="w-3 h-3 text-emerald-400" />
+              <span>Meta CAPI Ad Conversion Sync</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ===============================================================
+// 9. 99% PRECISION GST PURCHASE & SALES INVOICE OCR SIMULATOR
+// ===============================================================
+export function PurchaseInvoiceOcrSimulator() {
+  const [selectedInvoice, setSelectedInvoice] = useState<"inv_1" | "inv_2">("inv_1");
+  const [activeHighlight, setActiveHighlight] = useState<string | null>(null);
+  const [activeView, setActiveView] = useState<"fields" | "json">("fields");
+
+  const invoiceData = {
+    inv_1: {
+      title: "Silver Cloud Logistics Pvt Ltd (Inter-State IGST)",
+      supplier: {
+        name: "Silver Cloud Logistics Pvt Ltd",
+        gstin: "27AABCS1429B1ZB",
+        state: "Maharashtra (27)",
+        status: "Valid Checksum (Mod-36 Verified)",
+        spatialLabel: "Billed By / Supplier"
+      },
+      buyer: {
+        name: "Neelkanth Enterprises",
+        gstin: "19AUEPG0367J1ZK",
+        state: "West Bengal (19)",
+        status: "Valid Checksum (Mod-36 Verified)",
+        spatialLabel: "Bill To / Recipient"
+      },
+      invoiceNo: "SCL/2026/0891",
+      date: "18-Aug-2026",
+      items: [
+        { hsn: "996511", desc: "Freight Forwarding - Multi-State Hub Logistics", taxable: 65000, rate: "18% IGST", tax: 11700, total: 76700 },
+        { hsn: "996512", desc: "Warehouse Cross-Docking Handling Charges", taxable: 19500, rate: "18% IGST", tax: 3510, total: 23010 }
+      ],
+      taxableValue: 84500,
+      cgst: 0,
+      sgst: 0,
+      igst: 15210,
+      grandTotal: 99710,
+      delta: 0.00
+    },
+    inv_2: {
+      title: "Apex Precision Tools Ltd (Intra-State CGST + SGST)",
+      supplier: {
+        name: "Apex Precision Tools Ltd",
+        gstin: "19AAACP2341M1ZU",
+        state: "West Bengal (19)",
+        status: "Valid Checksum (Mod-36 Verified)",
+        spatialLabel: "Billed By / Supplier"
+      },
+      buyer: {
+        name: "Neelkanth Enterprises",
+        gstin: "19AUEPG0367J1ZK",
+        state: "West Bengal (19)",
+        status: "Valid Checksum (Mod-36 Verified)",
+        spatialLabel: "Bill To / Recipient"
+      },
+      invoiceNo: "APT-KOL-4421",
+      date: "24-Aug-2026",
+      items: [
+        { hsn: "846693", desc: "CNC Industrial Cutting Inserts (Grade P25)", taxable: 42000, rate: "9% CGST + 9% SGST", tax: 7560, total: 49560 },
+        { hsn: "846694", desc: "Hydraulic Clamping Tool Holders", taxable: 18000, rate: "9% CGST + 9% SGST", tax: 3240, total: 21240 }
+      ],
+      taxableValue: 60000,
+      cgst: 5400,
+      sgst: 5400,
+      igst: 0,
+      grandTotal: 70800,
+      delta: 0.00
+    }
+  };
+
+  const curr = invoiceData[selectedInvoice];
+
+  return (
+    <div className="space-y-6">
+      {/* Top Banner Status */}
+      <div className="p-4 rounded-2xl bg-zinc-950/80 border border-white/10 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-cobalt-500/10 border border-cobalt-500/20 flex items-center justify-center text-cobalt-400">
+            <Scan className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-display font-bold text-sm text-white">PaddleOCR 3.x Purchase Invoice Engine</span>
+              <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-mono font-bold border border-emerald-500/30">
+                99% Precision • ₹0 API Cost
+              </span>
+            </div>
+            <p className="font-mono text-xs text-zinc-300">
+              Spatial coordinate separation • Mod-36 GSTIN checksum validation • Automatic OCR typo correction
+            </p>
+          </div>
+        </div>
+
+        {/* Invoice Selector Buttons */}
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setSelectedInvoice("inv_1")}
+            className={`px-3 py-1.5 rounded-xl font-mono text-xs font-bold transition-all ${
+              selectedInvoice === "inv_1"
+                ? "bg-cobalt-600 text-white shadow-lg shadow-cobalt-600/30"
+                : "bg-zinc-800 text-zinc-300 hover:text-white"
+            }`}
+          >
+            Invoice 1 (IGST)
+          </button>
+          <button
+            onClick={() => setSelectedInvoice("inv_2")}
+            className={`px-3 py-1.5 rounded-xl font-mono text-xs font-bold transition-all ${
+              selectedInvoice === "inv_2"
+                ? "bg-cobalt-600 text-white shadow-lg shadow-cobalt-600/30"
+                : "bg-zinc-800 text-zinc-300 hover:text-white"
+            }`}
+          >
+            Invoice 2 (CGST+SGST)
+          </button>
+        </div>
+      </div>
+
+      {/* Side-by-Side Document Renderer + Structured Panel */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Left: Document Canvas with Interactive SVG Bounding Boxes (6 cols) */}
+        <div className="lg:col-span-6 p-5 rounded-2xl bg-zinc-950 border border-zinc-800 flex flex-col justify-between">
+          <div className="flex items-center justify-between pb-3 border-b border-zinc-800 mb-4">
+            <span className="font-mono text-xs font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
+              <FileText className="w-3.5 h-3.5 text-cobalt-400" />
+              Document Spatial Bounding Canvas
+            </span>
+            <span className="font-mono text-[10px] text-zinc-400">
+              Hover boxes to trace extracted fields
+            </span>
+          </div>
+
+          {/* Simulated Paper Invoice Document */}
+          <div className="relative p-6 rounded-xl bg-[#14171f] border border-zinc-700/80 shadow-2xl font-mono text-xs space-y-4">
+            {/* Header / Invoice Title Box */}
+            <div
+              onMouseEnter={() => setActiveHighlight("header")}
+              onMouseLeave={() => setActiveHighlight(null)}
+              className={`p-3 rounded-lg border transition-all cursor-pointer ${
+                activeHighlight === "header"
+                  ? "bg-cobalt-500/20 border-cobalt-400 ring-2 ring-cobalt-400/50"
+                  : "bg-zinc-900/60 border-zinc-700 hover:border-zinc-500"
+              }`}
+            >
+              <div className="flex justify-between items-start">
+                <div>
+                  <span className="font-bold text-sm text-white block">{curr.supplier.name}</span>
+                  <span className="text-[11px] text-zinc-300">GSTIN: {curr.supplier.gstin}</span>
+                </div>
+                <div className="text-right">
+                  <span className="text-[10px] font-bold text-cobalt-400 block">TAX INVOICE</span>
+                  <span className="text-[11px] text-zinc-300">{curr.invoiceNo}</span>
+                  <span className="text-[10px] text-zinc-400 block">Date: {curr.date}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Buyer Box */}
+            <div
+              onMouseEnter={() => setActiveHighlight("buyer")}
+              onMouseLeave={() => setActiveHighlight(null)}
+              className={`p-3 rounded-lg border transition-all cursor-pointer ${
+                activeHighlight === "buyer"
+                  ? "bg-cobalt-500/20 border-cobalt-400 ring-2 ring-cobalt-400/50"
+                  : "bg-zinc-900/60 border-zinc-700 hover:border-zinc-500"
+              }`}
+            >
+              <span className="text-[10px] text-zinc-400 block uppercase font-bold">Billed To (Recipient):</span>
+              <span className="font-bold text-xs text-white block">{curr.buyer.name}</span>
+              <span className="text-[11px] text-zinc-300">GSTIN: {curr.buyer.gstin} ({curr.buyer.state})</span>
+            </div>
+
+            {/* Line Items Table Box */}
+            <div
+              onMouseEnter={() => setActiveHighlight("table")}
+              onMouseLeave={() => setActiveHighlight(null)}
+              className={`p-3 rounded-lg border transition-all cursor-pointer ${
+                activeHighlight === "table"
+                  ? "bg-cobalt-500/20 border-cobalt-400 ring-2 ring-cobalt-400/50"
+                  : "bg-zinc-900/60 border-zinc-700 hover:border-zinc-500"
+              }`}
+            >
+              <div className="flex justify-between text-[10px] font-bold text-zinc-400 border-b border-zinc-700 pb-1 mb-2">
+                <span>ITEM DESCRIPTION</span>
+                <span>HSN</span>
+                <span>TAXABLE</span>
+                <span>TOTAL</span>
+              </div>
+              {curr.items.map((item, idx) => (
+                <div key={idx} className="flex justify-between text-[11px] text-zinc-200 py-1">
+                  <span className="truncate max-w-[160px]">{item.desc}</span>
+                  <span className="text-zinc-400">{item.hsn}</span>
+                  <span>₹{item.taxable.toLocaleString("en-IN")}</span>
+                  <span className="font-bold text-white">₹{item.total.toLocaleString("en-IN")}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Totals & Taxes Box */}
+            <div
+              onMouseEnter={() => setActiveHighlight("totals")}
+              onMouseLeave={() => setActiveHighlight(null)}
+              className={`p-3 rounded-lg border transition-all cursor-pointer flex justify-between items-center ${
+                activeHighlight === "totals"
+                  ? "bg-emerald-500/20 border-emerald-400 ring-2 ring-emerald-400/50"
+                  : "bg-zinc-900/60 border-zinc-700 hover:border-zinc-500"
+              }`}
+            >
+              <div>
+                <span className="text-[10px] text-zinc-400 block">Total Taxable: ₹{curr.taxableValue.toLocaleString("en-IN")}</span>
+                <span className="text-[10px] text-cyan-400 block">
+                  {curr.igst > 0 ? `IGST (18%): ₹${curr.igst.toLocaleString("en-IN")}` : `CGST + SGST (9%+9%): ₹${(curr.cgst + curr.sgst).toLocaleString("en-IN")}`}
+                </span>
+              </div>
+              <div className="text-right">
+                <span className="text-[10px] text-zinc-400 block font-bold uppercase">Grand Total:</span>
+                <span className="font-display font-extrabold text-sm text-emerald-400">
+                  ₹{curr.grandTotal.toLocaleString("en-IN")}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-3 flex items-center justify-between text-[11px] font-mono text-zinc-400">
+            <span>Engine: PaddleOCR v4-REC + LayoutLM</span>
+            <span className="text-emerald-400 font-bold">100% On-Device Processing</span>
+          </div>
+        </div>
+
+        {/* Right: Extracted Structured Fields & Math Audit (6 cols) */}
+        <div className="lg:col-span-6 p-5 rounded-2xl bg-zinc-950 border border-zinc-800 flex flex-col justify-between space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
+            <span className="font-mono text-xs font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+              Extracted Accounting Schema
+            </span>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => setActiveView("fields")}
+                className={`px-2.5 py-1 rounded-lg font-mono text-[10px] font-bold ${
+                  activeView === "fields" ? "bg-cobalt-600 text-white" : "bg-zinc-800 text-zinc-400"
+                }`}
+              >
+                Structured
+              </button>
+              <button
+                onClick={() => setActiveView("json")}
+                className={`px-2.5 py-1 rounded-lg font-mono text-[10px] font-bold ${
+                  activeView === "json" ? "bg-cobalt-600 text-white" : "bg-zinc-800 text-zinc-400"
+                }`}
+              >
+                JSON Schema
+              </button>
+            </div>
+          </div>
+
+          {activeView === "fields" ? (
+            <div className="space-y-4 font-mono text-xs">
+              {/* Supplier Extracted Card */}
+              <div className={`p-3 rounded-xl border transition-all ${
+                activeHighlight === "header" ? "bg-cobalt-500/10 border-cobalt-400" : "bg-zinc-900 border-zinc-800"
+              }`}>
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-[10px] font-bold text-zinc-400">SUPPLIER (BILLED BY):</span>
+                  <span className="text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                    Mod-36 Valid ✓
+                  </span>
+                </div>
+                <div className="font-sans font-bold text-sm text-white mb-1">{curr.supplier.name}</div>
+                <div className="flex justify-between text-[11px] text-zinc-300">
+                  <span>GSTIN: <strong className="text-cobalt-400">{curr.supplier.gstin}</strong></span>
+                  <span>{curr.supplier.state}</span>
+                </div>
+              </div>
+
+              {/* Buyer Extracted Card */}
+              <div className={`p-3 rounded-xl border transition-all ${
+                activeHighlight === "buyer" ? "bg-cobalt-500/10 border-cobalt-400" : "bg-zinc-900 border-zinc-800"
+              }`}>
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-[10px] font-bold text-zinc-400">BUYER (BILL TO):</span>
+                  <span className="text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                    Mod-36 Valid ✓
+                  </span>
+                </div>
+                <div className="font-sans font-bold text-sm text-white mb-1">{curr.buyer.name}</div>
+                <div className="flex justify-between text-[11px] text-zinc-300">
+                  <span>GSTIN: <strong className="text-cobalt-400">{curr.buyer.gstin}</strong></span>
+                  <span>{curr.buyer.state}</span>
+                </div>
+              </div>
+
+              {/* Mathematical Reconciliation Summary */}
+              <div className={`p-3.5 rounded-xl border transition-all ${
+                activeHighlight === "totals" ? "bg-emerald-500/10 border-emerald-400" : "bg-zinc-900 border-zinc-800"
+              }`}>
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-[10px] font-bold text-zinc-400 uppercase">Math Reconciliation Check:</span>
+                  <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                    Delta: ₹0.00 (Zero Discrepancy)
+                  </span>
+                </div>
+                <div className="space-y-1.5 text-[11px]">
+                  <div className="flex justify-between text-zinc-300">
+                    <span>Taxable Base Value:</span>
+                    <span>₹{curr.taxableValue.toLocaleString("en-IN")}</span>
+                  </div>
+                  <div className="flex justify-between text-zinc-300">
+                    <span>Total Computed GST (CGST/SGST/IGST):</span>
+                    <span>₹{(curr.cgst + curr.sgst + curr.igst).toLocaleString("en-IN")}</span>
+                  </div>
+                  <div className="flex justify-between font-bold text-white pt-1.5 border-t border-zinc-800">
+                    <span>Reconciled Grand Total:</span>
+                    <span className="text-emerald-400 font-display">₹{curr.grandTotal.toLocaleString("en-IN")}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="p-3 rounded-xl bg-zinc-900 border border-zinc-800 font-mono text-[11px] text-zinc-300 overflow-x-auto max-h-[300px]">
+              <pre>{JSON.stringify(curr, null, 2)}</pre>
+            </div>
+          )}
+
+          {/* Action Buttons */}
+          <div className="pt-2 border-t border-zinc-800 flex items-center justify-between gap-3">
+            <span className="text-[10px] font-mono text-zinc-400">
+              Export formats: JSON / CSV / Excel (.xlsx)
+            </span>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => alert("JSON accounting payload copied to clipboard!")}
+                className="px-3 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-mono text-xs font-bold transition-all flex items-center gap-1.5"
+              >
+                <Copy className="w-3 h-3" />
+                Copy JSON
+              </button>
+              <button
+                onClick={() => alert("Simulated Excel (.xlsx) generated with HSN breakdown!")}
+                className="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold transition-all flex items-center gap-1.5 shadow-lg shadow-emerald-600/30"
+              >
+                <Download className="w-3 h-3" />
+                Download Excel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// =========================================================================
+// 10. AUTO GST REGISTRATION & AUTONOMOUS LEGAL DRAFTING SIMULATOR
+// =========================================================================
+export function AutoGstDraftingSimulator() {
+  const [docType, setDocType] = useState<"NOC" | "RENT" | "DEED">("NOC");
+  const [selectedPreset, setSelectedPreset] = useState("preset_1");
+  const [stampMarginMm, setStampMarginMm] = useState(80);
+  const [monthlyRent, setMonthlyRent] = useState(25000);
+  const [copied, setCopied] = useState(false);
+
+  const presets = {
+    preset_1: {
+      location: "Commercial Office - Kolkata (West Bengal)",
+      ownerName: "Subhash Chandra Ghosh",
+      tenantName: "Neelkanth Enterprises (Prop. Shwet Ranjan)",
+      propertyAddress: "Flat 4B, 3rd Floor, Diamond Heritage, 16 Strand Road, Fairley Place, Kolkata, West Bengal - 700001",
+      electricityConsumerNo: "09124489102",
+      tenureMonths: 11
+    },
+    preset_2: {
+      location: "Fulfillment Warehouse - Gurugram (Haryana)",
+      ownerName: "Harpreet Singh Narang",
+      tenantName: "Apex Retail Solutions LLP",
+      propertyAddress: "Plot No. 42, Sector 18, Udyog Vihar Phase IV, Gurugram, Haryana - 122015",
+      electricityConsumerNo: "3319084421",
+      tenureMonths: 24
+    },
+    preset_3: {
+      location: "Registered Tech Office - Bengaluru (Karnataka)",
+      ownerName: "K. R. Venkatesh",
+      tenantName: "Taxamicus Legal Tech Solutions",
+      propertyAddress: "Suite 302, 3rd Floor, Brigade Towers, 135 Residency Road, Bengaluru, Karnataka - 560025",
+      electricityConsumerNo: "772109843",
+      tenureMonths: 36
+    }
+  };
+
+  const curr = presets[selectedPreset as keyof typeof presets];
+
+  // Number to Indian words conversion
+  const numberToWords = (num: number) => {
+    if (num === 25000) return "Twenty Five Thousand Rupees Only";
+    if (num === 35000) return "Thirty Five Thousand Rupees Only";
+    if (num === 50000) return "Fifty Thousand Rupees Only";
+    return `${num.toLocaleString("en-IN")} Rupees Only`;
+  };
+
+  const handleCopy = () => {
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Top Banner Status */}
+      <div className="p-4 rounded-2xl bg-zinc-950/80 border border-white/10 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+            <FileCode className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-display font-bold text-sm text-white">Auto GST Registration & Legal Drafter</span>
+              <span className="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-400 text-[10px] font-mono font-bold border border-purple-500/30">
+                Gemini Multimodal • 90% Automation
+              </span>
+            </div>
+            <p className="font-mono text-xs text-zinc-300">
+              Autonomous legal generation of NOC, Commercial Rent Agreement & Partnership Deeds with Address Audit Match
+            </p>
+          </div>
+        </div>
+
+        {/* Document Format Tabs */}
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setDocType("NOC")}
+            className={`px-3 py-1.5 rounded-xl font-mono text-xs font-bold transition-all ${
+              docType === "NOC"
+                ? "bg-purple-600 text-white shadow-lg shadow-purple-600/30"
+                : "bg-zinc-800 text-zinc-300 hover:text-white"
+            }`}
+          >
+            Owner NOC
+          </button>
+          <button
+            onClick={() => setDocType("RENT")}
+            className={`px-3 py-1.5 rounded-xl font-mono text-xs font-bold transition-all ${
+              docType === "RENT"
+                ? "bg-purple-600 text-white shadow-lg shadow-purple-600/30"
+                : "bg-zinc-800 text-zinc-300 hover:text-white"
+            }`}
+          >
+            Rent Agreement
+          </button>
+          <button
+            onClick={() => setDocType("DEED")}
+            className={`px-3 py-1.5 rounded-xl font-mono text-xs font-bold transition-all ${
+              docType === "DEED"
+                ? "bg-purple-600 text-white shadow-lg shadow-purple-600/30"
+                : "bg-zinc-800 text-zinc-300 hover:text-white"
+            }`}
+          >
+            Partnership Deed
+          </button>
+        </div>
+      </div>
+
+      {/* Main Grid: Controls + Document Preview */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Left Column: Preset Selectors & Customization (4 cols) */}
+        <div className="lg:col-span-4 p-5 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-4">
+          <div>
+            <span className="font-mono text-xs font-bold text-zinc-300 uppercase tracking-wider block mb-2">
+              Select Property Preset:
+            </span>
+            <div className="space-y-2">
+              {Object.entries(presets).map(([k, val]) => (
+                <button
+                  key={k}
+                  onClick={() => setSelectedPreset(k)}
+                  className={`w-full p-3 rounded-xl border text-left font-mono text-xs transition-all ${
+                    selectedPreset === k
+                      ? "bg-purple-600/20 border-purple-500 text-white"
+                      : "bg-zinc-900 border-zinc-800 text-zinc-300 hover:text-white"
+                  }`}
+                >
+                  <span className="font-bold text-white block mb-0.5">{val.location}</span>
+                  <span className="text-[10px] text-zinc-400 block truncate">{val.propertyAddress}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Interactive Parameters */}
+          <div className="space-y-3 pt-3 border-t border-zinc-800 font-mono text-xs">
+            <div>
+              <div className="flex justify-between items-center mb-1 text-zinc-300">
+                <span>Stamp Paper Margin:</span>
+                <span className="text-purple-400 font-bold">{stampMarginMm} mm</span>
+              </div>
+              <input
+                type="range"
+                min="50"
+                max="120"
+                step="5"
+                value={stampMarginMm}
+                onChange={(e) => setStampMarginMm(Number(e.target.value))}
+                className="w-full accent-purple-500 cursor-pointer"
+              />
+              <span className="text-[10px] text-zinc-400 block mt-1">
+                Preserves physical stamp paper printing clearance.
+              </span>
+            </div>
+
+            {docType === "RENT" && (
+              <div>
+                <span className="text-zinc-300 block mb-1">Monthly Rent (INR):</span>
+                <select
+                  value={monthlyRent}
+                  onChange={(e) => setMonthlyRent(Number(e.target.value))}
+                  className="w-full px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-700 text-white font-mono text-xs"
+                >
+                  <option value={25000}>₹25,000 / month</option>
+                  <option value={35000}>₹35,000 / month</option>
+                  <option value={50000}>₹50,000 / month</option>
+                </select>
+                <span className="text-[10px] text-emerald-400 block mt-1 font-sans">
+                  Words: {numberToWords(monthlyRent)}
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* Address Parity Audit Status */}
+          <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-1.5 text-xs font-mono">
+            <div className="flex items-center justify-between text-zinc-300 font-bold">
+              <span>Address Parity Audit:</span>
+              <span className="text-emerald-400">100% Match ✓</span>
+            </div>
+            <p className="text-[10px] text-zinc-400 leading-relaxed font-sans">
+              Electricity bill consumer #{curr.electricityConsumerNo} cross-verified against Principal Place of Business address. Zero GSTR-REG-01 notice risk.
+            </p>
+          </div>
+        </div>
+
+        {/* Right Column: Live Formatted Legal Document Preview (8 cols) */}
+        <div className="lg:col-span-8 p-6 rounded-2xl bg-zinc-950 border border-zinc-800 flex flex-col justify-between">
+          <div className="flex items-center justify-between pb-3 border-b border-zinc-800 mb-4">
+            <span className="font-mono text-xs font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
+              <FileText className="w-3.5 h-3.5 text-purple-400" />
+              Statutory Formatted Legal Preview
+            </span>
+            <span className="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-[10px] font-mono text-purple-300">
+              GSTN Compliant Layout
+            </span>
+          </div>
+
+          {/* Document Sheet Viewer */}
+          <div className="p-6 rounded-xl bg-[#0f1117] border border-zinc-700 shadow-2xl font-serif text-zinc-200 text-xs leading-relaxed space-y-4 max-h-[380px] overflow-y-auto">
+            {/* Stamp Paper Top Header Margin */}
+            <div
+              style={{ height: `${stampMarginMm * 0.9}px` }}
+              className="border-2 border-dashed border-zinc-700/60 rounded-lg flex items-center justify-center text-zinc-500 font-mono text-[10px] uppercase tracking-widest text-center px-4"
+            >
+              [ {stampMarginMm}mm Stamp Paper Margin Reserved for State Judicial Stamp ]
+            </div>
+
+            {/* Document Content based on Type */}
+            {docType === "NOC" && (
+              <div className="space-y-3 font-sans">
+                <h3 className="font-display font-extrabold text-center text-sm uppercase text-white tracking-wide border-b border-zinc-800 pb-2">
+                  NO OBJECTION CERTIFICATE (NOC)
+                </h3>
+                <p className="text-justify text-zinc-300">
+                  I, <strong>{curr.ownerName}</strong>, residing at the address mentioned herein, hereby solemnly declare and state as follows:
+                </p>
+                <p className="text-justify text-zinc-300">
+                  1. That I am the absolute legal owner and in lawful possession of the premises situated at <strong>{curr.propertyAddress}</strong> (Electricity Consumer No: <strong>{curr.electricityConsumerNo}</strong>).
+                </p>
+                <p className="text-justify text-zinc-300">
+                  2. That I have granted permission and have <strong>NO OBJECTION</strong> whatsoever for <strong>{curr.tenantName}</strong> to operate their business and obtain Goods and Services Tax (GST) Registration under the CGST/SGST Act at the aforesaid premises.
+                </p>
+                <p className="text-justify text-zinc-300">
+                  3. That I have not rented out this specific allotted portion to any conflicting business entity.
+                </p>
+                <div className="pt-4 flex justify-between font-mono text-xs text-zinc-300">
+                  <div>
+                    <span>Date: <strong>01-Oct-2026</strong></span><br />
+                    <span>Place: <strong>Kolkata</strong></span>
+                  </div>
+                  <div className="text-right">
+                    <span className="font-bold text-white">Signature of Owner</span><br />
+                    <span>({curr.ownerName})</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {docType === "RENT" && (
+              <div className="space-y-3 font-sans">
+                <h3 className="font-display font-extrabold text-center text-sm uppercase text-white tracking-wide border-b border-zinc-800 pb-2">
+                  COMMERCIAL LEASE & RENT AGREEMENT
+                </h3>
+                <p className="text-justify text-zinc-300">
+                  This Commercial Lease Agreement is executed on this <strong>1st day of October, 2026</strong>, between <strong>{curr.ownerName}</strong> (hereinafter referred to as the <em>LESSOR</em>) of the ONE PART and <strong>{curr.tenantName}</strong> (hereinafter referred to as the <em>LESSEE</em>) of the OTHER PART.
+                </p>
+                <p className="text-justify text-zinc-300">
+                  <strong>1. PREMISES:</strong> The Lessor hereby lets out the commercial premises situated at <strong>{curr.propertyAddress}</strong> for carrying on commercial activities and e-commerce trade.
+                </p>
+                <p className="text-justify text-zinc-300">
+                  <strong>2. MONTHLY RENT:</strong> The Lessee shall pay to the Lessor a monthly sum of <strong>₹{monthlyRent.toLocaleString("en-IN")} ({numberToWords(monthlyRent)})</strong> payable on or before the 10th of every calendar month.
+                </p>
+                <p className="text-justify text-zinc-300">
+                  <strong>3. TENURE:</strong> This Agreement shall remain in full force for an initial term of <strong>{curr.tenureMonths} Months</strong> with a standard 5% escalation upon mutual renewal.
+                </p>
+              </div>
+            )}
+
+            {docType === "DEED" && (
+              <div className="space-y-3 font-sans">
+                <h3 className="font-display font-extrabold text-center text-sm uppercase text-white tracking-wide border-b border-zinc-800 pb-2">
+                  DEED OF PARTNERSHIP
+                </h3>
+                <p className="text-justify text-zinc-300">
+                  This Partnership Deed is made on this <strong>1st day of October, 2026</strong>, between Party of the First Part and Party of the Second Part to carry on business under the name and style of <strong>{curr.tenantName}</strong>.
+                </p>
+                <p className="text-justify text-zinc-300">
+                  <strong>1. CAPITAL CONTRIBUTION & PROFIT SHARING:</strong> Both partners have agreed to contribute working capital in equal proportions. The net profits or losses of the firm shall be divided equally in the ratio of <strong>50% : 50%</strong>.
+                </p>
+                <p className="text-justify text-zinc-300">
+                  <strong>2. BANK ACCOUNTS & SIGNING POWERS:</strong> All bank accounts shall be operated jointly or severally by both partners as decided mutually by formal resolution.
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Action Footer */}
+          <div className="pt-3 border-t border-zinc-800 flex items-center justify-between flex-wrap gap-2">
+            <span className="font-mono text-xs text-zinc-400">
+              Format: Legal Stamped Layout • Automated Stamp Clearance
+            </span>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleCopy}
+                className="px-3 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-mono text-xs font-bold transition-all flex items-center gap-1.5"
+              >
+                {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                {copied ? "Copied ✓" : "Copy Legal Text"}
+              </button>
+              <button
+                onClick={() => alert("Simulating Chrome Extension Injector: Pushing verified draft directly into gst.gov.in (GSTR-REG-01) form!")}
+                className="px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-bold transition-all shadow-lg shadow-purple-600/30 flex items-center gap-1.5"
+              >
+                <Send className="w-3.5 h-3.5" />
+                Simulate Portal Injection
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+

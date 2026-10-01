@@ -161,6 +161,90 @@ export const projectsData: Project[] = [
     linkText: "Chrome Extension Specs"
   },
   {
+    id: "taxamicus-sales-crm",
+    title: "Taxamicus Sales CRM & AI Auto-Pilot WhatsApp Drip Engine",
+    category: "Technology & AI",
+    summary: "Real-time multi-agent WhatsApp Sales CRM powered by @whiskeysockets/baileys, Google Gemini 1.5 Flash AI Auto-Pilot, and service-aware automated drip follow-ups.",
+    fullDescription: "Engineered a production-ready conversational Sales CRM & Drip Engine designed for high-conversion GST compliance and Virtual Place of Business (VPOB) client acquisition. Connects directly to WhatsApp via pure Node.js WebSockets, pairs with Google Gemini 1.5 Flash for autonomous client qualification and sentiment-guided replies, and runs a service-aware drip engine (Track A: VPOB E-Commerce Amazon Prime 1-Day, Track B: GST Registration, Track C: Missing Documents) with strict Indian Business Hours (10:00 AM - 7:30 PM IST) and anti-spam safeguards. Features a real-time Socket.io Kanban board, atomic SQLite/JSON rolling snapshots, and closed-loop Meta CAPI webhook dispatch.",
+    impactMetrics: [
+      { label: "Response Latency", value: "< 3s" },
+      { label: "Drip Automation", value: "3 Tracks" },
+      { label: "Meta CAPI Webhooks", value: "Closed-Loop" }
+    ],
+    tags: ["WhatsApp Web Engine", "Google Gemini AI", "Automated Drip Engine", "Multi-Agent Kanban", "Socket.io", "SQLite WAL", "Meta CAPI"],
+    year: "2026",
+    status: "Active",
+    highlights: [
+      "Pure Node.js WhatsApp engine (@whiskeysockets/baileys) supporting real-time chat, media dispatch & multi-agent presence",
+      "Gemini 1.5 Flash AI Auto-Pilot with human takeover detection and canned triggers (/docs, /vpob, /bank)",
+      "Automated service-aware drip cadences (VPOB Prime 1-Day Advantage, 4.9★ Social Proof, Document Checklist) with Indian business hours enforcement",
+      "Closed-loop Meta CAPI conversion webhook dispatch to n8n upon client payment and certificate issuance"
+    ],
+    flowchartNodes: [
+      { step: "01", label: "Inbound WhatsApp Socket", detail: "Baileys engine streams incoming customer chats & media via WebSocket." },
+      { step: "02", label: "Gemini AI Auto-Pilot", detail: "Extracts business intent, qualifies service tracks & drafts instant replies." },
+      { step: "03", label: "Service-Aware Drip Engine", detail: "Schedules automated VPOB / GST / Docs cadences within IST business hours." },
+      { step: "04", label: "Kanban & Meta CAPI", detail: "Syncs multi-agent Kanban & triggers closed-loop CAPI ad conversion webhooks." }
+    ],
+    linkText: "Launch Interactive CRM Simulator"
+  },
+  {
+    id: "gst-purchase-invoice-ocr",
+    title: "99% Precision GST Purchase & Sales Invoice OCR Engine",
+    category: "Tax Compliance",
+    summary: "Self-hosted Indian GST invoice OCR and line-item reconciliation web platform powered by PaddleOCR 3.x, Mod-36 checksum validation, and interactive SVG bounding boxes.",
+    fullDescription: "Built a high-precision, self-hosted document processing engine tailored specifically for Indian GST purchase and sales invoices across PDF, JPG, PNG, and WebP formats. Eliminates third-party paid API costs by deploying local PaddleOCR 3.x (PP-OCRv4/v3) deep learning models. Utilizes spatial coordinate analysis to cleanly distinguish Supplier (Billed By) vs. Buyer (Bill To) GSTINs, applies statutory 15-character Mod-36 checksums with automated OCR typo self-healing, parses 4/6/8-digit HSN/SAC codes, and executes mathematical reconciliation across tax slabs with one-click JSON and Excel exports.",
+    impactMetrics: [
+      { label: "Extraction Accuracy", value: "99%" },
+      { label: "API Cost", value: "₹0 (Local Engine)" },
+      { label: "GSTIN Checksum", value: "Mod-36 Validated" }
+    ],
+    tags: ["PaddleOCR 3.x", "Computer Vision", "FastAPI / Python", "Mod-36 Checksum", "Mathematical Reconciliation", "SVG Bounding Boxes", "Excel Export"],
+    year: "2026",
+    status: "Active",
+    highlights: [
+      "Zero API reliance: Self-hosted PaddleOCR 3.x table recognition and text layout extraction pipeline",
+      "Spatial coordinate intelligence distinguishing Supplier vs. Buyer GSTINs with 15-character Mod-36 checksum validation",
+      "Automated OCR typo self-healing (O -> 0, I -> 1, B -> 8, S -> 5) and strict HSN/SAC tariff prioritization",
+      "Interactive side-by-side SVG document canvas highlighting bounding boxes on hover with one-click JSON/Excel exports"
+    ],
+    flowchartNodes: [
+      { step: "01", label: "Multi-Format Upload", detail: "Ingests scanned and digital GST invoices (PDF, JPG, PNG, WebP)." },
+      { step: "02", label: "PaddleOCR Local Pipeline", detail: "Extracts text layout, tabular line items, and spatial coordinates locally." },
+      { step: "03", label: "Mod-36 Checksum & Math Audit", detail: "Validates GSTINs, heals OCR typos, and reconciles line items vs grand total." },
+      { step: "04", label: "Interactive Canvas & Export", detail: "Renders side-by-side SVG highlights with instant Excel and JSON exports." }
+    ],
+    linkText: "Launch Invoice OCR Simulator"
+  },
+  {
+    id: "auto-gst-registration-drafting",
+    title: "Auto GST Registration & Autonomous Legal Drafting Engine",
+    category: "Tax Compliance",
+    summary: "90% automated GST registration workflow engine with multimodal AI document extraction, automated legal drafting (NOC, Rent Agreement, Partnership Deed), and GST portal injector.",
+    fullDescription: "Architected an end-to-end automation platform designed to compress the manual GST registration cycle by 90%. Leverages Google GenAI multimodal pipelines to cross-examine uploaded identity proofs and property documents (Electricity Bills, Municipal Tax Receipts), audits address parity against the Principal Place of Business, and autonomously drafts legally binding, stamp-duty-compliant documents—including Property Owner NOCs, Commercial Rent Agreements (with automated Indian currency word conversion and escalation clauses), and Multi-Partner Partnership Deeds. Integrates image optimization (sharp) and a Chrome extension injector for direct submission on gst.gov.in.",
+    impactMetrics: [
+      { label: "Cycle Automation", value: "90%" },
+      { label: "Legal Document Types", value: "NOC / Rent / Deed" },
+      { label: "Drafting Speed", value: "< 2s" }
+    ],
+    tags: ["Google GenAI", "Legal Drafting Automation", "GST Registration", "NOC & Rent Agreements", "Partnership Deeds", "Address Audit Match", "Chrome Extension"],
+    year: "2026",
+    status: "Active",
+    highlights: [
+      "Autonomous legal drafting of GST-ready Owner NOCs, Commercial Rent Agreements, and Partnership Deeds",
+      "Multimodal document extraction auditing address parity between electricity bills and principal business premises",
+      "Built-in Indian currency word conversion (numberToWordsINR) and customizable stamp-duty margin spacing",
+      "Client document compression pipeline (< 100 KB / 500 KB) and Chrome extension injector for gst.gov.in"
+    ],
+    flowchartNodes: [
+      { step: "01", label: "Document Ingestion", detail: "Uploads electricity bills, municipal receipts, PAN, and partner IDs." },
+      { step: "02", label: "Multimodal AI Audit", detail: "Cross-checks premises address match & extracts landlord/partner details." },
+      { step: "03", label: "Autonomous Legal Drafter", detail: "Generates formatted NOC, Rent Agreement, or Partnership Deed with stamp margins." },
+      { step: "04", label: "Portal Injector & File Ready", detail: "Compresses documents to statutory limits & injects data into gst.gov.in." }
+    ],
+    linkText: "Launch Legal Drafting Simulator"
+  },
+  {
     id: "intrinsic-value-modeler",
     title: "Buffett & Lynch Intrinsic Value & Equity Valuation Engine",
     category: "Investing",

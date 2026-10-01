@@ -79,6 +79,30 @@ export default function Navbar() {
 
   const liveApps = [
     {
+      name: "Taxamicus Sales CRM & AI WhatsApp Engine",
+      url: "#projects",
+      tag: "WhatsApp CRM",
+      status: "⚡ Production-Ready",
+      desc: "Multi-agent WhatsApp CRM with Gemini AI Auto-Pilot & service-aware drip engine.",
+      access: "🔒 Internal Team (Local Staging / Pilot)"
+    },
+    {
+      name: "99% Precision GST Purchase OCR Engine",
+      url: "#projects",
+      tag: "PaddleOCR",
+      status: "⚡ 99% Precision",
+      desc: "Self-hosted PaddleOCR 3.x line-item extractor with Mod-36 checksum validation.",
+      access: "🔒 Internal Team (Local Engine)"
+    },
+    {
+      name: "Auto GST Registration & Legal Drafter",
+      url: "#projects",
+      tag: "AI Drafter",
+      status: "⚡ 90% Automation",
+      desc: "Autonomous drafting of GST-ready NOC, Commercial Rent Agreement & Partnership Deed.",
+      access: "🔒 Internal Team (Local Engine)"
+    },
+    {
       name: "E-Commerce Tax Filing Engine",
       url: "https://experts.taxamicus.in",
       tag: "E-Com Tax",
@@ -200,7 +224,7 @@ export default function Navbar() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <span className="font-bold">5 Live Systems</span>
+                <span className="font-bold">8 Active Systems</span>
               </button>
 
               {/* Live Systems Popover Dropdown */}
@@ -217,7 +241,7 @@ export default function Navbar() {
                     <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
                       <span className="font-mono text-xs font-bold text-white flex items-center gap-2">
                         <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-                        5 LIVE OPERATIONAL SYSTEMS
+                        8 ACTIVE PRODUCTION & PILOT SYSTEMS
                       </span>
                       <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold">
                         ● All Systems Active
