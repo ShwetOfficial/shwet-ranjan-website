@@ -205,31 +205,31 @@ export default function Navbar() {
           <div className="flex items-center gap-2.5 shrink-0">
             <Link
               href="/"
-              className="flex items-center gap-2 group text-white font-display font-black text-sm sm:text-base whitespace-nowrap"
+              className="flex items-center gap-2.5 group text-white font-bold text-sm sm:text-base whitespace-nowrap tracking-tight"
             >
-              <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-cobalt-600 text-white flex items-center justify-center font-mono text-xs font-bold tracking-tighter transition-transform group-hover:scale-105 shadow-md shadow-cobalt-600/30">
+              <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/[0.08] border border-white/10 text-white flex items-center justify-center text-xs font-bold transition-transform group-hover:scale-105 shadow-sm">
                 SR
               </span>
-              <span className="tracking-tight font-black uppercase text-white">SHWET RANJAN</span>
+              <span className="text-white font-semibold">Shwet Ranjan</span>
             </Link>
           </div>
 
           {/* Center: Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2 font-mono text-[11px] xl:text-xs uppercase tracking-wider font-bold text-zinc-300">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5 text-xs font-medium text-slate-300">
             {primaryNavLinks.map((link) => {
               const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
               return (
                 <Link
                   key={link.label}
                   href={link.href}
-                  className={`relative px-2.5 xl:px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap ${
-                    isActive ? "text-white font-extrabold" : "hover:text-white text-zinc-300"
+                  className={`relative px-3.5 py-1.5 rounded-full transition-all whitespace-nowrap ${
+                    isActive ? "text-white font-semibold" : "hover:text-white text-slate-300"
                   }`}
                 >
                   {isActive && (
                     <motion.span
                       layoutId="activeNavTab"
-                      className="absolute inset-0 rounded-full bg-cobalt-600/30 border border-cobalt-500/40 -z-10"
+                      className="absolute inset-0 rounded-full bg-white/[0.08] border border-white/[0.12] -z-10 shadow-sm"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -240,19 +240,16 @@ export default function Navbar() {
           </nav>
 
           {/* Right: Search & Contact CTA */}
-          <div className="flex items-center gap-2 shrink-0 relative">
+          <div className="flex items-center gap-2.5 shrink-0 relative">
             {/* Live Interactive Status Pill */}
             <div className="relative">
               <button
                 onClick={() => setLiveAppsOpen((prev) => !prev)}
                 onMouseEnter={() => setLiveAppsOpen(true)}
-                className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-[11px] font-mono text-emerald-400 whitespace-nowrap transition-all cursor-pointer shadow-sm hover:scale-105"
+                className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-xs font-medium text-slate-300 whitespace-nowrap transition-all cursor-pointer shadow-sm"
               >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span className="font-bold">8 Active Systems</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>8 Live Systems</span>
               </button>
 
               {/* Live Systems Popover Dropdown */}
@@ -371,25 +368,25 @@ export default function Navbar() {
             <button
               onClick={() => setCmdPaletteOpen(true)}
               data-cursor="SEARCH"
-              className="px-3 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 transition-colors flex items-center gap-1.5 text-xs font-mono font-semibold whitespace-nowrap"
+              className="px-3 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 transition-colors flex items-center gap-1.5 text-xs font-medium whitespace-nowrap"
               aria-label="Search Command Palette"
             >
-              <Search className="w-3.5 h-3.5 text-zinc-300" />
-              <span className="hidden sm:inline-block">Cmd + K</span>
+              <Search className="w-3.5 h-3.5 text-slate-400" />
+              <span className="hidden sm:inline-block text-[11px] text-slate-400">Cmd K</span>
             </button>
 
             <Link
               href="/advisory#contact"
               data-cursor="CONTACT"
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-cobalt-600 text-white text-xs font-mono font-bold uppercase tracking-wider hover:bg-cobalt-500 transition-all shadow-md shadow-cobalt-600/30 whitespace-nowrap group shrink-0"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-500 transition-all shadow-sm shadow-blue-600/20 whitespace-nowrap group shrink-0"
             >
-              <span>Get In Touch</span>
+              <span>Consult / Inquire</span>
               <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0" />
             </Link>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-full text-zinc-300 hover:bg-zinc-800 transition-colors"
+              className="lg:hidden p-2 rounded-full text-slate-300 hover:bg-white/[0.08] transition-colors"
               aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -405,46 +402,46 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-x-4 top-20 z-40 p-6 rounded-3xl bg-[#09090b]/95 border border-white/10 backdrop-blur-2xl shadow-2xl lg:hidden flex flex-col gap-4"
+            className="fixed inset-x-4 top-20 z-40 p-6 rounded-3xl bg-[#0F1420]/95 border border-white/10 backdrop-blur-2xl shadow-2xl lg:hidden flex flex-col gap-4"
           >
-            <nav className="flex flex-col gap-3 font-mono text-sm font-bold uppercase tracking-wider">
+            <nav className="flex flex-col gap-2 text-sm font-medium">
               <Link
                 href="/"
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-2 rounded-xl bg-zinc-900/80 text-zinc-200 hover:bg-cobalt-600 hover:text-white transition-all flex items-center justify-between"
+                className="px-4 py-2.5 rounded-xl bg-white/[0.04] text-slate-200 hover:bg-blue-600 hover:text-white transition-all flex items-center justify-between"
               >
                 <span>Home</span>
-                <ArrowUpRight className="w-4 h-4 text-zinc-500" />
+                <ArrowUpRight className="w-4 h-4 text-slate-400" />
               </Link>
               {primaryNavLinks.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-2 rounded-xl bg-zinc-900/80 text-zinc-200 hover:bg-cobalt-600 hover:text-white transition-all flex items-center justify-between"
+                  className="px-4 py-2.5 rounded-xl bg-white/[0.04] text-slate-200 hover:bg-blue-600 hover:text-white transition-all flex items-center justify-between"
                 >
                   <span>{link.label}</span>
-                  <ArrowUpRight className="w-4 h-4 text-zinc-500" />
+                  <ArrowUpRight className="w-4 h-4 text-slate-400" />
                 </Link>
               ))}
             </nav>
-            <div className="pt-4 border-t border-zinc-800 flex flex-col gap-2">
+            <div className="pt-4 border-t border-white/[0.08] flex flex-col gap-2">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   setCmdPaletteOpen(true);
                 }}
-                className="w-full py-3 rounded-xl bg-zinc-900 text-zinc-300 font-mono text-xs font-bold flex items-center justify-center gap-2 border border-zinc-800"
+                className="w-full py-2.5 rounded-xl bg-white/[0.04] text-slate-300 text-xs font-medium flex items-center justify-center gap-2 border border-white/[0.08]"
               >
-                <Search className="w-4 h-4 text-zinc-300" />
-                <span>Search Command Palette (Cmd + K)</span>
+                <Search className="w-4 h-4 text-slate-400" />
+                <span>Quick Search (Cmd + K)</span>
               </button>
               <Link
                 href="/advisory#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3 rounded-xl bg-cobalt-600 text-white font-mono text-xs font-bold uppercase tracking-wider text-center block shadow-lg shadow-cobalt-600/30"
+                className="w-full py-2.5 rounded-xl bg-blue-600 text-white text-xs font-semibold text-center block shadow-lg shadow-blue-600/30"
               >
-                Get In Touch Direct
+                Schedule Consultation
               </Link>
             </div>
           </motion.div>

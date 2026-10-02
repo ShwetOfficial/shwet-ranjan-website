@@ -6,8 +6,7 @@ import { motion } from "framer-motion";
 export default function CustomCursor() {
   const [mounted, setMounted] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
-  const [cursorText, setCursorText] = useState("");
-  const [isHovered, setIsHovered] = useState(false);
+  const [isPointer, setIsPointer] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -21,16 +20,8 @@ export default function CustomCursor() {
       setIsVisible(true);
 
       const target = e.target as HTMLElement | null;
-      const cursorTarget = target?.closest("[data-cursor]") as HTMLElement | null;
-
-      if (cursorTarget) {
-        const text = cursorTarget.getAttribute("data-cursor") || "";
-        setCursorText(text);
-        setIsHovered(true);
-      } else {
-        setCursorText("");
-        setIsHovered(false);
-      }
+      const isInteractive = target?.closest("a, button, input, [role='button']") !== null;
+      setIsPointer(isInteractive);
     };
 
     const onMouseLeave = () => setIsVisible(false);
@@ -48,34 +39,23 @@ export default function CustomCursor() {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden">
-      {/* Outer Magnetic Ring */}
+      {/* Sleek, understated micro-dot */}
       <motion.div
-        className="fixed top-0 left-0 flex items-center justify-center rounded-full bg-cobalt-500/30 text-white font-mono text-[10px] font-bold uppercase tracking-wider shadow-lg backdrop-blur-sm border border-cobalt-400/50 pointer-events-none"
+        className="fixed top-0 left-0 rounded-full bg-white/80 pointer-events-none shadow-sm backdrop-blur-sm"
         animate={{
-          x: mousePosition.x - (isHovered ? 36 : 6),
-          y: mousePosition.y - (isHovered ? 36 : 6),
-          width: isHovered ? 72 : 12,
-          height: isHovered ? 72 : 12,
-          opacity: isHovered ? 1 : 0.6,
-          scale: isHovered ? 1.05 : 1,
+          x: mousePosition.x - (isPointer ? 8 : 4),
+          y: mousePosition.y - (isPointer ? 8 : 4),
+          width: isPointer ? 16 : 8,
+          height: isPointer ? 16 : 8,
+          opacity: isPointer ? 0.4 : 0.7,
         }}
         transition={{
           type: "spring",
-          stiffness: 500,
-          damping: 28,
-          mass: 0.3,
+          stiffness: 600,
+          damping: 35,
+          mass: 0.2,
         }}
-      >
-        {isHovered && cursorText && (
-          <motion.span
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-center px-1 text-[10px] leading-tight text-emerald-300 font-extrabold"
-          >
-            {cursorText}
-          </motion.span>
-        )}
-      </motion.div>
+      />
     </div>
   );
 }
