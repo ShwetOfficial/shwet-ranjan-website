@@ -505,7 +505,7 @@ export default function Hero() {
                     : ""
                 }`}
               >
-                <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight block">
+                <span className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight block whitespace-nowrap">
                   {item.value}
                 </span>
                 <span className="text-xs sm:text-sm text-slate-400 block leading-snug font-medium">
