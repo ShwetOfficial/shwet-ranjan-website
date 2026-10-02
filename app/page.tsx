@@ -70,7 +70,7 @@ export default function Home() {
       <Hero />
 
       {/* CORE DISCIPLINES */}
-      <section className="py-24 px-4 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.08] relative">
+      <section className="py-24 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/[0.08] relative">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400 uppercase tracking-wider">
@@ -174,7 +174,7 @@ export default function Home() {
       </section>
 
       {/* FEATURED FLAGSHIP SYSTEMS */}
-      <section className="py-24 px-4 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.08] relative">
+      <section className="py-24 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/[0.08] relative">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400 uppercase tracking-wider">
@@ -264,7 +264,7 @@ export default function Home() {
       </section>
 
       {/* CALCULATORS LAB & EQUITY RESEARCH TEASER */}
-      <section className="py-24 px-4 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.08] relative">
+      <section className="py-24 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/[0.08] relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Calculators Teaser Box */}
           <div className="specular-card p-8 sm:p-9 rounded-2xl flex flex-col justify-between group">
@@ -373,7 +373,7 @@ export default function Home() {
       </section>
 
       {/* SELECTED WRITINGS & ESSAYS */}
-      <section className="py-24 px-4 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.08] relative">
+      <section className="py-24 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/[0.08] relative">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400 uppercase tracking-wider">
@@ -433,7 +433,7 @@ export default function Home() {
       </section>
 
       {/* STRATEGIC ADVISORY CALLOUT */}
-      <section className="py-24 px-4 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.08] relative">
+      <section className="py-24 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/[0.08] relative">
         <div className="p-8 sm:p-14 rounded-3xl bg-gradient-to-br from-blue-950/40 via-slate-900/80 to-slate-950/90 border border-white/[0.1] shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
 

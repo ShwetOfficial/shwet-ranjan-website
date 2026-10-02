@@ -120,8 +120,8 @@ export default function Hero() {
       <div className="absolute top-72 left-10 w-96 h-96 bg-emerald-500/[0.03] rounded-full blur-[100px] pointer-events-none -z-10" />
 
       {/* Main Container */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           
           {/* Left Column: Executive Value Proposition (7 cols on LG) */}
           <motion.div
@@ -180,20 +180,6 @@ export default function Hero() {
                 <span>Financial Lab</span>
                 <span className="text-slate-500">→</span>
               </Link>
-            </div>
-
-            {/* Key Executive Proof Metrics Strip */}
-            <div className="pt-8 border-t border-white/[0.08] grid grid-cols-2 sm:grid-cols-4 gap-6">
-              {proofMetrics.map((item) => (
-                <div key={item.label} className="space-y-1">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight block">
-                    {item.value}
-                  </span>
-                  <span className="text-xs text-slate-400 block leading-tight">
-                    {item.label}
-                  </span>
-                </div>
-              ))}
             </div>
           </motion.div>
 
@@ -500,8 +486,35 @@ export default function Hero() {
               </div>
             </div>
           </motion.div>
-
         </div>
+
+        {/* Full-Width Executive Proof Metrics Strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-14 sm:mt-20 pt-8 sm:pt-10 border-t border-white/[0.08] w-full"
+        >
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+            {proofMetrics.map((item, idx) => (
+              <div
+                key={item.label}
+                className={`space-y-2 ${
+                  idx !== proofMetrics.length - 1
+                    ? "lg:border-r lg:border-white/[0.08] lg:pr-8"
+                    : ""
+                }`}
+              >
+                <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight block">
+                  {item.value}
+                </span>
+                <span className="text-xs sm:text-sm text-slate-400 block leading-snug font-medium">
+                  {item.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

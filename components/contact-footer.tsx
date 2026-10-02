@@ -69,7 +69,7 @@ export default function ContactFooter() {
   };
 
   return (
-    <footer id="contact" className="pt-24 pb-12 px-4 sm:px-8 max-w-7xl mx-auto border-t border-white/10 relative text-white">
+    <footer id="contact" className="pt-24 pb-12 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/10 relative text-white">
       {/* Contact Section Box */}
       <div className="p-8 sm:p-12 md:p-16 rounded-3xl bg-[#121218] border border-white/10 shadow-2xl mb-16 relative overflow-hidden">
         {/* Decorative ambient glow */}
