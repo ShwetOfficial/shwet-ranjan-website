@@ -33,7 +33,7 @@ export default function BentoPillars() {
   };
 
   return (
-    <section id="pillars" className="py-20 px-4 sm:px-8 max-w-6xl mx-auto border-t border-white/[0.08] text-white">
+    <section id="pillars" className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/[0.08] text-white">
       {/* Section Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
         <div>

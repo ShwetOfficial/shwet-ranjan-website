@@ -10,7 +10,7 @@ export default function JourneyPhilosophy() {
   const [activeTab, setActiveTab] = useState<"journey" | "philosophy" | "code">("journey");
 
   return (
-    <section id="journey" className="py-24 px-4 sm:px-8 max-w-7xl mx-auto border-t border-white/10 relative text-white">
+    <section id="journey" className="py-24 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/10 relative text-white">
       {/* Section Header & View Toggles */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div>

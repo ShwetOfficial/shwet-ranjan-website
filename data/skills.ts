@@ -7,48 +7,47 @@ export interface SkillCategory {
 
 export const skillsMatrixData: SkillCategory[] = [
   {
-    title: "Business & Strategy",
+    title: "Business & Operations Strategy",
     badge: "OPERATIONS",
     skills: [
       { name: "Financial Modeling & Unit Economics", level: 95, note: "DCF, LTV/CAC, CapEx Optimization" },
-      { name: "Supply Chain & Logistics", level: 88, note: "Inventory Turnover, Fulfillment" },
-      { name: "Operational Workflow Engineering", level: 92, note: "Process Optimization, SOPs" },
-      { name: "Growth Strategy & Go-To-Market", level: 85, note: "Market Analysis, Positioning" }
+      { name: "Supply Chain & Fulfillment Arbitrage", level: 88, note: "Multi-State VPOB, RTO Reduction" },
+      { name: "Operational Workflow Architecture", level: 92, note: "SOP Automation, Task Systems" },
+      { name: "Enterprise Growth & Go-To-Market", level: 86, note: "Market Positioning, Retainers" }
     ],
     frameworks: ["DuPont Analysis", "Working Capital Cycle", "Margin Waterfall", "Lean Operations"]
   },
   {
-    title: "Taxation & Compliance",
-    badge: "INDIAN TAX & LAW",
+    title: "Taxation & Statutory Compliance",
+    badge: "TAXATION",
     skills: [
-      { name: "GST Architecture & Reconciliation", level: 96, note: "GSTR-1, 3B, 2B Credit Matching" },
-      { name: "Corporate Income Tax Structuring", level: 90, note: "Tax Planning, Allowable Deductions" },
-      { name: "Statutory Compliance & Audit Defense", level: 92, note: "Notice Handling, Books Audit" },
-      { name: "Entity Structuring & Law", level: 86, note: "Company Incorporation, Agreements" }
+      { name: "Multi-State GST & ITC Reconciliation", level: 96, note: "GSTR-1, 3B, 2B Matching" },
+      { name: "Corporate Income Tax Structuring", level: 90, note: "Tax Planning, Deductions" },
+      { name: "Statutory Notice & Audit Defense", level: 92, note: "DRC-01A, Sec 16(2) Precedents" },
+      { name: "Commercial Entity Structuring & Law", level: 86, note: "Incorporation, Agreements" }
     ],
-    frameworks: ["Input Tax Credit (ITC) Rules", "GST Act Statutory Provisions", "Corporate Tax Codes", "Audit Trails"]
+    frameworks: ["Input Tax Credit Rules", "GST Statutory Provisions", "Corporate Tax Codes", "Audit Defense Trails"]
   },
   {
-    title: "Technology & Software",
+    title: "Technology & Software Systems",
     badge: "FULL-STACK & AI",
     skills: [
-      { name: "Full-Stack Web Development", level: 94, note: "Next.js, React, TypeScript, Node.js, FastAPI" },
-      { name: "Computer Vision & Invoice OCR", level: 95, note: "PaddleOCR 3.x, LayoutLM, Mod-36 Checksums" },
-      { name: "Conversational AI & WhatsApp Engines", level: 93, note: "Baileys WebSockets, Gemini Flash Auto-Pilot" },
-      { name: "Legal & Statutory Drafting AI", level: 92, note: "Gemini Multimodal, NOC, Rent & Partnership Deeds" },
-      { name: "Database & Cloud Architecture", level: 88, note: "SQLite WAL, Atomic Snapshots, PM2, REST APIs" }
+      { name: "Full-Stack Web Architecture", level: 94, note: "Next.js, TypeScript, React, APIs" },
+      { name: "Computer Vision & Invoice OCR", level: 95, note: "PaddleOCR 3.x, Mod-36 Checksums" },
+      { name: "Conversational AI & WhatsApp CRM", level: 93, note: "Baileys Sockets, Gemini Flash" },
+      { name: "High-Throughput Database Systems", level: 89, note: "SQLite WAL, Concurrency, PM2" }
     ],
-    frameworks: ["PaddleOCR 3.x", "Baileys WhatsApp Engine", "Gemini 1.5 / Multimodal", "Next.js App Router", "FastAPI / Python", "Socket.io", "SQLite WAL", "Meta CAPI"]
+    frameworks: ["Next.js & TypeScript", "PaddleOCR & Vision", "Baileys WhatsApp", "SQLite WAL Mode"]
   },
   {
-    title: "Investing & Capital",
-    badge: "VALUATION & FINANCE",
+    title: "Capital Allocation & Valuation",
+    badge: "EQUITY FINANCE",
     skills: [
-      { name: "Fundamental Equity Analysis", level: 90, note: "Balance Sheet & Cash Flow Audit" },
-      { name: "Intrinsic Value Estimation", level: 88, note: "Multi-Stage DCF & Margin of Safety" },
-      { name: "Capital Allocation & ROIC Analysis", level: 86, note: "Hurdle Rates, Reinvestment Risk" },
-      { name: "Risk Management & Portfolio Theory", level: 85, note: "Asymmetric Risk/Reward Ratios" }
+      { name: "Fundamental Equity Research", level: 91, note: "Balance Sheet & Cash Flow Audit" },
+      { name: "Multi-Stage Intrinsic Value DCF", level: 89, note: "Owner Earnings & Hurdle Rates" },
+      { name: "Economic Moats & ROIC Analysis", level: 88, note: "Pricing Power vs WACC" },
+      { name: "Risk Management & Portfolio Theory", level: 86, note: "Asymmetric Risk/Reward Ratios" }
     ],
-    frameworks: ["Discounted Cash Flow (DCF)", "Owner Earnings Model", "ROIC vs WACC", "Graham Safety Margin"]
+    frameworks: ["Multi-Stage DCF", "Owner Earnings Model", "ROIC vs WACC", "Lynch PEG & Moat"]
   }
 ];
